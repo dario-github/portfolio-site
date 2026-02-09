@@ -44,7 +44,7 @@ const projects: Project[] = [
   // 1 - 企业级视频 Agent 系统
   {
     title: "企业级视频 Agent 系统",
-    description: "AI 驱动腰部视频制作成本下降，新模版制作周期大幅缩短",
+    description: "腰部视频制作成本降至原来的 1/10，新模版周期从数周缩短到日内",
     techStack: ["Multi-Agent", "因果策略", "剪映 API", "Gemini"],
     role: "技术负责人",
     background:
@@ -54,7 +54,7 @@ const projects: Project[] = [
     execution:
       "集成剪映 API、Gemini 多模态分析、自研因果归因引擎。在雀巢、飞鹤项目上验证落地，逐步替代人工流程。",
     outcome:
-      "腰部视频制作成本大幅下降，新视频模版制作周期显著缩短。内容 ROI 归因准确率提升，告别靠经验选素材。",
+      "腰部视频制作成本降至原来的 1/10，新视频模版制作周期从数周缩短到日内。内容 ROI 归因准确率提升，告别靠经验选素材。",
   },
   // 2 - 数据策略大脑 ChatBI
   {
