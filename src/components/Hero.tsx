@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 const impactNumbers = [
   { value: "8 年", label: "AI 与算法经验" },
   { value: "18+", label: "AI 项目交付" },
-  { value: "5 行业", label: "金融·创投·营销·保险·快消" },
+  { value: "5+", label: "服务行业覆盖" },
   { value: "10 人", label: "产研团队管理" },
 ];
 
