@@ -18,12 +18,15 @@ Currently leading a 10-person team building enterprise AI infrastructure.
 - Deep Tech: C (no low-level/algorithm evidence)
 
 ## Projects
-- Video Highlight Extractor: Enterprise AI video highlight extraction, 4-layer architecture (24K lines Python)
-- Claude Code Workflow Studio: VS Code extension for visual AI workflow design
-- Claude Code Enterprise Proxy: Team Claude Code sharing service (LiteLLM + AWS Bedrock)
-- TeamAssist MCP: MCP-based team collaboration and knowledge management
-- OpenClaw AI Workflow: Personal AI operating system with 30+ skill plugins
-- Business Strategy Simulation: Venture Strategy business simulation
+- 内容宇宙 AI 平台: Enterprise AI platform (Smart Canvas), 1600+ users, 2000+ Agents, 4000+ daily calls (AWS Serverless + MCP + Buffer of Thoughts)
+- 企业级视频 Agent 系统: End-to-end AI video production, 30 days → 6 hours (Multi-Agent pipeline + causal attribution, codename DDD)
+- OpenClaw AI Workflow: Personal AI operating system with 30+ skill plugins, structured memory architecture (MemBrain-Lite)
+- 金融知识图谱 & 智能选股: Multi-dimensional financial knowledge graph + event-driven investment reasoning engine (with Edinburgh Univ.)
+- 因果 AI 量化策略: Macro-industry-stock multi-level auto-timing strategy with significant Alpha (with CMU)
+- 创业者画像模型: Data-driven VC decision system with causal inference (Miracle Plus / 奇绩创坛)
+- ChatBI 智能数据平台: Natural language-driven enterprise data analytics (Streamlit + LLM)
+- A股投资 Agent: AI-driven A-share investment analysis and decision support (Tushare + LLM Agent)
+- 欧莱雅 CCL 消费者洞察: AI-powered consumer review analysis with knowledge graph (Gemini + RAG + Next.js)
 
 ## Contact
 - Email: zdclink@gmail.com

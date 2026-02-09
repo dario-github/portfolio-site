@@ -15,60 +15,95 @@ import { ArrowRight } from "lucide-react";
 
 interface Project {
   title: string;
-  oneLiner: string;
+  description: string;
   techStack: string[];
   role: string;
   details: string;
 }
 
 const projects: Project[] = [
+  // === 蓝色光标（核心）===
   {
-    title: "Video Highlight Extractor",
-    oneLiner: "企业级 AI 视频精彩片段自动提取系统",
-    techStack: ["Python", "OpenAI Whisper", "Gemini", "FastAPI", "Docker"],
-    role: "独立开发（AI辅助）, 24K行",
+    title: "内容宇宙 AI 平台",
+    description:
+      "企业级 AI 中台，支撑 1600+ 集团员工、2000+ Agent、日均 4000+ 调用",
+    techStack: [
+      "AWS Serverless",
+      "MCP",
+      "LLM Agent",
+      "RAG",
+      "Buffer of Thoughts",
+    ],
+    role: "技术负责人（10人团队）",
     details:
-      "四层架构设计（转录层 → 分析层 → 编辑层 → 输出层），集成 OpenAI Whisper 语音转录与 Gemini 多模态分析，自动识别视频高光时刻并生成精华剪辑。支持批量处理、自定义评分规则、多格式输出。独立完成 24,000 行 Python 代码，从 0 到 1 产品化交付。",
+      "从零搭建统一的企业级 AI 中台（Smart Canvas），底层走 AWS Serverless + MCP 协议，上层支持文案、数据分析、视频生成等多场景 Agent。引入 Buffer of Thoughts 推理框架做复杂任务的多步推理，用分级记忆管理和代码沙箱解决安全合规问题。获 2024 集团年度 AI Native 团队奖。",
   },
   {
-    title: "Claude Code Workflow Studio",
-    oneLiner: "VS Code 插件，可视化设计 Claude Code 工作流",
-    techStack: ["TypeScript", "React Flow", "VS Code API"],
-    role: "贡献者",
+    title: "企业级视频 Agent 系统",
+    description: "AI 驱动端到端视频制作，从 30 天压缩到 6 小时出片",
+    techStack: ["Multi-Agent", "因果策略", "剪映 API", "Gemini"],
+    role: "技术负责人",
     details:
-      "VS Code 扩展，将 Claude Code 的工作流设计从命令行搬到可视化画布。基于 React Flow 构建节点编辑器，支持拖拽式工作流编排、条件分支、循环执行、变量传递。降低 AI 工作流设计门槛，让非技术用户也能构建复杂 Agent 流程。",
+      "搭建 Agent pipeline——脚本生成、素材匹配、智能剪辑、审核优化，将广告素材从脚本到成片的周期从 30 天压缩到 6 小时。同时用因果策略做内容效果归因，找到真正影响 ROI 的变量，在雀巢、飞鹤项目上验证落地。产品代号 DDD。",
   },
-  {
-    title: "Claude Code Enterprise Proxy",
-    oneLiner: "企业团队 Claude Code 共享服务",
-    techStack: ["Node.js", "LiteLLM", "AWS Bedrock", "MongoDB"],
-    role: "主导开发",
-    details:
-      "企业级 Claude Code 共享代理服务，解决团队 API 成本和管理问题。通过 LiteLLM 统一网关对接 AWS Bedrock 等多个 AI 服务商，实现用量追踪、配额管理、成本分摊。MongoDB 存储使用日志和团队配置，支持多租户隔离。将团队 AI 编码工具成本降低 60%。",
-  },
-  {
-    title: "TeamAssist MCP",
-    oneLiner: "MCP 协议团队协作与知识管理服务",
-    techStack: ["Node.js", "TypeScript", "MCP SDK", "MongoDB"],
-    role: "独立开发",
-    details:
-      "基于 Model Context Protocol (MCP) 构建的团队协作服务，让 AI Agent 能够直接访问和管理团队知识库。实现文档检索、任务分配、会议纪要生成、知识图谱查询等能力，通过标准化 MCP 接口与各类 AI 工具无缝集成。",
-  },
+  // === AI 工具链 ===
   {
     title: "OpenClaw AI Workflow",
-    oneLiner: "个人 AI 操作系统，30+ 技能插件",
-    techStack: ["OpenClaw", "Claude", "Slack", "MCP"],
+    description: "个人 AI 操作系统，30+ 技能插件覆盖工作全链路",
+    techStack: ["OpenClaw", "Claude", "Slack", "MCP", "30+ Skills"],
     role: "深度定制",
     details:
-      "基于 OpenClaw 平台深度定制的个人 AI 操作系统。30+ 技能插件覆盖：股票分析（Tushare + 自定义策略）、社交媒体爬虫、深度思考（Gemini/GPT 多模型协同）、视频总结、TTS、浏览器自动化等。通过 Slack 作为统一交互界面，实现 AI 原生的工作流自动化。",
+      "基于开源项目 OpenClaw 深度定制的个人 AI 工作操作系统。设计了结构化记忆架构（MemBrain-Lite：实体/上下文/时间线索引）、上下文隔离规则（大数据自动 subagent 分流）、30+ 技能编排（搜索/股票/TTS/视频总结/GitHub/飞书等），涵盖研究→开发→投资→生活管理全链路。",
+  },
+  // === 金融/数据 ===
+  {
+    title: "金融知识图谱 & 智能选股",
+    description: "多维金融知识图谱 + 事件驱动投资逻辑推理引擎",
+    techStack: ["NLP", "知识图谱", "因果推理", "Python"],
+    role: "核心开发（同花顺）",
+    details:
+      "搭建包含概念、因果、事理的多维金融知识图谱，用 NLP 从研报和资讯中抽取事件和关系，做事件驱动的投资逻辑推理引擎。与爱丁堡大学 Jeff Pan 教授（知识图谱领域）联合研究，落地了适合金融场景的知识表示与推理框架。",
   },
   {
-    title: "Business Strategy Simulation",
-    oneLiner: "Venture Strategy 商业模拟经营决策",
-    techStack: ["战略分析", "定价策略", "产能规划"],
-    role: "团队决策者",
+    title: "因果 AI 量化策略",
+    description: "宏观-行业-个股多层级自动择时，实盘跑出 Alpha",
+    techStack: ["因果推断", "时序分析", "Python", "量化交易"],
+    role: "核心开发（同花顺）",
     details:
-      "商业模拟竞赛项目，作为团队核心决策者参与 Venture Strategy 多轮竞赛。负责市场分析、定价策略制定、产能规划与资源配置。运用数据驱动决策方法，结合博弈论思维进行竞争策略优化，最终取得优异成绩。",
+      '与 CMU 张坤教授团队（因果发现领域）合作，研发宏观-行业-个股多层级自动择时策略。核心思路是用因果图剔除伪相关因子——区分"A 导致 B"和"A 和 B 碰巧一起动"。回测和实盘都跑出了显著 Alpha，验证了因果 AI 在金融交易中的有效性。',
+  },
+  {
+    title: "创业者画像模型",
+    description: "数据驱动的创投决策系统，因果推断辅助投资",
+    techStack: ["因果推断", "NLP", "标签体系", "Python"],
+    role: "算法研究员（奇绩创坛）",
+    details:
+      "对历史审核数据做深度归因分析，重构评估权重，降低漏筛率。用 NLP 做长尾标签清洗和语义聚类，标签覆盖率提到 95%+。引入因果推断挖掘创始人背景、赛道特征与项目成功率的因果关系，给投委会提供量化决策支持。",
+  },
+  {
+    title: "ChatBI 智能数据平台",
+    description: "自然语言驱动的企业数据分析平台",
+    techStack: ["Streamlit", "Python", "LLM", "SQL"],
+    role: "独立开发（AI辅助）",
+    details:
+      "面向业务团队的智能数据分析平台，通过自然语言对话实现数据查询、可视化和洞察生成。支持多数据源接入，AI 自动生成分析报告，降低非技术人员的数据使用门槛。",
+  },
+  {
+    title: "A股投资 Agent",
+    description: "AI 驱动的 A 股投资分析与决策辅助系统",
+    techStack: ["Python", "Tushare", "LLM Agent", "量化分析"],
+    role: "独立开发",
+    details:
+      "结合量化分析和 AI Agent 的 A 股投资辅助系统。集成 Tushare 行情数据、券商研报分析、热点扫描、事件雷达等功能，支持自动化的市场监控和投资决策辅助。",
+  },
+  // === 其他 ===
+  {
+    title: "欧莱雅 CCL 消费者洞察",
+    description: "AI 驱动的消费者评论分析与知识图谱系统",
+    techStack: ["Gemini", "RAG", "知识图谱", "Next.js", "FastAPI"],
+    role: "技术负责人",
+    details:
+      "为欧莱雅搭建消费者评论分析系统，基于 Gemini + RAG 架构实现多维度评论分析（情感分布、核心洞察、热门话题、竞品对比），信息密度分级展示，多模态分析接入 Vision API，知识图谱可视化呈现消费者认知关系。",
   },
 ];
 
@@ -103,7 +138,7 @@ export default function Projects() {
                 {project.title}
               </h3>
               <p className="text-sm text-[#A0A0A0] mb-4 flex-1">
-                {project.oneLiner}
+                {project.description}
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.techStack.map((tech) => (
@@ -138,7 +173,7 @@ export default function Projects() {
                 {selectedProject?.title}
               </DialogTitle>
               <DialogDescription className="text-[#A0A0A0]">
-                {selectedProject?.oneLiner}
+                {selectedProject?.description}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
