@@ -7,7 +7,7 @@ const impactNumbers = [
   { value: "1,600+", label: "Platform Users" },
   { value: "2,000+", label: "AI Agents Built" },
   { value: "4,000+", label: "Daily API Calls" },
-  { value: "30d → 6h", label: "Content Production" },
+  { value: "10x", label: "Cost Reduction" },
 ];
 
 const tags = ["AI-native", "Product × Engineering", "Computational Reasoning"];

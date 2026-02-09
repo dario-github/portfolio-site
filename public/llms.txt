@@ -21,7 +21,7 @@ Currently leading a 10-person team building enterprise AI infrastructure.
 
 ### 🏢 蓝色光标
 - 内容宇宙 AI 平台: Enterprise AI platform (Smart Canvas), 1600+ users, 2000+ Agents, 4000+ daily calls (AWS Serverless + MCP + RAG)
-- 企业级视频 Agent 系统: End-to-end AI video production, 30 days → 6 hours (Multi-Agent pipeline + causal attribution, codename DDD)
+- 企业级视频 Agent 系统: AI-driven video production reducing mid-tier video costs and template creation cycle (Multi-Agent pipeline + causal attribution, codename DDD)
 - 数据策略大脑 ChatBI: Natural language-driven enterprise data analytics & strategy insights (Streamlit + LLM + SQL)
 - 爆款视频逆向归因系统: AI reverse-engineering viral video success factors with causal inference (NLP + video analysis)
 - 飞鹤 KOC 视频智能审核: AI-powered KOC video content review & quality scoring (Whisper + Gemini Vision)
