@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 
 const impactNumbers = [
-  { value: "1,600+", label: "Platform Users" },
-  { value: "2,000+", label: "AI Agents Built" },
-  { value: "4,000+", label: "Daily API Calls" },
-  { value: "10x", label: "Cost Reduction" },
+  { value: "8 年", label: "AI 与算法经验" },
+  { value: "18+", label: "AI 项目交付" },
+  { value: "5 行业", label: "金融·创投·营销·保险·快消" },
+  { value: "10 人", label: "产研团队管理" },
 ];
 
 const tags = ["AI-native", "Product × Engineering", "Computational Reasoning"];
