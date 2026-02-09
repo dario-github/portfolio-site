@@ -31,9 +31,9 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-[#EDEDED] leading-[1.1]">
-            从推理
+            From Reasoning
             <br />
-            到交付
+            to Shipping
           </h1>
 
           <p className="mt-6 text-xl text-[#A0A0A0] max-w-xl">
