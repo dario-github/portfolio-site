@@ -73,7 +73,7 @@ const projects: Project[] = [
   },
   // 3 - 爆款视频逆向归因系统
   {
-    title: "爆款视频逆向归因系统",
+    title: "人源活力爆款归因",
     description: "AI 分析爆款视频成功要素，指导内容策略优化",
     techStack: ["NLP", "视频分析", "因果推断", "Python"],
     role: "技术负责人",
@@ -88,7 +88,7 @@ const projects: Project[] = [
   },
   // 4 - 飞鹤 KOC 视频智能审核
   {
-    title: "飞鹤 KOC 视频智能审核",
+    title: "飞鹤视频审稿",
     description: "AI 自动化视频内容审核与质量评分系统",
     techStack: ["Whisper", "Gemini Vision", "Python", "FastAPI"],
     role: "技术负责人",
@@ -283,7 +283,7 @@ const projects: Project[] = [
   },
   // 17 - 欧莱雅消费者洞察
   {
-    title: "欧莱雅消费者洞察",
+    title: "欧莱雅产品洞察",
     description: "AI 驱动的消费者评论分析与知识图谱",
     techStack: ["Gemini", "RAG", "知识图谱", "Next.js"],
     role: "技术负责人",
@@ -299,10 +299,11 @@ const projects: Project[] = [
 ];
 
 const categories = [
-  { name: "战略规划", emoji: "🎯", indices: [0, 7, 6] },
-  { name: "产品交付", emoji: "🚀", indices: [1, 2, 3, 4, 5, 17] },
-  { name: "技术创新", emoji: "🔬", indices: [11, 10, 13, 14, 15] },
-  { name: "团队赋能", emoji: "🏗️", indices: [8, 9, 12, 16] },
+  { name: "AI 中台", emoji: "🎯", indices: [0, 7, 1] },
+  { name: "客户交付", emoji: "🚀", indices: [2, 5, 4, 3, 17] },
+  { name: "技术创新", emoji: "🔧", indices: [6, 11, 10, 13, 14, 15] },
+  { name: "团队赋能", emoji: "🏗️", indices: [8, 9] },
+  { name: "个人兴趣", emoji: "🎮", indices: [16, 12] },
 ];
 
 export default function Projects() {
