@@ -36,7 +36,7 @@ export default function About() {
 
           <div className="max-w-3xl space-y-6 text-[#A0A0A0] leading-relaxed">
             <p>
-              AI-native 技术产品人。同济大学数学系 + 柏林工业大学交换。
+              AI-native 技术产品人。同济大学数学系。
             </p>
 
             <p>

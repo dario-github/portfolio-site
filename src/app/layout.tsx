@@ -27,8 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "jobTitle": "AI Technical Product Lead",
           "knowsAbout": ["AI Agents", "MCP", "LLM Applications", "Product Management"],
           "alumniOf": [
-            { "@type": "EducationalOrganization", "name": "Tongji University" },
-            { "@type": "EducationalOrganization", "name": "TU Berlin" }
+            { "@type": "EducationalOrganization", "name": "Tongji University" }
           ],
           "url": "https://dario.dev"
         })}} />

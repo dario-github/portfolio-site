@@ -3,7 +3,7 @@
 > Portfolio site for 章东丞 (Dario Zhang)
 
 ## About
-AI-native technical product builder. B.S. Mathematics @ Tongji University + Exchange @ TU Berlin.
+AI-native technical product builder. B.S. Mathematics @ Tongji University.
 Career thread: Computational Reasoning (Symbolic → Causal → Chain-of-Thought).
 Currently leading a 10-person team building enterprise AI infrastructure.
 
