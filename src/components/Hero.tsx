@@ -14,14 +14,23 @@ const tags = ["AI-native", "Product × Engineering", "Computational Reasoning"];
 
 export default function Hero() {
   return (
-    <section className="pt-32 pb-24 md:pt-40 md:pb-32">
-      <div className="max-w-[1200px] mx-auto px-6">
+    <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 min-h-[calc(100vh-64px)]">
+      {/* Subtle grid background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
+      <div className="relative max-w-[1200px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-[#EDEDED] leading-[1.1]">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-[#EDEDED] leading-[1.1]">
             From Reasoning
             <br />
             to Shipping
@@ -36,7 +45,7 @@ export default function Hero() {
               <Badge
                 key={tag}
                 variant="outline"
-                className="border-[#262626] text-[#A0A0A0] bg-[#141414] px-3 py-1 text-sm"
+                className="bg-[#1E293B] text-[#94A3B8] border-[#334155] px-3 py-1 text-sm"
               >
                 {tag}
               </Badge>
@@ -53,7 +62,7 @@ export default function Hero() {
           {impactNumbers.map((item) => (
             <div
               key={item.label}
-              className="bg-[#141414] border border-[#262626] rounded-xl p-6 text-center"
+              className="bg-[#141414] border border-[#262626] rounded-xl p-6 text-center hover:border-[#3B82F6] hover:scale-[1.02] transition-all duration-300"
             >
               <div className="text-2xl md:text-3xl font-bold text-[#EDEDED] font-[family-name:var(--font-geist-mono)]">
                 {item.value}

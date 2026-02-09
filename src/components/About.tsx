@@ -34,7 +34,7 @@ export default function About() {
             章东丞 / Dario Zhang
           </h2>
 
-          <div className="max-w-3xl space-y-6 text-[#A0A0A0] leading-relaxed">
+          <div className="max-w-3xl space-y-6 text-[#A0A0A0] leading-[1.8]">
             <p>
               AI-native 技术产品人。同济大学数学系。
             </p>
@@ -54,10 +54,10 @@ export default function About() {
 
             <div className="space-y-2">
               <p className="text-[#EDEDED] font-medium">核心信条：</p>
-              <ul className="list-none space-y-1">
-                <li>• 让 AI 在真实业务里跑起来，不做 demo</li>
-                <li>• 知道要做什么 &gt; 知道怎么做 &gt; 能自己做</li>
-                <li>• 如无必要，勿增实体</li>
+              <ul className="list-none space-y-3">
+                <li className="border-l-2 border-[#3B82F6] pl-4">让 AI 在真实业务里跑起来，不做 demo</li>
+                <li className="border-l-2 border-[#3B82F6] pl-4">知道要做什么 &gt; 知道怎么做 &gt; 能自己做</li>
+                <li className="border-l-2 border-[#3B82F6] pl-4">如无必要，勿增实体</li>
               </ul>
             </div>
           </div>

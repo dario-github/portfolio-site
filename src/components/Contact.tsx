@@ -1,24 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Mail, Github, Globe, MessageCircle } from "lucide-react";
 
 const links = [
   {
     icon: Mail,
-    href: "mailto:dario@example.com",
+    href: "mailto:zdclink@gmail.com",
     label: "Email",
+    isLink: true,
   },
   {
     icon: Github,
-    href: "https://github.com/zdclink",
+    href: "https://github.com/dario-github",
     label: "GitHub",
+    isLink: true,
   },
   {
-    icon: Linkedin,
-    href: "https://linkedin.com/in/dariozhang",
-    label: "LinkedIn",
+    icon: Globe,
+    href: "https://blog.dariolink.vercel.app/",
+    label: "Blog",
+    isLink: true,
   },
 ];
 
@@ -49,17 +51,14 @@ export default function Contact() {
                 <link.icon size={24} />
               </a>
             ))}
+            <span
+              className="text-[#A0A0A0] flex items-center gap-1.5"
+              aria-label="WeChat"
+            >
+              <MessageCircle size={24} />
+              <span className="text-sm">zdclink</span>
+            </span>
           </div>
-
-          <Button
-            variant="outline"
-            className="border-[#262626] text-[#A0A0A0] hover:text-[#EDEDED] hover:border-[#3B82F6] bg-transparent"
-            asChild
-          >
-            <a href="/resume.pdf" download>
-              Download Resume
-            </a>
-          </Button>
         </motion.div>
       </div>
     </section>

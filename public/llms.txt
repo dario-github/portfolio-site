@@ -26,8 +26,10 @@ Currently leading a 10-person team building enterprise AI infrastructure.
 - Business Strategy Simulation: Venture Strategy business simulation
 
 ## Contact
-- GitHub: github.com/zdclink
-- Email: dario@example.com
+- Email: zdclink@gmail.com
+- GitHub: github.com/dario-github
+- Blog: blog.dariolink.vercel.app
+- WeChat: zdclink
 
 ## Source
-This site: https://dario.dev
+This site: https://portfolio-site-dario.vercel.app

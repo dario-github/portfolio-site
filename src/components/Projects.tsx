@@ -97,7 +97,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="bg-[#141414] border border-[#262626] rounded-xl p-6 hover:border-[#3B82F6] transition-colors flex flex-col"
+              className="bg-[#141414] border border-[#262626] rounded-xl p-6 hover:border-[#3B82F6] hover:bg-[#1A1A1A] transition-all duration-300 flex flex-col"
             >
               <h3 className="text-lg font-semibold text-[#EDEDED] mb-2">
                 {project.title}
@@ -110,7 +110,7 @@ export default function Projects() {
                   <Badge
                     key={tech}
                     variant="secondary"
-                    className="bg-[#1A1A1A] text-[#A0A0A0] border-none text-xs"
+                    className="bg-[#1E293B] text-[#94A3B8] border-none text-xs rounded-md px-2 py-0.5"
                   >
                     {tech}
                   </Badge>
@@ -119,10 +119,10 @@ export default function Projects() {
               <p className="text-xs text-[#666666] mb-4">{project.role}</p>
               <Button
                 variant="ghost"
-                className="w-fit text-[#3B82F6] hover:text-[#3B82F6] hover:bg-[#3B82F6]/10 p-0 h-auto text-sm"
+                className="w-fit text-[#3B82F6] hover:text-[#3B82F6] hover:bg-[#3B82F6]/10 p-0 h-auto text-sm group"
                 onClick={() => setSelectedProject(project)}
               >
-                View Details <ArrowRight size={14} className="ml-1" />
+                View Details <ArrowRight size={14} className="ml-1 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Button>
             </motion.div>
           ))}
@@ -152,7 +152,7 @@ export default function Projects() {
                     <Badge
                       key={tech}
                       variant="secondary"
-                      className="bg-[#1A1A1A] text-[#A0A0A0] border-none text-xs"
+                      className="bg-[#1E293B] text-[#94A3B8] border-none text-xs rounded-md px-2 py-0.5"
                     >
                       {tech}
                     </Badge>

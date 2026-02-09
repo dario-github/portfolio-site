@@ -29,7 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "alumniOf": [
             { "@type": "EducationalOrganization", "name": "Tongji University" }
           ],
-          "url": "https://dario.dev"
+          "url": "https://portfolio-site-dario.vercel.app",
+          "sameAs": ["https://github.com/dario-github", "https://blog.dariolink.vercel.app"]
         })}} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0A0A0A] text-[#EDEDED]`}>

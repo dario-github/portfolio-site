@@ -108,6 +108,12 @@ export default function SkillAssessment() {
           <div className="w-full max-w-lg mx-auto">
             <ResponsiveContainer width="100%" height={400}>
               <RadarChart data={data} cx="50%" cy="50%" outerRadius="70%">
+                <defs>
+                  <linearGradient id="skillGradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#3B82F6" stopOpacity={0.3} />
+                    <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0.3} />
+                  </linearGradient>
+                </defs>
                 <PolarGrid stroke="#262626" />
                 <PolarAngleAxis
                   dataKey="subject"
@@ -117,8 +123,8 @@ export default function SkillAssessment() {
                   name="技术能力"
                   dataKey="score"
                   stroke="#3B82F6"
-                  fill="#3B82F6"
-                  fillOpacity={0.3}
+                  fill="url(#skillGradient)"
+                  fillOpacity={1}
                 />
               </RadarChart>
             </ResponsiveContainer>
