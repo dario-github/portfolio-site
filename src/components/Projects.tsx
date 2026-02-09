@@ -319,7 +319,7 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-[#EDEDED] mb-12">
-            Selected Work
+            项目经历
           </h2>
         </motion.div>
 
@@ -365,7 +365,7 @@ export default function Projects() {
                       className="w-fit text-[#3B82F6] hover:text-[#3B82F6] hover:bg-[#3B82F6]/10 p-0 h-auto text-sm group"
                       onClick={() => setSelectedProject(project)}
                     >
-                      View Details{" "}
+                      查看详情{" "}
                       <ArrowRight
                         size={14}
                         className="ml-1 transition-transform duration-200 group-hover:translate-x-0.5"

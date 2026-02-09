@@ -6,11 +6,11 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dario Zhang — AI-native Technical Product Builder",
-  description: "Portfolio of 章东丞 (Dario Zhang). From reasoning to shipping — I build AI that works in production.",
+  title: "章东丞 — AI 原生技术产品人",
+  description: "章东丞的个人作品集。从推理到交付——让 AI 在真实业务里跑起来。",
   openGraph: {
-    title: "Dario Zhang — AI-native Technical Product Builder",
-    description: "From reasoning to shipping — I build AI that works in production.",
+    title: "章东丞 — AI 原生技术产品人",
+    description: "从推理到交付——让 AI 在真实业务里跑起来。",
     type: "website",
   },
 };

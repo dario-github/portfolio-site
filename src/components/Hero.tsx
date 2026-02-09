@@ -10,7 +10,7 @@ const impactNumbers = [
   { value: "10 人", label: "产研团队管理" },
 ];
 
-const tags = ["AI-native", "Product × Engineering", "Computational Reasoning"];
+const tags = ["AI 原生", "产品 × 工程", "计算推理"];
 
 export default function Hero() {
   return (
@@ -31,13 +31,13 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-[#EDEDED] leading-[1.1]">
-            From Reasoning
+            从推理
             <br />
-            to Shipping
+            到交付
           </h1>
 
           <p className="mt-6 text-xl text-[#A0A0A0] max-w-xl">
-            I build AI that works in production — not demos.
+            让 AI 在真实业务里跑起来，不做 demo。
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">

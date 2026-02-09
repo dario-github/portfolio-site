@@ -91,7 +91,7 @@ export default function SkillAssessment() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-[#EDEDED] mb-6">
-            Technical Assessment
+            技术能力评估
           </h2>
           <p className="text-[#A0A0A0] max-w-2xl mb-12 leading-relaxed">
             以下为 AI 基于真实代码仓库的客观技术能力评估。评估方法：全盘扫描本地代码仓库、git log、项目结构、技术文档，只看代码和实际产出。
@@ -185,7 +185,7 @@ export default function SkillAssessment() {
           </Collapsible>
 
           <p className="text-center text-xs text-[#666666] mt-8 font-[family-name:var(--font-geist-mono)]">
-            Assessed by Claude — based on real codebase analysis
+            由 Claude 基于真实代码仓库评估
           </p>
         </motion.div>
       </div>

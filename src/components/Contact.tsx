@@ -35,7 +35,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-[#EDEDED] mb-8">
-            Get in Touch
+            联系方式
           </h2>
 
           <div className="flex items-center justify-center gap-6 mb-8">
