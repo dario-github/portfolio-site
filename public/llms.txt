@@ -1,0 +1,33 @@
+# Dario Zhang — AI-native Technical Product Builder
+
+> Portfolio site for 章东丞 (Dario Zhang)
+
+## About
+AI-native technical product builder. B.S. Mathematics @ Tongji University + Exchange @ TU Berlin.
+Career thread: Computational Reasoning (Symbolic → Causal → Chain-of-Thought).
+Currently leading a 10-person team building enterprise AI infrastructure.
+
+## Key Skills
+- AI Tool Mastery: A (systematic Claude Code workflows, 20+ projects with AI-assisted development)
+- Product Thinking: A- (PRDs, user personas, roadmaps beyond typical developer level)
+- Independent Delivery: A- (multiple full-stack prototypes, AI-assisted)
+- Architecture Design: B+ (assembly-style, not low-level)
+- Data Analysis: B+ (practical, script-based)
+- Code Quality: B- (functional, heavily AI-assisted)
+- Engineering Practices: C+ (Docker yes, CI/CD minimal)
+- Deep Tech: C (no low-level/algorithm evidence)
+
+## Projects
+- Video Highlight Extractor: Enterprise AI video highlight extraction, 4-layer architecture (24K lines Python)
+- Claude Code Workflow Studio: VS Code extension for visual AI workflow design
+- Claude Code Enterprise Proxy: Team Claude Code sharing service (LiteLLM + AWS Bedrock)
+- TeamAssist MCP: MCP-based team collaboration and knowledge management
+- OpenClaw AI Workflow: Personal AI operating system with 30+ skill plugins
+- Business Strategy Simulation: Venture Strategy business simulation
+
+## Contact
+- GitHub: github.com/zdclink
+- Email: dario@example.com
+
+## Source
+This site: https://dario.dev
