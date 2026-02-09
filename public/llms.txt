@@ -18,15 +18,32 @@ Currently leading a 10-person team building enterprise AI infrastructure.
 - Deep Tech: C (no low-level/algorithm evidence)
 
 ## Projects
-- 内容宇宙 AI 平台: Enterprise AI platform (Smart Canvas), 1600+ users, 2000+ Agents, 4000+ daily calls (AWS Serverless + MCP + Buffer of Thoughts)
+
+### 🏢 蓝色光标
+- 内容宇宙 AI 平台: Enterprise AI platform (Smart Canvas), 1600+ users, 2000+ Agents, 4000+ daily calls (AWS Serverless + MCP + RAG)
 - 企业级视频 Agent 系统: End-to-end AI video production, 30 days → 6 hours (Multi-Agent pipeline + causal attribution, codename DDD)
+- 数据策略大脑 ChatBI: Natural language-driven enterprise data analytics & strategy insights (Streamlit + LLM + SQL)
+- 爆款视频逆向归因系统: AI reverse-engineering viral video success factors with causal inference (NLP + video analysis)
+- 飞鹤 KOC 视频智能审核: AI-powered KOC video content review & quality scoring (Whisper + Gemini Vision)
+- 雀巢 KOS 小红书 AIGC 平台: AI-driven Xiaohongshu content mass production for Nestlé KOS (Multi-Agent + AIGC)
+- AIdience 慧像: Multi-Agent intelligent audience research platform (NLP + user profiling)
+- 太平洋保险数智化改造: Insurance industry AI + data platform digital transformation (knowledge graph + AI Agent)
+- Claude Code Enterprise Proxy: Enterprise team Claude Code CLI sharing service (Node.js + LiteLLM + AWS Bedrock)
+- TeamAssist MCP: MCP-protocol team collaboration & knowledge management service (TypeScript + MCP SDK)
+
+### 🔧 AI 工具链
+- 剪映 MCP & pyJianYingDraft: JianYing API MCP integration + Python draft generation for automated video editing (Python + MCP)
+- Video Highlight Extractor: Enterprise AI video highlight extraction with 4-layer architecture, 24K lines (Whisper + Gemini + FastAPI)
 - OpenClaw AI Workflow: Personal AI operating system with 30+ skill plugins, structured memory architecture (MemBrain-Lite)
+
+### 📊 金融 / 数据
 - 金融知识图谱 & 智能选股: Multi-dimensional financial knowledge graph + event-driven investment reasoning engine (with Edinburgh Univ.)
 - 因果 AI 量化策略: Macro-industry-stock multi-level auto-timing strategy with significant Alpha (with CMU)
 - 创业者画像模型: Data-driven VC decision system with causal inference (Miracle Plus / 奇绩创坛)
-- ChatBI 智能数据平台: Natural language-driven enterprise data analytics (Streamlit + LLM)
-- A股投资 Agent: AI-driven A-share investment analysis and decision support (Tushare + LLM Agent)
-- 欧莱雅 CCL 消费者洞察: AI-powered consumer review analysis with knowledge graph (Gemini + RAG + Next.js)
+- A股智能看板: AI-driven A-share investment analysis & market monitoring (Tushare + LLM Agent)
+
+### 🌐 其他
+- 欧莱雅消费者洞察: AI-powered consumer review analysis with knowledge graph (Gemini + RAG + Next.js)
 
 ## Contact
 - Email: zdclink@gmail.com
