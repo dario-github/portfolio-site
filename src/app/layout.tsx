@@ -15,11 +15,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "章东丞 — AI 技术总监",
+  title: "章东丞 — AI 技术副总监",
   description:
     "章东丞（Dario Zhang）的个人主页。8 年算法经验，从符号推理到因果推理到链式推理——让 AI 在真实业务里跑起来。",
   openGraph: {
-    title: "章东丞 — AI 技术总监",
+    title: "章东丞 — AI 技术副总监",
     description:
       "从推理到交付——让 AI 在真实业务里跑起来。",
     type: "website",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "章东丞 — AI 技术总监",
+    title: "章东丞 — AI 技术副总监",
     description:
       "从推理到交付——让 AI 在真实业务里跑起来。",
   },
@@ -53,7 +53,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "章东丞",
               alternateName: "Dario Zhang",
-              jobTitle: "AI 技术总监",
+              jobTitle: "AI 技术副总监",
               worksFor: {
                 "@type": "Organization",
                 name: "蓝色光标",

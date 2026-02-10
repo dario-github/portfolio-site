@@ -35,14 +35,14 @@ interface Experience {
 const EXPERIENCES: Experience[] = [
   {
     period: "2023 — 至今",
-    title: "AI 技术总监",
+    title: "AI 技术副总监",
     company: "蓝色光标",
     description:
       "主导企业级 AI 中台 Smart Canvas 的架构设计与工程落地，构建支撑全集团 1600+ 用户、2000+ Agent 的统一智能服务平台。带领 10 人产研团队完成从传统开发到 AI 工程化的系统性转型。",
     highlights: [
-      "搭建 AI 中台 Smart Canvas — 1600+ 用户，2000+ Agent，日均 4000+ 调用，月均节省人力成本 ¥200万+",
-      "设计视频 Agent 系统 — 腰部视频单条成本从 ¥3000 降至 ¥300，新模版从 2 周缩短到 1 天内上线",
-      "带 10 人产研团队，推动 Claude Code + AI 辅助编程落地，PR 周均产出从 12 个提升至 18 个",
+      "搭建 AI 中台 Smart Canvas — 1600+ 用户，2000+ Agent，日均 4000+ 调用",
+      "设计视频 Agent 系统 — 广告素材从脚本到成片从 30 天压缩到 6 小时，在雀巢、飞鹤等项目验证落地",
+      "带 10 人产研团队，推动 AI 辅助编程落地，代码产出效率提升约 50%",
       "客户项目落地：雀巢、飞鹤、宁德时代、太平洋保险、欧莱雅等 6 家头部企业",
       "获 2024 集团年度 AI Native 团队奖（全集团唯一）",
     ],
@@ -61,8 +61,8 @@ const EXPERIENCES: Experience[] = [
     description:
       "构建数据驱动的创投决策系统，将因果推断方法引入项目初筛环节，系统性提升尽调自动化程度与评估准确性。",
     highlights: [
-      "创业者画像归因模型 — 因果重构评估权重，漏筛率下降 30%+",
-      "标签体系重构 — NLP 语义聚类 + 层次标签映射，覆盖率从 60% 提升至 95%+",
+      "创业者画像归因模型 — 因果重构评估权重，降低漏筛率，提升初筛自动化程度",
+      "标签体系重构 — NLP 语义聚类 + 层次标签映射，标签覆盖率提升至 95%+",
       "因果推断辅助投资 — 建立创始人特征→成功概率的因果图谱，辅助合伙人决策",
     ],
     techStack: ["因果推断", "贝叶斯网络", "NLP", "Python"],
@@ -74,10 +74,10 @@ const EXPERIENCES: Experience[] = [
     description:
       "主导金融知识图谱与智能选股系统的研发，将因果推断引入量化交易场景，与国际学术团队合作完成实盘策略验证。",
     highlights: [
-      "金融知识图谱 — 概念、因果、事理三层图谱 + 事件驱动推理引擎，覆盖 A 股 4000+ 标的",
-      "与爱丁堡大学 Jeff Pan 教授合作知识表示框架，产出内部推理引擎并申请专利",
+      "金融知识图谱 — 概念、因果、事理三层图谱 + 事件驱动推理引擎",
+      "与爱丁堡大学 Jeff Pan 教授合作知识表示框架，落地内部推理引擎",
       "与 CMU 张坤教授团队合作因果发现算法 (PC/FCI variants)，应用于金融时序数据",
-      "因果 AI 量化策略 — 宏观→行业→个股三层择时，实盘年化超额收益 15%+",
+      "因果 AI 量化策略 — 宏观→行业→个股三层择时，实盘跑出显著 Alpha",
     ],
     techStack: ["知识图谱", "因果推断", "NLP", "量化交易", "Python"],
   },
@@ -109,24 +109,24 @@ const PROJECTS: Project[] = [
   {
     title: "内容宇宙 AI 平台",
     description:
-      "企业级 AI 中台，1600+ 用户、2000+ Agent、日均 4000+ 调用，月均节省人力成本 ¥200万+",
+      "企业级 AI 中台，1600+ 用户、2000+ Agent、日均 4000+ 调用",
     techStack: ["AWS Serverless", "MCP", "LLM Agent", "RAG"],
     category: "ai-platform",
     background: "蓝色光标各业务线 AI 工具碎片化严重，缺乏统一的 Agent 调度和知识管理能力，各团队重复造轮子。",
     breakdown: "拆解为三层：底层模型路由与成本优化（多模型 fallback + token 预算控制）、中层 Agent 编排框架（MCP 协议统一通信）、上层业务场景模板（可复用 workflow）。关键挑战：多租户隔离和峰谷流量调度。",
-    execution: "基于 AWS Lambda + API Gateway 实现弹性扩缩（冷启动 < 2s），设计 MCP 协议统一 Agent 通信，构建 RAG 知识库支撑企业专有数据检索（召回准确率 92%+）。选择 Serverless 而非 K8s 是因为流量峰谷比达 10:1，按需付费节省 60% 基础设施成本。",
-    outcome: "支撑 1600+ 用户、2000+ Agent，日均 4000+ 调用，月均节省人力成本 ¥200万+。获 2024 集团年度 AI Native 团队奖（全集团唯一）。",
+    execution: "基于 AWS Lambda + API Gateway 实现弹性扩缩（冷启动 < 2s），设计 MCP 协议统一 Agent 通信，构建 RAG 知识库支撑企业专有数据检索。选择 Serverless 而非 K8s 是因为流量峰谷比达 10:1，按需付费显著降低基础设施成本。",
+    outcome: "支撑 1600+ 用户、2000+ Agent，日均 4000+ 调用。获 2024 集团年度 AI Native 团队奖。",
   },
   {
     title: "企业级视频 Agent 系统",
     description:
-      "腰部视频单条成本从 ¥3000 降至 ¥300，新模版从 2 周缩短到 1 天内上线",
+      "广告素材从脚本到成片从 30 天压缩到 6 小时，在雀巢、飞鹤等项目验证落地",
     techStack: ["Multi-Agent", "因果策略", "剪映 API", "Gemini"],
     category: "ai-platform",
-    background: "广告行业腰部视频产量大但制作效率低，传统模板化方案缺乏灵活性，单条制作成本约 ¥3000。",
+    background: "广告行业腰部视频产量大但制作效率低，传统流程从脚本到成片需要约 30 天。",
     breakdown: "将视频生产拆解为脚本生成、素材匹配、剪辑编排、审核优化四个独立 Agent，每个环节可替换可并行。核心技术决策：选择 Agent 编排而非端到端模型，因为广告视频需要精确控制每个环节的品牌合规性。",
     execution: "Multi-Agent 协作架构，脚本 Agent（GPT-4o）→ 素材 Agent（Gemini Vision 匹配）→ 剪辑 Agent（剪映 API 编排）→ 审核 Agent（品牌合规检查）。因果策略优化素材选择，从相关性匹配升级为因果效果预测。",
-    outcome: "单条成本从 ¥3000 降至 ¥300（10x），模板创建从 2 周缩短到日内。月产出从 50 条提升至 500+ 条，客户满意度 4.6/5。",
+    outcome: "广告素材制作周期从 30 天压缩到 6 小时。用因果策略做内容效果归因，在雀巢、飞鹤项目上验证落地。",
   },
   {
     title: "数据策略大脑 ChatBI",
@@ -136,27 +136,27 @@ const PROJECTS: Project[] = [
     background: "企业数据分析依赖 BI 工程师手动出报表，业务人员无法自助获取数据洞察。",
     breakdown: "NL2SQL 为核心，增加意图识别、多轮对话、图表自动生成三个模块。",
     execution: "LLM 解析自然语言生成 SQL，Streamlit 搭建交互界面，支持多数据源接入。",
-    outcome: "业务人员可自助完成 80% 的常规数据查询，BI 工程师从重复工作中释放。",
+    outcome: "业务人员可自助完成常规数据查询，减少对 BI 工程师的依赖。",
   },
   {
     title: "雀巢 KOS 小红书 AIGC",
-    description: "AI 驱动的小红书 KOS 内容批量生产与分发。单月产出 200+ 篇笔记，人均效率提升 5 倍，爆文率从 3% 提升至 12%。",
+    description: "AI 驱动的小红书 KOS 内容批量生产与分发。累计产出 1000+ 篇种草图文，效率提升 90%，成本降低 50%。",
     techStack: ["Multi-Agent", "小红书 API", "AIGC", "因果归因"],
     category: "client-delivery",
     background: "雀巢需要在小红书快速铺量 KOS（Key Opinion Sales）内容，但人工创作产能有限且爆文率低。",
     breakdown: "拆解为选题挖掘（因果归因爆款因素）→ 文案生成（Multi-Agent 协作）→ 视觉匹配 → 发布调度四阶段。",
     execution: "因果推断分析爆款视频成功要素，指导选题和内容策略；Multi-Agent 系统批量生成差异化文案。",
-    outcome: "单月产出 200+ 篇笔记，爆文率从 3% → 12%。模式复制到飞鹤等其他客户。",
+    outcome: "累计产出 1000+ 篇种草图文，效率提升 90%，成本降低 50%。模式复制到飞鹤等其他客户。",
   },
   {
     title: "欧莱雅消费者洞察知识图谱",
-    description: "AI 驱动的消费者评论分析与产品知识图谱可视化，覆盖 50万+ 评论数据，洞察报告生成时间从 2 周缩短至 2 小时。",
+    description: "AI 驱动的消费者评论分析与产品知识图谱可视化",
     techStack: ["Gemini", "RAG", "知识图谱", "Next.js"],
     category: "client-delivery",
     background: "欧莱雅需要从海量消费者评论中快速提取产品洞察，传统 BI 报表无法捕捉语义层面的用户需求变化。",
     breakdown: "构建产品-成分-功效-用户评价四层知识图谱，结合 RAG 实现自然语言查询。",
     execution: "Gemini 驱动评论理解和实体抽取，Next.js 构建可交互的图谱可视化界面。",
-    outcome: "覆盖 50万+ 评论数据，洞察报告生成从 2 周缩至 2 小时。客户续约并扩展至其他品牌线。",
+    outcome: "为欧莱雅构建产品洞察知识图谱，支持自然语言查询消费者反馈。",
   },
   {
     title: "太平洋保险数智化改造",
@@ -166,7 +166,7 @@ const PROJECTS: Project[] = [
     background: "太平洋保险传统 IT 系统数据孤岛严重，AI 能力缺乏统一调度。",
     breakdown: "聚焦理赔智能审核、客户画像精准营销、内部知识库三个高 ROI 场景。",
     execution: "构建数据中台打通多源数据，AI Agent 编排业务流程，知识图谱支撑专业领域推理。",
-    outcome: "理赔初审效率提升 40%，客户画像精准度提升 25%。项目成为集团保险行业标杆案例。",
+    outcome: "主导设计保险行业 AI 技术合作方案，聚焦理赔审核、客户画像、内部知识库三个场景。",
   },
   {
     title: "Video Highlight Extractor",
@@ -182,33 +182,33 @@ const PROJECTS: Project[] = [
   },
   {
     title: "金融知识图谱 & 智能选股",
-    description: "概念-因果-事理三层知识图谱 + 事件驱动推理引擎，覆盖 A 股 4000+ 标的",
+    description: "概念-因果-事理三层知识图谱 + 事件驱动推理引擎",
     techStack: ["NLP", "知识图谱", "因果推理"],
     category: "tech-innovation",
     background: "传统选股依赖技术指标和基本面数据，缺乏对事件驱动和因果关系的系统建模。",
     breakdown: "构建概念图谱、因果图谱、事理图谱三层知识表示，设计事件驱动推理引擎。",
-    execution: "NLP 抽取实体关系构建多维图谱。与爱丁堡大学 Jeff Pan 教授合作设计知识表示与推理框架（产出专利 1 项 + 内部推理引擎）。",
-    outcome: "覆盖 A 股 4000+ 标的的概念和事件链，推理引擎在回测中 F1 score 达到 0.78。",
+    execution: "NLP 抽取实体关系构建多维图谱。与爱丁堡大学 Jeff Pan 教授合作设计知识表示与推理框架，落地内部推理引擎。",
+    outcome: "搭建覆盖 A 股主要标的的概念和事件链，推理引擎应用于智能选股产品。",
   },
   {
     title: "因果 AI 量化策略",
-    description: "宏观→行业→个股三层因果择时模型，实盘年化超额收益 15%+",
+    description: "宏观→行业→个股三层因果择时模型，实盘验证有效",
     techStack: ["因果推断", "时序分析", "量化交易"],
     category: "tech-innovation",
     background: "量化策略多基于相关性，容易被伪相关误导，尤其在市场结构性变化时回撤严重。",
     breakdown: "三层择时：宏观经济因果图（领先指标识别）→ 行业轮动因果链（产业链传导）→ 个股因果信号（事件驱动），逐层过滤。",
     execution: "与 CMU 张坤教授团队合作，应用 PC/FCI 因果发现算法于金融时序数据。核心创新：将因果发现从 i.i.d. 数据扩展到非平稳时序，处理金融数据的 regime change 问题。",
-    outcome: "实盘年化超额收益 15%+，最大回撤较基准降低 40%。验证因果推断在量化场景的鲁棒性优势。",
+    outcome: "回测和实盘均跑出显著 Alpha，验证因果推断在量化交易中的有效性。",
   },
   {
     title: "创业者画像归因模型",
-    description: "数据驱动的创投决策系统，因果推断辅助项目初筛，漏筛率下降 30%+",
+    description: "数据驱动的创投决策系统，因果推断辅助项目初筛",
     techStack: ["因果推断", "NLP", "标签体系"],
     category: "tech-innovation",
     background: "VC 项目初筛依赖合伙人经验判断，主观性强且漏筛率高。",
     breakdown: "构建创始人特征→创业成功率的因果图谱，区分真因果和伪相关。",
     execution: "NLP 提取创始人背景特征，因果推断建模替代传统相关性打分。",
-    outcome: "漏筛率下降 30%+，评估一致性显著提升。模型被纳入常规尽调流程。",
+    outcome: "降低漏筛率，提升评估一致性。模型被纳入常规尽调流程。",
   },
   {
     title: "Claude Code Enterprise Proxy",
@@ -374,7 +374,7 @@ export default function Home() {
                 Dario Zhang
               </p>
               <h2 className="mt-3 text-lg font-medium tracking-tight text-[#ccd6f6] sm:text-xl">
-                AI 技术总监
+                AI 技术副总监
               </h2>
               <p className="mt-4 max-w-xs leading-[1.85]">
                 专注于将 AI 推理能力工程化为可交付的生产系统。
@@ -514,15 +514,7 @@ export default function Home() {
                       <span className="mx-2 text-[#8892b0]/40">·</span>
                       <span className="text-sm">数学与应用数学（本科）</span>
                     </div>
-                    <span className="text-[#4fd1c5] font-mono text-sm ml-4 whitespace-nowrap">2014 — 2018</span>
-                  </div>
-                  <div className="flex items-baseline justify-between">
-                    <div>
-                      <span className="text-[#ccd6f6] font-medium">柏林工业大学</span>
-                      <span className="mx-2 text-[#8892b0]/40">·</span>
-                      <span className="text-sm">交换学习（数学系，德语 B2）</span>
-                    </div>
-                    <span className="text-[#4fd1c5] font-mono text-sm ml-4 whitespace-nowrap">2016 — 2017</span>
+                    <span className="text-[#4fd1c5] font-mono text-sm ml-4 whitespace-nowrap">2013 — 2018</span>
                   </div>
                 </div>
               </div>
