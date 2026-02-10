@@ -35,23 +35,25 @@ interface Experience {
 const EXPERIENCES: Experience[] = [
   {
     period: "2023 — 至今",
-    title: "AI 技术副总监",
+    title: "AI 技术总监",
     company: "蓝色光标",
     description:
-      "主导企业级 AI 中台 Smart Canvas 的架构设计与工程落地，构建支撑全集团 1600+ 用户、2000+ Agent 的统一智能服务平台。带领 10 人产研团队完成从传统开发到 AI 工程化的系统性转型。",
+      "主导企业级 AI 中台 Smart Canvas 的架构设计与工程落地，构建支撑全集团 1600+ 用户、2000+ Agent 的统一智能服务平台。当前重心：基于 MCP 协议的主动式多 Agent 系统，让 Agent 从被动响应升级为自主感知上下文、预判意图、规划执行的智能体。",
     highlights: [
       "搭建 AI 中台 Smart Canvas — 1600+ 用户，2000+ Agent，日均 4000+ 调用",
-      "设计视频 Agent 系统 — 广告素材从脚本到成片从 30 天压缩到 6 小时，在雀巢、飞鹤等项目验证落地",
+      "设计主动式多 Agent 系统 — 基于 MCP 协议统一 Agent 通信，实现跨场景的自主编排与协作",
+      "视频 Agent 系统 — 广告素材从脚本到成片从 30 天压缩到 6 小时，在雀巢、飞鹤等项目验证落地",
+      "推动 Context Learning 在企业场景的应用 — Agent 根据对话上下文动态调整策略，而非依赖静态 prompt",
       "带 10 人产研团队，推动 AI 辅助编程落地，代码产出效率提升约 50%",
       "客户项目落地：雀巢、飞鹤、宁德时代、太平洋保险、欧莱雅等 6 家头部企业",
       "获 2024 集团年度 AI Native 团队奖（全集团唯一）",
     ],
     techStack: [
-      "AWS Serverless",
       "MCP",
       "Multi-Agent",
-      "Buffer of Thoughts",
-      "RAG",
+      "Context Learning",
+      "AWS Serverless",
+      "Agent 编排",
     ],
   },
   {
@@ -59,27 +61,22 @@ const EXPERIENCES: Experience[] = [
     title: "因果算法研究员",
     company: "奇绩创坛",
     description:
-      "构建数据驱动的创投决策系统，将因果推断方法引入项目初筛环节，系统性提升尽调自动化程度与评估准确性。",
+      "构建数据驱动的创投决策系统，将因果推断引入项目初筛与尽调自动化。",
     highlights: [
-      "创业者画像归因模型 — 因果重构评估权重，降低漏筛率，提升初筛自动化程度",
-      "标签体系重构 — NLP 语义聚类 + 层次标签映射，标签覆盖率提升至 95%+",
-      "因果推断辅助投资 — 建立创始人特征→成功概率的因果图谱，辅助合伙人决策",
+      "创业者画像归因模型 — 因果推断辅助合伙人投资决策，提升初筛自动化程度",
     ],
-    techStack: ["因果推断", "贝叶斯网络", "NLP", "Python"],
+    techStack: ["因果推断", "NLP", "Python"],
   },
   {
     period: "2018 — 2021",
     title: "NLP 算法工程师",
     company: "同花顺",
     description:
-      "主导金融知识图谱与智能选股系统的研发，将因果推断引入量化交易场景，与国际学术团队合作完成实盘策略验证。",
+      "主导金融知识图谱与因果推断量化策略的研发，与 CMU、爱丁堡大学团队开展学术合作。",
     highlights: [
-      "金融知识图谱 — 概念、因果、事理三层图谱 + 事件驱动推理引擎",
-      "与爱丁堡大学 Jeff Pan 教授合作知识表示框架，落地内部推理引擎",
-      "与 CMU 张坤教授团队合作因果发现算法 (PC/FCI variants)，应用于金融时序数据",
-      "因果 AI 量化策略 — 宏观→行业→个股三层择时，实盘跑出显著 Alpha",
+      "搭建概念-因果-事理三层金融知识图谱，落地事件驱动智能选股系统",
     ],
-    techStack: ["知识图谱", "因果推断", "NLP", "量化交易", "Python"],
+    techStack: ["知识图谱", "因果推断", "NLP"],
   },
 ];
 
@@ -374,10 +371,10 @@ export default function Home() {
                 Dario Zhang
               </p>
               <h2 className="mt-3 text-lg font-medium tracking-tight text-[#ccd6f6] sm:text-xl">
-                AI 技术副总监
+                AI 技术总监
               </h2>
               <p className="mt-4 max-w-xs leading-[1.85]">
-                专注于将 AI 推理能力工程化为可交付的生产系统。
+                构建主动式 Agent 系统，让 AI 从被动响应走向自主规划执行。
               </p>
 
               {/* Navigation with active vertical indicator */}
@@ -481,18 +478,14 @@ export default function Home() {
               <div className="space-y-4 leading-[1.85]">
                 <p>
                   8 年算法经验，职业主线是
-                  <Highlight>计算推理</Highlight>——从同花顺的
-                  <Highlight>符号推理</Highlight>（知识图谱），到奇绩创坛的
-                  <Highlight>因果推理</Highlight>（贝叶斯网络），再到蓝色光标的
-                  <Highlight>链式推理</Highlight>（LLM Multi-Agent）。
+                  <Highlight>让 AI 从被动工具进化为主动智能体</Highlight>——早期在同花顺和奇绩创坛做知识图谱与因果推断，积累了符号推理和数据驱动决策的基础；2023 年加入蓝色光标后，从零搭起企业级
+                  AI 中台 <Highlight>Smart Canvas</Highlight>，支撑 2000+ Agent
+                  日均 4000+ 次调用，重心全面转向 <Highlight>主动式 Agent 系统</Highlight>与<Highlight>多 Agent 协作</Highlight>。
                 </p>
                 <p>
-                  在同花顺搭了金融知识图谱和因果推断量化策略，与{" "}
-                  <Highlight>CMU</Highlight> 和
-                  <Highlight>爱丁堡大学</Highlight>
-                  的学者合作；在奇绩创坛做数据驱动的创投尽调；在蓝色光标从零搭起企业级
-                  AI 中台 <Highlight>Smart Canvas</Highlight>，支撑 2000+ Agent
-                  日均 4000+ 次调用。
+                  当前研究方向：<Highlight>主动式 Agent 系统</Highlight>与<Highlight>Context Learning</Highlight>——让
+                  AI 不只是被动响应指令，而是主动理解上下文、预判需求、自主规划执行。在蓝色光标的实践中，基于 MCP 协议构建 Agent 间的标准化通信，探索
+                  Agent 根据对话上下文动态调整策略的能力。
                 </p>
                 <p>
                   INTJ，信奉
