@@ -35,7 +35,7 @@ const EXPERIENCES: Experience[] = [
     title: "AI 技术总监",
     company: "蓝色光标",
     description:
-      "从零搭建企业级 AI 中台 Smart Canvas，支撑全集团 1600+ 用户和 2000+ Agent 的日常调用。带领 10 人产研团队完成从传统开发到 AI 工程化的转型。",
+      "主导企业级 AI 中台 Smart Canvas 的架构设计与工程落地，构建支撑全集团 1600+ 用户、2000+ Agent 的统一智能服务平台。带领 10 人产研团队完成从传统开发到 AI 工程化的系统性转型。",
     highlights: [
       "搭建 AI 中台 Smart Canvas — 1600+ 用户，2000+ Agent，日均 4000+ 调用",
       "设计视频 Agent 系统 — 腰部视频成本降至 1/10，模版周期从数周到日内",
@@ -56,7 +56,7 @@ const EXPERIENCES: Experience[] = [
     title: "因果算法研究员",
     company: "奇绩创坛",
     description:
-      "数据驱动的创投决策系统。用因果推断替代经验判断，提升项目初筛的自动化程度和准确性。",
+      "构建数据驱动的创投决策系统，将因果推断方法引入项目初筛环节，系统性提升尽调自动化程度与评估准确性。",
     highlights: [
       "创业者画像归因模型 — 重构评估权重，降低漏筛率",
       "标签体系重构 — NLP 语义聚类，覆盖率从 60% 提升至 95%+",
@@ -69,7 +69,7 @@ const EXPERIENCES: Experience[] = [
     title: "NLP 算法工程师",
     company: "同花顺",
     description:
-      "搭建金融知识图谱与智能选股系统，将学术前沿的因果推断引入量化交易场景，实盘验证 Alpha。",
+      "主导金融知识图谱与智能选股系统的研发，将因果推断引入量化交易场景，与国际学术团队合作完成实盘策略验证。",
     highlights: [
       "金融知识图谱 — 概念、因果、事理多维图谱 + 事件驱动推理引擎",
       "与爱丁堡大学 Jeff Pan 教授合作知识表示与推理",
@@ -238,40 +238,69 @@ const PROJECTS: Project[] = [
 
 interface Writing {
   title: string;
-  description: string;
+  tldr: string;
   date: string;
   url?: string;
-  confidence: "high" | "medium" | "low";
+  confidence: "high" | "medium" | "speculative";
   revision: number;
+  tags: string[];
+  sources?: number;
 }
 
 const WRITINGS: Writing[] = [
   {
-    title: "从符号推理到链式推理：我的技术主线",
-    description:
-      "回顾 8 年技术生涯——从同花顺的知识图谱到蓝色光标的 Multi-Agent，计算推理如何贯穿始终。",
-    date: "2026",
-    url: "https://blog.dariolink.vercel.app",
+    title: "AI Agent 长期记忆架构：从 ChatGPT 到 MemBrain 的方案对比",
+    tldr: "逆向分析了 ChatGPT/Claude/LlamaIndex/Letta 四种记忆方案，发现工程上的核心 tradeoff 是深度 vs 速度",
     confidence: "high",
     revision: 3,
+    date: "2026-02",
+    tags: ["Agent Memory", "Architecture", "Engineering"],
+    sources: 4,
   },
   {
-    title: "让 AI 在企业里跑起来的五个教训",
-    description:
-      "搭建 Smart Canvas 过程中踩过的坑：从技术选型到组织变革，demo 和产品之间差的不是代码。",
-    date: "2025",
-    url: "https://blog.dariolink.vercel.app",
+    title: "渐进式上下文注入：让 Agent 像人一样导航信息",
+    tldr: "Claude Code 的 hybrid model 是目前最成熟的实现——预加载 CLAUDE.md + 工具按需探索",
     confidence: "high",
     revision: 2,
+    date: "2026-02",
+    tags: ["Context Engineering", "Claude Code", "RAG"],
+    sources: 5,
   },
   {
-    title: "因果推断为什么比相关性更值钱",
-    description:
-      "在量化交易和创投场景的实战经验：A 和 B 一起涨不代表 A 导致 B 涨。",
-    date: "2024",
-    url: "https://blog.dariolink.vercel.app",
+    title: "从 Workflow+RAG 到 Auto Agent+MCP：范式跃迁的技术决策",
+    tldr: "为什么我们放弃了 Dify 式 workflow，拥抱自主 Agent + MCP 协议标准化",
+    confidence: "high",
+    revision: 2,
+    date: "2026-01",
+    tags: ["MCP", "Agent Architecture", "Decision"],
+    sources: 3,
+  },
+  {
+    title: "语言如何塑造 LLM 的推理能力",
+    tldr: "不同语言 prompt 对模型推理的影响远超预期，中文 prompt 的特殊优势和局限",
     confidence: "medium",
     revision: 1,
+    date: "2026-02",
+    tags: ["LLM", "Multilingual", "Reasoning"],
+    sources: 6,
+  },
+  {
+    title: "因果推断在内容归因中的工程实践",
+    tldr: "不靠经验选素材，用因果图区分真因果和伪相关——从金融量化到内容营销的方法迁移",
+    confidence: "high",
+    revision: 2,
+    date: "2025-12",
+    tags: ["Causal Inference", "Content Attribution", "Data Science"],
+    sources: 4,
+  },
+  {
+    title: "AI 自省能力的边界：模型真的知道自己在想什么吗？",
+    tldr: "Anthropic 的 introspection 研究揭示了一个反直觉结论：CoT 不一定反映真实推理过程",
+    confidence: "speculative",
+    revision: 1,
+    date: "2026-01",
+    tags: ["AI Safety", "Interpretability", "Philosophy"],
+    sources: 3,
   },
 ];
 
@@ -315,7 +344,7 @@ export default function Home() {
 
   return (
     <div
-      className="relative min-h-screen bg-[#0a192f] leading-relaxed text-[#8892b0] antialiased"
+      className="relative min-h-screen bg-[#0a192f] leading-[1.85] text-[#8892b0] antialiased"
       onMouseMove={handleMouseMove}
     >
       {/* ── Mouse follow glow ── */}
@@ -340,8 +369,8 @@ export default function Home() {
               <h2 className="mt-3 text-lg font-medium tracking-tight text-[#ccd6f6] sm:text-xl">
                 AI 技术总监
               </h2>
-              <p className="mt-4 max-w-xs leading-normal">
-                让 AI 在真实业务里跑起来，不做 demo。
+              <p className="mt-4 max-w-xs leading-[1.85]">
+                专注于将 AI 推理能力工程化为可交付的生产系统。
               </p>
 
               {/* Navigation with active vertical indicator */}
@@ -359,14 +388,14 @@ export default function Home() {
                         <span
                           className={`mr-4 w-0.5 transition-all duration-300 ${
                             activeSection === item.href
-                              ? "h-6 bg-[#64ffda]"
-                              : "h-4 bg-[#8892b0]/30 group-hover:h-6 group-hover:bg-[#64ffda]/60"
+                              ? "h-6 bg-[#4fd1c5]"
+                              : "h-4 bg-[#8892b0]/30 group-hover:h-6 group-hover:bg-[#4fd1c5]/60"
                           }`}
                         />
                         <span
-                          className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 group-hover:text-[#64ffda] ${
+                          className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 group-hover:text-[#4fd1c5] ${
                             activeSection === item.href
-                              ? "text-[#64ffda]"
+                              ? "text-[#4fd1c5]"
                               : "text-[#8892b0]"
                           }`}
                         >
@@ -386,7 +415,7 @@ export default function Home() {
             >
               <li>
                 <a
-                  className="block text-[#8892b0] transition-colors hover:text-[#64ffda]"
+                  className="block text-[#8892b0] transition-colors hover:text-[#4fd1c5]"
                   href="mailto:zdclink@gmail.com"
                   title="Email"
                   aria-label="Email"
@@ -396,7 +425,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  className="block text-[#8892b0] transition-colors hover:text-[#64ffda]"
+                  className="block text-[#8892b0] transition-colors hover:text-[#4fd1c5]"
                   href="https://github.com/dario-github"
                   target="_blank"
                   rel="noreferrer noopener"
@@ -408,7 +437,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  className="block text-[#8892b0] transition-colors hover:text-[#64ffda]"
+                  className="block text-[#8892b0] transition-colors hover:text-[#4fd1c5]"
                   href="https://blog.dariolink.vercel.app"
                   target="_blank"
                   rel="noreferrer noopener"
@@ -430,7 +459,7 @@ export default function Home() {
               aria-label="关于我"
             >
               <SectionHeading index="01">关于</SectionHeading>
-              <div className="space-y-4">
+              <div className="space-y-4 leading-[1.85]">
                 <p>
                   8 年算法经验，职业主线是
                   <Highlight>计算推理</Highlight>——从同花顺的
@@ -473,20 +502,20 @@ export default function Home() {
                         <h3 className="text-lg font-semibold text-[#ccd6f6]">
                           {exp.title}
                           <span className="mx-2 text-[#8892b0]/60">·</span>
-                          <span className="text-[#64ffda]">{exp.company}</span>
+                          <span className="text-[#4fd1c5]">{exp.company}</span>
                         </h3>
                       </div>
-                      <span className="text-[#64ffda] font-mono text-sm whitespace-nowrap ml-4">
+                      <span className="text-[#4fd1c5] font-mono text-sm whitespace-nowrap ml-4">
                         {exp.period}
                       </span>
                     </div>
-                    <p className="mt-2 text-sm leading-normal">
+                    <p className="mt-2 text-sm leading-[1.85]">
                       {exp.description}
                     </p>
                     <ul className="mt-3 space-y-1">
                       {exp.highlights.map((h, j) => (
                         <li key={j} className="flex items-start text-sm">
-                          <span className="mr-2 mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#64ffda]" />
+                          <span className="mr-2 mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#4fd1c5]" />
                           {h}
                         </li>
                       ))}
@@ -516,8 +545,8 @@ export default function Home() {
                     }}
                     className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
                       activeCategory === cat.key
-                        ? "bg-[#64ffda]/10 text-[#64ffda] border border-[#64ffda]/30"
-                        : "text-[#8892b0] border border-transparent hover:text-[#64ffda] hover:border-[#64ffda]/20"
+                        ? "bg-[#4fd1c5]/10 text-[#4fd1c5] border border-[#4fd1c5]/30"
+                        : "text-[#8892b0] border border-transparent hover:text-[#4fd1c5] hover:border-[#4fd1c5]/20"
                     }`}
                   >
                     {cat.label}
@@ -545,7 +574,7 @@ export default function Home() {
 
                           <div className="z-10 relative">
                             <div className="flex items-start justify-between">
-                              <h3 className="font-medium leading-snug text-[#ccd6f6] group-hover:text-[#64ffda] transition-colors">
+                              <h3 className="font-medium leading-snug text-[#ccd6f6] group-hover:text-[#4fd1c5] transition-colors">
                                 {project.url ? (
                                   <a
                                     href={project.url}
@@ -570,7 +599,7 @@ export default function Home() {
                                       isExpanded ? null : globalIndex
                                     )
                                   }
-                                  className="ml-2 text-[#8892b0] hover:text-[#64ffda] transition-colors flex-shrink-0"
+                                  className="ml-2 text-[#8892b0] hover:text-[#4fd1c5] transition-colors flex-shrink-0"
                                   aria-label={isExpanded ? "收起详情" : "展开详情"}
                                 >
                                   {isExpanded ? (
@@ -587,7 +616,7 @@ export default function Home() {
 
                             {/* 4-step narrative (expanded) */}
                             {isExpanded && hasNarrative && (
-                              <div className="mt-4 space-y-3 border-l-2 border-[#64ffda]/20 pl-4">
+                              <div className="mt-4 space-y-3 border-l-2 border-[#4fd1c5]/20 pl-4">
                                 {project.background && (
                                   <NarrativeStep
                                     label="🎯 背景"
@@ -639,46 +668,43 @@ export default function Home() {
                       ? "border-[#22c55e]"
                       : article.confidence === "medium"
                       ? "border-[#eab308]"
-                      : "border-[#ef4444]";
+                      : "border-[#a78bfa]";
                   const badgeColor =
                     article.confidence === "high"
                       ? "bg-[#22c55e]/10 text-[#22c55e]"
                       : article.confidence === "medium"
                       ? "bg-[#eab308]/10 text-[#eab308]"
-                      : "bg-[#ef4444]/10 text-[#ef4444]";
+                      : "bg-[#a78bfa]/10 text-[#a78bfa]";
                   const confidenceLabel =
                     article.confidence === "high"
                       ? "🟢 高确信"
                       : article.confidence === "medium"
                       ? "🟡 中确信"
-                      : "🔴 低确信";
+                      : "🟣 推测性";
 
                   return (
                     <div
                       key={i}
-                      className={`border-l-2 ${borderColor} bg-[#112240]/30 rounded-lg p-4 hover:bg-[#112240]/60 transition`}
+                      className={`border-l-2 ${borderColor} bg-[#112240]/30 rounded-lg p-5 hover:bg-[#112240]/60 transition`}
                     >
-                      <h3 className="font-medium leading-snug text-[#ccd6f6] hover:text-[#64ffda] transition-colors">
-                        {article.url ? (
-                          <a
-                            href={article.url}
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            className="inline-flex items-baseline"
-                          >
-                            {article.title}
-                            <ArrowUpRight
-                              size={14}
-                              className="ml-1 inline-block transition-transform hover:-translate-y-0.5 hover:translate-x-0.5"
-                            />
-                          </a>
-                        ) : (
-                          article.title
-                        )}
+                      <h3 className="font-medium leading-snug text-[#ccd6f6]">
+                        {article.title}
                       </h3>
-                      <p className="mt-2 text-sm leading-normal">
-                        {article.description}
+                      <p className="mt-2 text-sm leading-[1.85] text-[#8892b0]">
+                        {article.tldr}
                       </p>
+                      {/* Tags */}
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        {article.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-[#4fd1c5]/10 px-2.5 py-0.5 font-mono text-[11px] tracking-wider text-[#4fd1c5]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      {/* Meta row */}
                       <div className="mt-3 flex items-center gap-3 text-xs">
                         <span
                           className={`rounded-full px-2 py-0.5 ${badgeColor}`}
@@ -691,6 +717,11 @@ export default function Home() {
                         <span className="text-[#8892b0]/60 font-mono">
                           {article.date}
                         </span>
+                        {article.sources && (
+                          <span className="text-[#8892b0]/50 font-mono ml-auto">
+                            基于 {article.sources} 个一手信源
+                          </span>
+                        )}
                       </div>
                     </div>
                   );
@@ -712,7 +743,7 @@ export default function Home() {
                 </p>
                 <a
                   href="mailto:zdclink@gmail.com"
-                  className="group inline-flex items-center text-[#64ffda] transition-colors hover:text-[#64ffda]/80"
+                  className="group inline-flex items-center text-[#4fd1c5] transition-colors hover:text-[#4fd1c5]/80"
                 >
                   <Mail size={16} className="mr-2" />
                   zdclink@gmail.com
@@ -729,7 +760,7 @@ export default function Home() {
               <p>
                 设计灵感来自{" "}
                 <a
-                  className="font-medium text-[#8892b0]/70 hover:text-[#64ffda] transition-colors"
+                  className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
                   href="https://brittanychiang.com"
                   target="_blank"
                   rel="noreferrer noopener"
@@ -738,7 +769,7 @@ export default function Home() {
                 </a>
                 。使用{" "}
                 <a
-                  className="font-medium text-[#8892b0]/70 hover:text-[#64ffda] transition-colors"
+                  className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
                   href="https://nextjs.org"
                   target="_blank"
                   rel="noreferrer noopener"
@@ -747,7 +778,7 @@ export default function Home() {
                 </a>{" "}
                 和{" "}
                 <a
-                  className="font-medium text-[#8892b0]/70 hover:text-[#64ffda] transition-colors"
+                  className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
                   href="https://tailwindcss.com"
                   target="_blank"
                   rel="noreferrer noopener"
@@ -756,7 +787,7 @@ export default function Home() {
                 </a>{" "}
                 构建，部署在{" "}
                 <a
-                  className="font-medium text-[#8892b0]/70 hover:text-[#64ffda] transition-colors"
+                  className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
                   href="https://vercel.com"
                   target="_blank"
                   rel="noreferrer noopener"
@@ -787,13 +818,13 @@ function SectionHeading({
       {/* Mobile: sticky header */}
       <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-[#0a192f]/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:hidden">
         <h2 className="text-sm font-bold uppercase tracking-widest text-[#ccd6f6]">
-          <span className="text-[#64ffda] font-mono mr-2">{index}.</span>
+          <span className="text-[#4fd1c5] font-mono mr-2">{index}.</span>
           {children}
         </h2>
       </div>
       {/* Desktop: numbered heading with decorative line */}
       <div className="hidden lg:flex items-center gap-2 mb-8">
-        <span className="text-[#64ffda] font-mono text-sm">{index}.</span>
+        <span className="text-[#4fd1c5] font-mono text-sm">{index}.</span>
         <h2 className="text-2xl font-bold text-[#ccd6f6]">{children}</h2>
         <div className="h-px bg-[#233554] flex-1 ml-4" />
       </div>
@@ -812,7 +843,7 @@ function TechTags({ tags }: { tags: string[] }) {
     <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
       {tags.map((tech) => (
         <li key={tech}>
-          <div className="flex items-center rounded-full bg-[#64ffda]/10 px-3 py-1 text-xs font-medium leading-5 text-[#64ffda]">
+          <div className="flex items-center rounded-full bg-[#4fd1c5]/10 px-3 py-1 font-mono text-[11px] font-medium tracking-wider leading-5 text-[#4fd1c5]">
             {tech}
           </div>
         </li>
