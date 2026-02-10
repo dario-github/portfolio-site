@@ -502,9 +502,8 @@ const CYCLING_TITLES = [
   "AI 技术总监",
   "铲屎官 🐱",
   "化债人 📈",
-  "INTJ 建筑师 🧊",
+  "紫老头 🧊",
   "Deutsch B2 🇩🇪",
-  "鲁路修信徒 ⚔️",
 ];
 
 /* ── Section Glow Colors ── */
