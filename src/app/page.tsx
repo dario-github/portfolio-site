@@ -561,6 +561,10 @@ export default function Home() {
   const [titleIndex, setTitleIndex] = useState(0);
   const [activeCategory, setActiveCategory] = useState("ai-platform");
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
+  const [projectsExpanded, setProjectsExpanded] = useState(false);
+  const [labExpanded, setLabExpanded] = useState(false);
+  const [writingExpanded, setWritingExpanded] = useState(false);
+  const [agentExpanded, setAgentExpanded] = useState(false);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
@@ -850,6 +854,7 @@ export default function Home() {
                     onClick={() => {
                       setActiveCategory(cat.key);
                       setExpandedProject(null);
+                      setProjectsExpanded(false);
                     }}
                     className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
                       activeCategory === cat.key
@@ -863,9 +868,9 @@ export default function Home() {
               </div>
 
               {/* Project Cards */}
-              <div>
+              <div className="relative">
                 <ul className="group/list">
-                  {filteredProjects.map((project, i) => {
+                  {(projectsExpanded ? filteredProjects : filteredProjects.slice(0, 3)).map((project, i) => {
                     const globalIndex = PROJECTS.indexOf(project);
                     const hasNarrative =
                       project.background ||
@@ -959,74 +964,125 @@ export default function Home() {
                     );
                   })}
                 </ul>
+                {!projectsExpanded && filteredProjects.length > 3 && (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a192f] to-transparent" />
+                )}
               </div>
+              {!projectsExpanded && filteredProjects.length > 3 && (
+                <div className="flex justify-center pt-4 pb-2">
+                  <button
+                    onClick={() => setProjectsExpanded(true)}
+                    className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+                  >
+                    查看全部 {filteredProjects.length} 个项目 →
+                  </button>
+                </div>
+              )}
+              {projectsExpanded && filteredProjects.length > 3 && (
+                <div className="flex justify-center pt-4 pb-2">
+                  <button
+                    onClick={() => setProjectsExpanded(false)}
+                    className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+                  >
+                    收起
+                  </button>
+                </div>
+              )}
             </section>
-
-            {/* ── Lab ── */}
             <section
               id="lab"
               className="scroll-mt-16 py-24 lg:scroll-mt-24"
               aria-label="实验室"
             >
               <SectionHeading index="04" subtitle="Side Projects & Explorations">实验室</SectionHeading>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {LAB_PROJECTS.map((project, i) => {
-                  const IconComponent =
-                    project.icon === "bot"
-                      ? Bot
-                      : project.icon === "gamepad"
-                      ? Gamepad2
-                      : project.icon === "gamepad2"
-                      ? FlaskConical
-                      : TrendingUp;
+              <div className="relative">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {LAB_PROJECTS.map((project, i) => {
+                    const IconComponent =
+                      project.icon === "bot"
+                        ? Bot
+                        : project.icon === "gamepad"
+                        ? Gamepad2
+                        : project.icon === "gamepad2"
+                        ? FlaskConical
+                        : TrendingUp;
+                    const isCompact = !labExpanded && !project.featured;
 
-                  return (
-                    <div
-                      key={i}
-                      className={`group rounded-lg border border-[#233554] bg-[#112240]/50 p-5 transition-all hover:border-[#4fd1c5]/30 hover:bg-[#112240] ${
-                        project.featured ? "sm:col-span-2" : ""
-                      }`}
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-[#4fd1c5]/10">
-                          <IconComponent size={16} className="text-[#4fd1c5]" />
+                    return (
+                      <div
+                        key={i}
+                        className={`group rounded-lg border border-[#233554] bg-[#112240]/50 p-5 transition-all hover:border-[#4fd1c5]/30 hover:bg-[#112240] ${
+                          project.featured ? "sm:col-span-2" : ""
+                        }`}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-[#4fd1c5]/10">
+                            <IconComponent size={16} className="text-[#4fd1c5]" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-[#ccd6f6] group-hover:text-[#4fd1c5] transition-colors">
+                              {project.title}
+                            </h3>
+                            <p className="text-sm text-[#4fd1c5]/70">
+                              {project.subtitle}
+                            </p>
+                          </div>
                         </div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-[#ccd6f6] group-hover:text-[#4fd1c5] transition-colors">
-                            {project.title}
-                          </h3>
-                          <p className="text-sm text-[#4fd1c5]/70">
-                            {project.subtitle}
-                          </p>
-                        </div>
+
+                        {!isCompact && (
+                          <>
+                            {project.stats && (
+                              <div className="mt-3 flex items-center gap-2">
+                                <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
+                                  {project.stats}
+                                </span>
+                              </div>
+                            )}
+
+                            <p className="mt-3 text-sm leading-[1.85]">
+                              {project.description}
+                            </p>
+
+                            <ul className="mt-3 space-y-1.5">
+                              {project.highlights.map((h, j) => (
+                                <li key={j} className="flex items-start text-sm">
+                                  <span className="mr-2 mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#4fd1c5]" />
+                                  {h}
+                                </li>
+                              ))}
+                            </ul>
+
+                            <TechTags tags={project.techStack} />
+                          </>
+                        )}
                       </div>
-
-                      {project.stats && (
-                        <div className="mt-3 flex items-center gap-2">
-                          <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
-                            {project.stats}
-                          </span>
-                        </div>
-                      )}
-
-                      <p className="mt-3 text-sm leading-[1.85]">
-                        {project.description}
-                      </p>
-
-                      <ul className="mt-3 space-y-1.5">
-                        {project.highlights.map((h, j) => (
-                          <li key={j} className="flex items-start text-sm">
-                            <span className="mr-2 mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#4fd1c5]" />
-                            {h}
-                          </li>
-                        ))}
-                      </ul>
-
-                      <TechTags tags={project.techStack} />
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+                {!labExpanded && (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a192f] to-transparent" />
+                )}
               </div>
+              {!labExpanded && (
+                <div className="flex justify-center pt-4 pb-2">
+                  <button
+                    onClick={() => setLabExpanded(true)}
+                    className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+                  >
+                    探索更多实验 →
+                  </button>
+                </div>
+              )}
+              {labExpanded && (
+                <div className="flex justify-center pt-4 pb-2">
+                  <button
+                    onClick={() => setLabExpanded(false)}
+                    className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+                  >
+                    收起
+                  </button>
+                </div>
+              )}
             </section>
 
             {/* ── Writing ── */}
@@ -1036,102 +1092,127 @@ export default function Home() {
               aria-label="文章"
             >
               <SectionHeading index="05">研究笔记</SectionHeading>
-              <div className="space-y-4">
-                {WRITINGS.map((article, i) => {
-                  const borderColor =
-                    article.confidence === "high"
-                      ? "border-[#22c55e]"
-                      : article.confidence === "medium"
-                      ? "border-[#eab308]"
-                      : "border-[#a78bfa]";
-                  const badgeColor =
-                    article.confidence === "high"
-                      ? "bg-[#22c55e]/10 text-[#22c55e]"
-                      : article.confidence === "medium"
-                      ? "bg-[#eab308]/10 text-[#eab308]"
-                      : "bg-[#a78bfa]/10 text-[#a78bfa]";
-                  const confidenceLabel =
-                    article.confidence === "high"
-                      ? "🟢 高确信"
-                      : article.confidence === "medium"
-                      ? "🟡 中确信"
-                      : "🟣 推测性";
+              <div className="relative">
+                <div className="space-y-4">
+                  {(writingExpanded ? WRITINGS : WRITINGS.slice(0, 3)).map((article, i) => {
+                    const borderColor =
+                      article.confidence === "high"
+                        ? "border-[#22c55e]"
+                        : article.confidence === "medium"
+                        ? "border-[#eab308]"
+                        : "border-[#a78bfa]";
+                    const badgeColor =
+                      article.confidence === "high"
+                        ? "bg-[#22c55e]/10 text-[#22c55e]"
+                        : article.confidence === "medium"
+                        ? "bg-[#eab308]/10 text-[#eab308]"
+                        : "bg-[#a78bfa]/10 text-[#a78bfa]";
+                    const confidenceLabel =
+                      article.confidence === "high"
+                        ? "🟢 高确信"
+                        : article.confidence === "medium"
+                        ? "🟡 中确信"
+                        : "🟣 推测性";
 
-                  return (
-                    <div
-                      key={i}
-                      className={`border-l-2 ${borderColor} bg-[#112240]/30 rounded-lg p-5 hover:bg-[#112240]/60 transition`}
-                    >
-                      <h3 className="font-medium leading-snug text-[#ccd6f6]">
-                        {article.url ? (
-                        <a
-                          href={article.url}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="group/link inline-flex items-baseline hover:text-[#4fd1c5] transition-colors"
-                        >
-                          {article.title}
-                          <ArrowUpRight
-                            size={14}
-                            className="ml-1 inline-block transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
-                          />
-                        </a>
-                        ) : (
-                          <span>{article.title}</span>
-                        )}
-                      </h3>
-                      <p className="mt-2 text-sm leading-[1.85] text-[#8892b0]">
-                        {article.tldr}
-                      </p>
-                      {/* Tags */}
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        {article.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full bg-[#4fd1c5]/10 px-2.5 py-0.5 font-mono text-[11px] tracking-wider text-[#4fd1c5]"
+                    return (
+                      <div
+                        key={i}
+                        className={`border-l-2 ${borderColor} bg-[#112240]/30 rounded-lg p-5 hover:bg-[#112240]/60 transition`}
+                      >
+                        <h3 className="font-medium leading-snug text-[#ccd6f6]">
+                          {article.url ? (
+                          <a
+                            href={article.url}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="group/link inline-flex items-baseline hover:text-[#4fd1c5] transition-colors"
                           >
-                            {tag}
+                            {article.title}
+                            <ArrowUpRight
+                              size={14}
+                              className="ml-1 inline-block transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
+                            />
+                          </a>
+                          ) : (
+                            <span>{article.title}</span>
+                          )}
+                        </h3>
+                        <p className="mt-2 text-sm leading-[1.85] text-[#8892b0]">
+                          {article.tldr}
+                        </p>
+                        {/* Tags */}
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {article.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="rounded-full bg-[#4fd1c5]/10 px-2.5 py-0.5 font-mono text-[11px] tracking-wider text-[#4fd1c5]"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        {/* Meta row */}
+                        <div className="mt-3 flex items-center gap-3 text-xs">
+                          <span
+                            className={`rounded-full px-2 py-0.5 ${badgeColor}`}
+                          >
+                            {confidenceLabel}
                           </span>
-                        ))}
-                      </div>
-                      {/* Meta row */}
-                      <div className="mt-3 flex items-center gap-3 text-xs">
-                        <span
-                          className={`rounded-full px-2 py-0.5 ${badgeColor}`}
-                        >
-                          {confidenceLabel}
-                        </span>
-                        <span className="rounded-full bg-[#8892b0]/10 px-2 py-0.5 text-[#8892b0]">
-                          v{article.revision}
-                        </span>
-                        <span className="text-[#8892b0]/60 font-mono">
-                          {article.date}
-                        </span>
-                        {article.sources && (
-                          <span className="text-[#8892b0]/50 font-mono ml-auto">
-                            基于 {article.sources} 个一手信源
+                          <span className="rounded-full bg-[#8892b0]/10 px-2 py-0.5 text-[#8892b0]">
+                            v{article.revision}
                           </span>
+                          <span className="text-[#8892b0]/60 font-mono">
+                            {article.date}
+                          </span>
+                          {article.sources && (
+                            <span className="text-[#8892b0]/50 font-mono ml-auto">
+                              基于 {article.sources} 个一手信源
+                            </span>
+                          )}
+                        </div>
+                        {/* References */}
+                        {article.references && article.references.length > 0 && (
+                          <details className="mt-3 group">
+                            <summary className="text-[11px] font-mono text-[#8892b0]/40 cursor-pointer hover:text-[#8892b0]/70 transition-colors">
+                              参考文献 [{article.references.length}]
+                            </summary>
+                            <ol className="mt-2 space-y-1 pl-4 list-decimal">
+                              {article.references.map((ref, ri) => (
+                                <li key={ri} className="text-[10px] font-mono text-[#8892b0]/40 leading-relaxed">
+                                  {ref}
+                                </li>
+                              ))}
+                            </ol>
+                          </details>
                         )}
                       </div>
-                      {/* References */}
-                      {article.references && article.references.length > 0 && (
-                        <details className="mt-3 group">
-                          <summary className="text-[11px] font-mono text-[#8892b0]/40 cursor-pointer hover:text-[#8892b0]/70 transition-colors">
-                            参考文献 [{article.references.length}]
-                          </summary>
-                          <ol className="mt-2 space-y-1 pl-4 list-decimal">
-                            {article.references.map((ref, ri) => (
-                              <li key={ri} className="text-[10px] font-mono text-[#8892b0]/40 leading-relaxed">
-                                {ref}
-                              </li>
-                            ))}
-                          </ol>
-                        </details>
-                      )}
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+                {!writingExpanded && WRITINGS.length > 3 && (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a192f] to-transparent" />
+                )}
               </div>
+              {!writingExpanded && WRITINGS.length > 3 && (
+                <div className="flex justify-center pt-4 pb-2">
+                  <button
+                    onClick={() => setWritingExpanded(true)}
+                    className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+                  >
+                    查看全部 {WRITINGS.length} 篇研究笔记 →
+                  </button>
+                </div>
+              )}
+              {writingExpanded && WRITINGS.length > 3 && (
+                <div className="flex justify-center pt-4 pb-2">
+                  <button
+                    onClick={() => setWritingExpanded(false)}
+                    className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+                  >
+                    收起
+                  </button>
+                </div>
+              )}
             </section>
 
             {/* ── Agent ── */}
@@ -1159,93 +1240,138 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Methodology */}
-              <div className="space-y-6">
-                <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
-                  <Bot size={16} className="text-[#4fd1c5]" />
-                  OpenClaw 配置方法论
-                </h3>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {METHODOLOGY.map((method, i) => (
-                    <div
-                      key={i}
-                      className="rounded-lg border border-[#233554] bg-[#0a192f] p-4"
-                    >
-                      <h4 className="mb-2 font-mono text-sm font-semibold text-[#4fd1c5]">
-                        {method.title}
-                      </h4>
-                      <ul className="space-y-1">
-                        {method.items.map((item, j) => (
-                          <li
-                            key={j}
-                            className="font-mono text-xs leading-relaxed text-[#8892b0]"
-                          >
-                            <span className="text-[#4fd1c5]/50 mr-1">→</span>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
+              {/* Summary stats (always visible) */}
+              <div className="mb-6 flex flex-wrap gap-3">
+                <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1.5 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
+                  {METHODOLOGY.length} 套方法论
+                </span>
+                <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1.5 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
+                  {OPENCLAW_SKILLS.length} 个技能插件
+                </span>
+                <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1.5 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
+                  {CORE_LESSONS.length} 条核心教训
+                </span>
               </div>
 
-              {/* Skills List */}
-              <div className="mt-10 space-y-4">
-                <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
-                  <FlaskConical size={16} className="text-[#4fd1c5]" />
-                  技能清单（{OPENCLAW_SKILLS.length} skills）
-                </h3>
-                <div className="rounded-lg border border-[#233554] bg-[#0a192f] p-4 font-mono text-xs">
-                  <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2">
-                    {OPENCLAW_SKILLS.map((skill, i) => (
-                      <div key={i} className="flex items-baseline gap-2 py-0.5">
-                        <span className="text-[#4fd1c5] flex-shrink-0">
-                          {skill.name}
-                        </span>
-                        <span className="text-[#233554]">—</span>
-                        <span className="text-[#8892b0]/80 truncate">
-                          {skill.desc}
-                        </span>
+              <div className="relative">
+                {/* Methodology (always visible as preview) */}
+                <div className="space-y-6">
+                  <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
+                    <Bot size={16} className="text-[#4fd1c5]" />
+                    OpenClaw 配置方法论
+                  </h3>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    {METHODOLOGY.map((method, i) => (
+                      <div
+                        key={i}
+                        className="rounded-lg border border-[#233554] bg-[#0a192f] p-4"
+                      >
+                        <h4 className="mb-2 font-mono text-sm font-semibold text-[#4fd1c5]">
+                          {method.title}
+                        </h4>
+                        <ul className="space-y-1">
+                          {method.items.map((item, j) => (
+                            <li
+                              key={j}
+                              className="font-mono text-xs leading-relaxed text-[#8892b0]"
+                            >
+                              <span className="text-[#4fd1c5]/50 mr-1">→</span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
 
-              {/* Core Lessons */}
-              <div className="mt-10 space-y-4">
-                <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
-                  <GraduationCap size={16} className="text-[#4fd1c5]" />
-                  核心教训
-                </h3>
-                <div className="space-y-3">
-                  {CORE_LESSONS.map((lesson, i) => (
-                    <div
-                      key={i}
-                      className="rounded-lg border border-[#233554] bg-[#0a192f] p-4"
-                    >
-                      <h4 className="font-mono text-sm font-semibold text-[#ccd6f6]">
-                        <span className="text-[#4fd1c5] mr-2">#{i + 1}</span>
-                        {lesson.title}
-                      </h4>
-                      <p className="mt-1 font-mono text-xs leading-relaxed text-[#8892b0]">
-                        {lesson.desc}
-                      </p>
+                {agentExpanded && (
+                  <>
+                    {/* Skills List */}
+                    <div className="mt-10 space-y-4">
+                      <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
+                        <FlaskConical size={16} className="text-[#4fd1c5]" />
+                        技能清单（{OPENCLAW_SKILLS.length} skills）
+                      </h3>
+                      <div className="rounded-lg border border-[#233554] bg-[#0a192f] p-4 font-mono text-xs">
+                        <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2">
+                          {OPENCLAW_SKILLS.map((skill, i) => (
+                            <div key={i} className="flex items-baseline gap-2 py-0.5">
+                              <span className="text-[#4fd1c5] flex-shrink-0">
+                                {skill.name}
+                              </span>
+                              <span className="text-[#233554]">—</span>
+                              <span className="text-[#8892b0]/80 truncate">
+                                {skill.desc}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  ))}
-                </div>
+
+                    {/* Core Lessons */}
+                    <div className="mt-10 space-y-4">
+                      <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
+                        <GraduationCap size={16} className="text-[#4fd1c5]" />
+                        核心教训
+                      </h3>
+                      <div className="space-y-3">
+                        {CORE_LESSONS.map((lesson, i) => (
+                          <div
+                            key={i}
+                            className="rounded-lg border border-[#233554] bg-[#0a192f] p-4"
+                          >
+                            <h4 className="font-mono text-sm font-semibold text-[#ccd6f6]">
+                              <span className="text-[#4fd1c5] mr-2">#{i + 1}</span>
+                              {lesson.title}
+                            </h4>
+                            <p className="mt-1 font-mono text-xs leading-relaxed text-[#8892b0]">
+                              {lesson.desc}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {!agentExpanded && (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a192f] to-transparent" />
+                )}
               </div>
 
-              {/* Footer CTA */}
-              <div className="mt-10 rounded-lg border border-dashed border-[#4fd1c5]/30 bg-[#4fd1c5]/5 px-4 py-3 text-center">
-                <code className="font-mono text-sm text-[#4fd1c5]">
-                  github.com/dario-github
-                </code>
-                <p className="mt-1 font-mono text-xs text-[#8892b0]/60">
-                  开源项目与技术探索
-                </p>
-              </div>
+              {!agentExpanded && (
+                <div className="flex justify-center pt-4 pb-2">
+                  <button
+                    onClick={() => setAgentExpanded(true)}
+                    className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+                  >
+                    查看完整 Agent 指南 →
+                  </button>
+                </div>
+              )}
+              {agentExpanded && (
+                <>
+                  {/* Footer CTA */}
+                  <div className="mt-10 rounded-lg border border-dashed border-[#4fd1c5]/30 bg-[#4fd1c5]/5 px-4 py-3 text-center">
+                    <code className="font-mono text-sm text-[#4fd1c5]">
+                      github.com/dario-github
+                    </code>
+                    <p className="mt-1 font-mono text-xs text-[#8892b0]/60">
+                      开源项目与技术探索
+                    </p>
+                  </div>
+                  <div className="flex justify-center pt-4 pb-2">
+                    <button
+                      onClick={() => setAgentExpanded(false)}
+                      className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+                    >
+                      收起
+                    </button>
+                  </div>
+                </>
+              )}
             </section>
 
             {/* ── Contact ── */}
