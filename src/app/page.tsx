@@ -211,7 +211,7 @@ const PROJECTS: Project[] = [
     title: "Claude Code Enterprise Proxy",
     description: "企业团队 Claude Code CLI 共享与管控服务",
     techStack: ["Node.js", "LiteLLM", "AWS Bedrock"],
-    url: "https://github.com/dario-github/claude-code-enterprise-proxy",
+    // url removed — repo is private/not yet published
     category: "team-enablement",
   },
   {
@@ -252,7 +252,7 @@ const WRITINGS: Writing[] = [
     confidence: "high",
     revision: 3,
     date: "2026-02",
-    url: "https://blog.dariolink.vercel.app",
+    url: "",
     tags: ["Agent Memory", "Architecture", "Engineering"],
     sources: 4,
   },
@@ -262,7 +262,7 @@ const WRITINGS: Writing[] = [
     confidence: "high",
     revision: 2,
     date: "2026-02",
-    url: "https://blog.dariolink.vercel.app",
+    url: "",
     tags: ["Context Engineering", "Claude Code", "RAG"],
     sources: 5,
   },
@@ -272,7 +272,7 @@ const WRITINGS: Writing[] = [
     confidence: "high",
     revision: 2,
     date: "2026-01",
-    url: "https://blog.dariolink.vercel.app",
+    url: "",
     tags: ["MCP", "Agent Architecture", "Decision"],
     sources: 3,
   },
@@ -282,7 +282,7 @@ const WRITINGS: Writing[] = [
     confidence: "medium",
     revision: 1,
     date: "2026-02",
-    url: "https://blog.dariolink.vercel.app",
+    url: "",
     tags: ["LLM", "Multilingual", "Reasoning"],
     sources: 6,
   },
@@ -292,7 +292,7 @@ const WRITINGS: Writing[] = [
     confidence: "high",
     revision: 2,
     date: "2025-12",
-    url: "https://blog.dariolink.vercel.app",
+    url: "",
     tags: ["Causal Inference", "Content Attribution", "Data Science"],
     sources: 4,
   },
@@ -302,7 +302,7 @@ const WRITINGS: Writing[] = [
     confidence: "speculative",
     revision: 1,
     date: "2026-01",
-    url: "https://blog.dariolink.vercel.app",
+    url: "",
     tags: ["AI Safety", "Interpretability", "Philosophy"],
     sources: 3,
   },
@@ -374,10 +374,10 @@ const LAB_PROJECTS: LabProject[] = [
     title: "投资研究系统",
     subtitle: "盘前预判→盘中验证→偏差分析闭环",
     description:
-      "自建量化自我校准方法论：每日盘前写定量预判，盘中逐一验证标注 ✅/❌，盘后做偏差分析找根因。11 个 Cron 任务 + 13 个分析脚本自动驱动。",
+      "自建量化自我校准方法论：每日盘前写定量预判，盘中逐一验证标注 ✅/❌，盘后做偏差分析找根因。18 个分析脚本 + 定时任务自动驱动。",
     highlights: [
       "结构化市场日志 — 每日 3 段（am/midday/pm）含定量指标",
-      "自建 11 Cron + 13 分析脚本 — 研报拉取、持仓跟踪、风险监控全自动",
+      "自建 18 分析脚本 — 研报拉取、持仓跟踪、风险监控全自动",
     ],
     techStack: ["Python", "Tushare Pro", "LLM Agent", "Cron"],
     icon: "trending",
@@ -639,7 +639,7 @@ export default function Home() {
               <li>
                 <a
                   className="block text-[#8892b0] transition-colors hover:text-[#4fd1c5]"
-                  href="https://blog.dariolink.vercel.app"
+                  href="https://github.com/dario-github"
                   target="_blank"
                   rel="noreferrer noopener"
                   title="Blog"
@@ -986,6 +986,7 @@ export default function Home() {
                       className={`border-l-2 ${borderColor} bg-[#112240]/30 rounded-lg p-5 hover:bg-[#112240]/60 transition`}
                     >
                       <h3 className="font-medium leading-snug text-[#ccd6f6]">
+                        {article.url ? (
                         <a
                           href={article.url}
                           target="_blank"
@@ -998,6 +999,9 @@ export default function Home() {
                             className="ml-1 inline-block transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
                           />
                         </a>
+                        ) : (
+                          <span>{article.title}</span>
+                        )}
                       </h3>
                       <p className="mt-2 text-sm leading-[1.85] text-[#8892b0]">
                         {article.tldr}
@@ -1135,10 +1139,10 @@ export default function Home() {
               {/* Footer CTA */}
               <div className="mt-10 rounded-lg border border-dashed border-[#4fd1c5]/30 bg-[#4fd1c5]/5 px-4 py-3 text-center">
                 <code className="font-mono text-sm text-[#4fd1c5]">
-                  curl dario.dev/llms.txt
+                  github.com/dario-github
                 </code>
                 <p className="mt-1 font-mono text-xs text-[#8892b0]/60">
-                  获取完整 LLM 友好信息
+                  开源项目与技术探索
                 </p>
               </div>
             </section>
