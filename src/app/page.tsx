@@ -560,7 +560,14 @@ export default function Home() {
     [activeSection]
   );
 
-  // Title cycling handler
+  // Title cycling - auto rotate every 3s + click to advance
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTitleIndex((prev) => (prev + 1) % CYCLING_TITLES.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
   const handleTitleClick = useCallback(() => {
     setTitleIndex((prev) => (prev + 1) % CYCLING_TITLES.length);
   }, []);
