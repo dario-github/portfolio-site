@@ -38,21 +38,19 @@ const EXPERIENCES: Experience[] = [
     title: "AI 技术总监",
     company: "蓝色光标",
     description:
-      "主导企业级 AI 中台 Smart Canvas 的架构设计与工程落地，构建支撑全集团 1600+ 用户、2000+ Agent 的统一智能服务平台。当前重心：基于 MCP 协议的主动式多 Agent 系统，让 Agent 从被动响应升级为自主感知上下文、预判意图、规划执行的智能体。",
+      "从 0 搭建企业级 AI 中台 Smart Canvas，基于 AWS Serverless + MCP 协议 + Buffer of Thoughts 推理框架，支撑全集团 1600+ 员工、2000+ Agent、日均 4000+ 次调用。带 10 人团队完成 AI 工程化转型。",
     highlights: [
-      "搭建 AI 中台 Smart Canvas — 1600+ 用户，2000+ Agent，日均 4000+ 调用",
-      "设计主动式多 Agent 系统 — 基于 MCP 协议统一 Agent 通信，实现跨场景的自主编排与协作",
-      "视频 Agent 系统 — 广告素材从脚本到成片从 30 天压缩到 6 小时，在雀巢、飞鹤等项目验证落地",
-      "推动 Context Learning 在企业场景的应用 — Agent 根据对话上下文动态调整策略，而非依赖静态 prompt",
-      "带 10 人产研团队，推动 AI 辅助编程落地，代码产出效率提升约 50%",
-      "客户项目落地：雀巢、飞鹤、宁德时代、太平洋保险、欧莱雅等 6 家头部企业",
-      "获 2024 集团年度 AI Native 团队奖（全集团唯一）",
+      "AI 中台 — AWS Serverless + MCP 协议 + Buffer of Thoughts 推理框架，1600+ 员工、2000+ Agent、日均 4000+ 调用",
+      "视频 Agent 系统 — 30 天→6 小时，Agent pipeline：脚本生成→素材匹配→智能剪辑→审核优化，因果策略做归因，在雀巢、飞鹤验证落地",
+      "团队管理 — 带 10 人，传统开发→复合型 AI 工程师，AI 辅助编程（Vibe Coding）效率提升约 50%，AI MCN 模式探索",
+      "获 2024 集团年度 AI Native 个人及团队奖",
+      "客户：太保、宁德时代、香格里拉、雀巢、飞鹤",
     ],
     techStack: [
-      "MCP",
       "Multi-Agent",
-      "Context Learning",
+      "Buffer of Thoughts",
       "AWS Serverless",
+      "因果策略",
       "Agent 编排",
     ],
   },
@@ -61,9 +59,11 @@ const EXPERIENCES: Experience[] = [
     title: "因果算法研究员",
     company: "奇绩创坛",
     description:
-      "构建数据驱动的创投决策系统，将因果推断引入项目初筛与尽调自动化。",
+      "用因果算法做创投数据驱动尽调，给投委会提供决策支持。",
     highlights: [
-      "创业者画像归因模型 — 因果推断辅助合伙人投资决策，提升初筛自动化程度",
+      "创业者画像模型 — 归因分析重构评估权重，降低漏筛率",
+      "标签体系重构 — NLP 长尾标签清洗和语义聚类，覆盖率 95%+",
+      "因果推断辅助投资 — 因果关系挖掘，给投委会量化决策支持",
     ],
     techStack: ["因果推断", "NLP", "Python"],
   },
@@ -72,11 +72,14 @@ const EXPERIENCES: Experience[] = [
     title: "NLP 算法工程师",
     company: "同花顺",
     description:
-      "主导金融知识图谱与因果推断量化策略的研发，与 CMU、爱丁堡大学团队开展学术合作。",
+      "搭金融知识图谱，与 CMU/爱丁堡教授合作做因果推断量化策略。",
     highlights: [
-      "搭建概念-因果-事理三层金融知识图谱，落地事件驱动智能选股系统",
+      "金融知识图谱 & 智能选股 — 概念、因果、事理多维图谱，事件驱动投资推理",
+      "学术合作 — 爱丁堡 Jeff Pan 教授（知识图谱），CMU 张坤教授（因果发现）",
+      "因果 AI 量化策略 — 宏观-行业-个股多层级择时，回测和实盘跑出显著 Alpha",
+      "因果分析工具包 — 内部推广，支持 2 个核心项目",
     ],
-    techStack: ["知识图谱", "因果推断", "NLP"],
+    techStack: ["知识图谱", "因果推断", "NLP", "量化交易"],
   },
 ];
 
@@ -107,7 +110,7 @@ const PROJECTS: Project[] = [
     title: "内容宇宙 AI 平台",
     description:
       "企业级 AI 中台，1600+ 用户、2000+ Agent、日均 4000+ 调用",
-    techStack: ["AWS Serverless", "MCP", "LLM Agent", "RAG"],
+    techStack: ["AWS Serverless", "LLM Agent", "RAG", "Buffer of Thoughts"],
     category: "ai-platform",
     background: "蓝色光标各业务线 AI 工具碎片化严重，缺乏统一的 Agent 调度和知识管理能力，各团队重复造轮子。",
     breakdown: "拆解为三层：底层模型路由与成本优化（多模型 fallback + token 预算控制）、中层 Agent 编排框架（MCP 协议统一通信）、上层业务场景模板（可复用 workflow）。关键挑战：多租户隔离和峰谷流量调度。",
@@ -146,21 +149,11 @@ const PROJECTS: Project[] = [
     outcome: "累计产出 1000+ 篇种草图文，效率提升 90%，成本降低 50%。模式复制到飞鹤等其他客户。",
   },
   {
-    title: "欧莱雅消费者洞察知识图谱",
-    description: "AI 驱动的消费者评论分析与产品知识图谱可视化",
-    techStack: ["Gemini", "RAG", "知识图谱", "Next.js"],
-    category: "client-delivery",
-    background: "欧莱雅需要从海量消费者评论中快速提取产品洞察，传统 BI 报表无法捕捉语义层面的用户需求变化。",
-    breakdown: "构建产品-成分-功效-用户评价四层知识图谱，结合 RAG 实现自然语言查询。",
-    execution: "Gemini 驱动评论理解和实体抽取，Next.js 构建可交互的图谱可视化界面。",
-    outcome: "为欧莱雅构建产品洞察知识图谱，支持自然语言查询消费者反馈。",
-  },
-  {
-    title: "太平洋保险数智化改造",
+    title: "太保数智化改造",
     description: "保险行业 AI + 数据中台数智化转型，从理赔智能审核到客户画像，落地 3 个核心场景。",
     techStack: ["数据中台", "AI Agent", "知识图谱"],
     category: "client-delivery",
-    background: "太平洋保险传统 IT 系统数据孤岛严重，AI 能力缺乏统一调度。",
+    background: "太保传统 IT 系统数据孤岛严重，AI 能力缺乏统一调度。",
     breakdown: "聚焦理赔智能审核、客户画像精准营销、内部知识库三个高 ROI 场景。",
     execution: "构建数据中台打通多源数据，AI Agent 编排业务流程，知识图谱支撑专业领域推理。",
     outcome: "主导设计保险行业 AI 技术合作方案，聚焦理赔审核、客户画像、内部知识库三个场景。",
@@ -172,9 +165,9 @@ const PROJECTS: Project[] = [
     category: "tech-innovation",
   },
   {
-    title: "剪映 MCP & pyJianYingDraft",
-    description: "剪映 API MCP 集成 + Python 草稿生成工具",
-    techStack: ["Python", "MCP", "剪映 API"],
+    title: "剪映自动化 & pyJianYingDraft",
+    description: "剪映 API 集成 + Python 草稿生成工具",
+    techStack: ["Python", "剪映 API"],
     category: "tech-innovation",
   },
   {
@@ -215,15 +208,15 @@ const PROJECTS: Project[] = [
     category: "team-enablement",
   },
   {
-    title: "TeamAssist MCP",
-    description: "MCP 协议团队协作与知识管理服务",
-    techStack: ["TypeScript", "MCP SDK", "MongoDB"],
+    title: "TeamAssist 协作服务",
+    description: "团队协作与知识管理服务",
+    techStack: ["TypeScript", "MongoDB"],
     category: "team-enablement",
   },
   {
     title: "OpenClaw AI Workflow",
     description: "个人 AI 操作系统，30+ 技能插件的工作流编排",
-    techStack: ["OpenClaw", "Claude", "Slack", "MCP"],
+    techStack: ["OpenClaw", "Claude", "Slack"],
     category: "personal",
   },
   {
@@ -477,20 +470,13 @@ export default function Home() {
               <SectionHeading index="01">关于</SectionHeading>
               <div className="space-y-4 leading-[1.85]">
                 <p>
-                  8 年算法经验，职业主线是
-                  <Highlight>让 AI 从被动工具进化为主动智能体</Highlight>——早期在同花顺和奇绩创坛做知识图谱与因果推断，积累了符号推理和数据驱动决策的基础；2023 年加入蓝色光标后，从零搭起企业级
-                  AI 中台 <Highlight>Smart Canvas</Highlight>，支撑 2000+ Agent
-                  日均 4000+ 次调用，重心全面转向 <Highlight>主动式 Agent 系统</Highlight>与<Highlight>多 Agent 协作</Highlight>。
+                  8 年算法经验，从金融 NLP 到 AI Agent 系统。同花顺 3 年：搭金融知识图谱，与 CMU/爱丁堡教授合作因果推断量化策略。奇绩创坛 1 年：用因果算法做创投数据驱动尽调，给投委会提供决策支持。蓝色光标 2 年：从 0 搭企业级 AI 中台 <Highlight>Smart Canvas</Highlight>，支撑 1600+ 员工、2000+ Agent、日均 4000+ 次调用；搭了视频 Agent 系统把广告素材生产从 30 天压到 6 小时，在雀巢、飞鹤落地。带 10 人团队完成 AI 工程化转型。
                 </p>
                 <p>
-                  当前研究方向：<Highlight>主动式 Agent 系统</Highlight>与<Highlight>Context Learning</Highlight>——让
-                  AI 不只是被动响应指令，而是主动理解上下文、预判需求、自主规划执行。在蓝色光标的实践中，基于 MCP 协议构建 Agent 间的标准化通信，探索
-                  Agent 根据对话上下文动态调整策略的能力。
+                  核心能力是<Highlight>把 AI 技术变成能跑的产品</Highlight>——不只是调模型，是从架构设计、团队搭建到客户交付的全链路。<Highlight>因果推断 + Agent 系统</Highlight>的跨界背景。
                 </p>
                 <p>
-                  INTJ，信奉
-                  &ldquo;如无必要，勿增实体&rdquo;。工作之外关注量化投资和
-                  AI-native 工作流。
+                  当前研究方向：<Highlight>主动式 Agent 系统</Highlight>与<Highlight>Context Learning</Highlight>——让 AI 不只是被动响应指令，而是主动理解上下文、预判需求、自主规划执行。
                 </p>
               </div>
 
@@ -509,6 +495,15 @@ export default function Home() {
                     </div>
                     <span className="text-[#4fd1c5] font-mono text-sm ml-4 whitespace-nowrap">2013 — 2018</span>
                   </div>
+                  <div className="flex items-baseline justify-between">
+                    <div>
+                      <span className="text-[#ccd6f6] font-medium">同济大学</span>
+                      <span className="mx-2 text-[#8892b0]/40">·</span>
+                      <span className="text-sm">德语强化班</span>
+                    </div>
+                    <span className="text-[#4fd1c5] font-mono text-sm ml-4 whitespace-nowrap">2015 — 2016</span>
+                  </div>
+                  <p className="text-sm text-[#8892b0]/70 mt-1">学院党委副支书、班级团支书</p>
                 </div>
               </div>
 
