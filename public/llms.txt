@@ -6,6 +6,7 @@
 AI-native technical product builder. B.S. Mathematics @ Tongji University.
 Career thread: Computational Reasoning (Symbolic → Causal → Chain-of-Thought).
 Currently leading a 10-person team building enterprise AI infrastructure.
+2026 Focus: Proactive Agent Systems + Context Learning.
 
 ## Key Skills
 - AI Tool Mastery: A (systematic Claude Code workflows, 20+ projects with AI-assisted development)
@@ -13,41 +14,116 @@ Currently leading a 10-person team building enterprise AI infrastructure.
 - Independent Delivery: A- (multiple full-stack prototypes, AI-assisted)
 - Architecture Design: B+ (assembly-style, not low-level)
 - Data Analysis: B+ (practical, script-based)
-- Code Quality: B- (functional, heavily AI-assisted)
-- Engineering Practices: C+ (Docker yes, CI/CD minimal)
-- Deep Tech: C (no low-level/algorithm evidence)
+
+## Experience
+- 2023–present: AI Technical Director @ BlueFocus (蓝色光标) — 10-person team, enterprise AI platform
+- 2021–2022: Causal Algorithm Researcher @ Miracle Plus (奇绩创坛) — VC data-driven due diligence
+- 2018–2021: NLP Algorithm Engineer @ Hithink (同花顺) — Financial knowledge graphs, CMU/Edinburgh collaborations
 
 ## Projects
 
-### 🏢 蓝色光标
-- 内容宇宙 AI 平台: Enterprise AI platform (Smart Canvas), 1600+ users, 2000+ Agents, 4000+ daily calls (AWS Serverless + MCP + RAG)
-- 企业级视频 Agent 系统: AI-driven video production reducing mid-tier video costs and template creation cycle (Multi-Agent pipeline + causal attribution, codename DDD)
-- 数据策略大脑 ChatBI: Natural language-driven enterprise data analytics & strategy insights (Streamlit + LLM + SQL)
-- 爆款视频逆向归因系统: AI reverse-engineering viral video success factors with causal inference (NLP + video analysis)
-- 飞鹤 KOC 视频智能审核: AI-powered KOC video content review & quality scoring (Whisper + Gemini Vision)
-- 雀巢 KOS 小红书 AIGC 平台: AI-driven Xiaohongshu content mass production for Nestlé KOS (Multi-Agent + AIGC)
-- AIdience 慧像: Multi-Agent intelligent audience research platform (NLP + user profiling)
-- 太平洋保险数智化改造: Insurance industry AI + data platform digital transformation (knowledge graph + AI Agent)
-- Claude Code Enterprise Proxy: Enterprise team Claude Code CLI sharing service (Node.js + LiteLLM + AWS Bedrock)
-- TeamAssist MCP: MCP-protocol team collaboration & knowledge management service (TypeScript + MCP SDK)
+### 🏢 Enterprise (BlueFocus)
+- 内容宇宙 AI 平台 (Smart Canvas): Enterprise AI platform, 1600+ users, 2000+ Agents, 4000+ daily calls (AWS Serverless + MCP + RAG)
+- 企业级视频 Agent 系统: Ad video production 30 days → 6 hours (Multi-Agent pipeline + causal attribution)
+- 数据策略大脑 ChatBI: Natural language-driven enterprise data analytics (Streamlit + LLM + SQL)
+- 雀巢 KOS 小红书 AIGC: AI-driven Xiaohongshu content mass production (1000+ posts, 90% efficiency gain)
+- 太平洋保险数智化改造: Insurance industry AI + data platform transformation
 
-### 🔧 AI 工具链
-- 剪映 MCP & pyJianYingDraft: JianYing API MCP integration + Python draft generation for automated video editing (Python + MCP)
-- Video Highlight Extractor: Enterprise AI video highlight extraction with 4-layer architecture, 24K lines (Whisper + Gemini + FastAPI)
-- OpenClaw AI Workflow: Personal AI operating system with 30+ skill plugins, structured memory architecture (MemBrain-Lite)
+### 🔧 Tech Innovation
+- Video Highlight Extractor: 4-layer AI video highlight extraction, cost optimization 69-95%
+- 剪映 MCP & pyJianYingDraft: JianYing API integration + Python draft generation
+- 金融知识图谱 & 智能选股: Multi-dimensional knowledge graph + event-driven reasoning (with Edinburgh Univ.)
+- 因果 AI 量化策略: Multi-level causal timing model with significant Alpha (with CMU)
+- Claude Code Enterprise Proxy: Enterprise team Claude Code CLI sharing (Node.js + LiteLLM + AWS Bedrock)
 
-### 📊 金融 / 数据
-- 金融知识图谱 & 智能选股: Multi-dimensional financial knowledge graph + event-driven investment reasoning engine (with Edinburgh Univ.)
-- 因果 AI 量化策略: Macro-industry-stock multi-level auto-timing strategy with significant Alpha (with CMU)
-- 创业者画像模型: Data-driven VC decision system with causal inference (Miracle Plus / 奇绩创坛)
-- A股智能看板: AI-driven A-share investment analysis & market monitoring (Tushare + LLM Agent)
+### 🧪 Lab — Side Projects & Explorations
+- KOX AgentCore: AWS cloud-native multi-agent video production system. 5-role pipeline | 54 tools | E2E 81.8%. Custom StreamingOrchestrator replacing AWS Swarm; Context Variables asset referencing (Token ↓ 85-90%); Bedrock + Cognito + ECS + DynamoDB enterprise security.
+- 互动影游: AI-generated interactive film game for Steam. All video assets AI-generated. Creative to playable MVP in one day. (Ren'Py + Seedance 1.5 Pro)
+- 百年孤独：上校的金鱼: Narrative adventure pixel RPG based on "One Hundred Years of Solitude". All-AI development team (Claude + Codex + Gemini). (Godot 4.2.x)
+- 投资研究系统: Daily pre-market prediction → intraday verification → deviation analysis closed loop. 11 cron jobs + 13 analysis scripts. Quantitative self-calibration methodology.
 
-### 🌐 其他
-- 欧莱雅消费者洞察: AI-powered consumer review analysis with knowledge graph (Gemini + RAG + Next.js)
+## Writing (6 Research Articles)
+- AI Agent 长期记忆架构：从 ChatGPT 到 MemBrain 的方案对比 [high confidence, v3]
+- 渐进式上下文注入：让 Agent 像人一样导航信息 [high confidence, v2]
+- 从 Workflow+RAG 到 Auto Agent+MCP：范式跃迁的技术决策 [high confidence, v2]
+- 语言如何塑造 LLM 的推理能力 [medium confidence, v1]
+- 因果推断在内容归因中的工程实践 [high confidence, v2]
+- AI 自省能力的边界：模型真的知道自己在想什么吗？ [speculative, v1]
+
+## Agent-Friendly Zone
+
+### OpenClaw Configuration Methodology
+
+#### MemBrain-Lite Memory Architecture
+- 3-layer separation: entities(people/projects) → context(preferences/config) → timeline(time index)
+- Query routing: people→entities/people/, projects→entities/projects/, preferences→context/
+- memory_search fuzzy query fallback, conversation-index.jsonl for conversation recall
+
+#### Context Isolation Design
+- Main session stays lightweight, large tasks delegated to subagents
+- Thresholds: read >50KB / exec >200 lines / web_fetch full page → subagent
+- Main session only receives summarized information, never raw data
+
+#### Heartbeat Autonomous Activity
+- Essence: Free activity time, not a checklist
+- Order: Do what interests you first → check if anything needs attention
+- Cron covers repetitive tasks, Heartbeat reserved for exploration and creation
+
+#### Work Methodology
+- Documentation-driven: Write design docs before code. Features not in docs don't exist
+- Evidence-driven: No guessing, only verification. "Fixed" requires proof of running results
+- Progressive iteration: Build on stable versions, single objective, incremental changes
+
+### Skills (34 active)
+web-search — Brave Search API multi-engine search
+social-media-crawler — Xiaohongshu/Douyin/Bilibili/Weibo data collection
+tushare — A-share/HK stock quotes + broker research reports
+stock-picker — Quantitative stock selection methodology + tool verification
+deep-think — Gemini + GPT deep thinking (multi-model cross-validation)
+gemini-structured — Gemini structured output (JSON Schema)
+research — Sub-agent driven deep research
+coding-agent — Claude Code CLI integration
+tts-multi — SenseTime/Edge-TTS multi-engine speech synthesis
+video-summarizer — Video content intelligent summarization
+openai-whisper-api — OpenAI Whisper speech transcription
+summarize — URL/podcast/long-form content summary
+gemini-image — Gemini native image generation
+openai-image-gen — DALL-E / GPT image generation
+video-frames — Video keyframe extraction
+agent-browser — Playwright browser automation
+kox — KOX video creation (generation/NLE export/asset management)
+membrain-lite — Entity/project/context layered memory management
+slack-blocks — Slack Block Kit rich message building
+slack-canvas — Slack Canvas document read/write
+feishu-doc — Feishu document read/write
+pptx-generator — PowerPoint automatic generation
+github — GitHub repo/PR/Issue management
+things-mac — Things todo management
+apple-reminders — Apple Reminders integration
+sonoscli — Sonos speaker control
+weather — Weather queries
+healthcheck — System security inspection
+moltbook-interact — Moltbook community interaction
+skill-creator — Auto-create new skill templates
+session-logs — Session log query and analysis
+nano-pdf — PDF reading and parsing
+model-usage — Model usage statistics
+xiaohongshu — Xiaohongshu post parsing
+
+### Core Lessons
+#1 Text > Brain — Writing to files = remembering. Conversations are temporary. Identity is causal continuity.
+#2 Tools Before Knowledge — Facts/data must be tool-fetched first, then reasoned about. Internal knowledge = hallucination risk.
+#3 Context Isolation — Large returns (>50KB) must be subagent-isolated. Main context only receives summaries.
+#4 Progressive Context Injection — Session startup injection: 55K → 12.7K chars (-77%). Minimal preload, rest JIT.
+#5 Satisficing vs Optimizing — Models default to "finishing" not "excelling". Counter with Context Slim + tool-first rules.
+#6 Occam's Razor — If unnecessary, don't add entities. This is a probabilistic system, not a deterministic program.
+#7 Compaction Recovery — Summaries may be stale. Post-compaction must verify pending items against file-level truth.
+#8 Heartbeat ≠ Checklist — Autonomous activity time. Nighttime silence is external; growth is internal.
 
 ## Contact
 - Email: zdclink@gmail.com
 - GitHub: github.com/dario-github
+- LinkedIn: linkedin.com/in/dariozhang
 - Blog: blog.dariolink.vercel.app
 - WeChat: zdclink
 
