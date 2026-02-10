@@ -18,7 +18,7 @@ const NEOFETCH_ART = `
 \x1b[cyan]  ██                 ██  \x1b[reset]  \x1b[bold]教育\x1b[reset]:  同济大学 · 数学与应用数学
 \x1b[cyan]  ██   ▄▄▄▄▄▄▄▄▄   ██  \x1b[reset]  \x1b[bold]语言\x1b[reset]:  中文 / English / Deutsch B2
 \x1b[cyan]   ██  ▀▀▀▀▀▀▀▀▀  ██   \x1b[reset]  \x1b[bold]性格\x1b[reset]:  INTJ
-\x1b[cyan]     ██            ██     \x1b[reset]  \x1b[bold]爱好\x1b[reset]:  猫 · Code Geass · 投资
+\x1b[cyan]     ██            ██     \x1b[reset]  \x1b[bold]爱好\x1b[reset]:  猫 · 鲁路修 · 化债
 \x1b[cyan]       ████████████       \x1b[reset]  
                                  \x1b[bold]技能栈\x1b[reset]:
   \x1b[green]█████████████████\x1b[reset] Agent 系统 (95%)   \x1b[green]████████████████\x1b[reset] 因果推断 (90%)
@@ -51,7 +51,7 @@ function processCommand(
       return {
         output: [
           {
-            text: "章东丞 / AI 技术总监 / INTJ / 猫奴 / 德语B2 / 业余投资者",
+            text: "章东丞 / AI 技术总监 / INTJ / 铲屎官 / 德语B2 / 化债人",
             color: "#4fd1c5",
           },
         ],
