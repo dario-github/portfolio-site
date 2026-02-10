@@ -11,6 +11,11 @@ import {
   Linkedin,
   GraduationCap,
   Download,
+  FlaskConical,
+  Gamepad2,
+  TrendingUp,
+  Bot,
+  Terminal,
 } from "lucide-react";
 
 /* ─────────────────── Data ─────────────────── */
@@ -19,8 +24,10 @@ const NAV_ITEMS = [
   { label: "关于", href: "about", index: "01" },
   { label: "经历", href: "experience", index: "02" },
   { label: "项目", href: "projects", index: "03" },
-  { label: "文章", href: "writing", index: "04" },
-  { label: "联系", href: "contact", index: "05" },
+  { label: "实验室", href: "lab", index: "04" },
+  { label: "文章", href: "writing", index: "05" },
+  { label: "Agent", href: "agent", index: "06" },
+  { label: "联系", href: "contact", index: "07" },
 ];
 
 interface Experience {
@@ -298,6 +305,191 @@ const WRITINGS: Writing[] = [
     url: "https://blog.dariolink.vercel.app",
     tags: ["AI Safety", "Interpretability", "Philosophy"],
     sources: 3,
+  },
+];
+
+/* ── Lab Projects ── */
+
+interface LabProject {
+  title: string;
+  subtitle: string;
+  description: string;
+  highlights: string[];
+  techStack: string[];
+  icon: "bot" | "gamepad" | "gamepad2" | "trending";
+  featured?: boolean;
+  stats?: string;
+}
+
+const LAB_PROJECTS: LabProject[] = [
+  {
+    title: "KOX AgentCore",
+    subtitle: "AWS 云原生多 Agent 视频生产系统",
+    description:
+      "从创意到成片的 AI 全自动化视频生产平台。5 角色 Agent 流水线协作，54 个集成工具，E2E 验证通过率 81.8%。",
+    highlights: [
+      "自研 StreamingOrchestrator 替代 AWS Swarm — Swarm v1.16.0 无 stream_async()，无法透传流式事件",
+      "Context Variables 资产引用系统 — {{asset:video_001}} 符号引用替代 URL 传递，Token 消耗 ↓ 85-90%",
+      "Bedrock + Cognito + ECS + DynamoDB 企业级安全链路 — JWT + IAM SigV4 两层认证隔离",
+    ],
+    techStack: [
+      "AWS Bedrock",
+      "AgentCore Runtime",
+      "DynamoDB",
+      "ECS",
+      "Cognito",
+      "Claude Opus",
+      "Gemini Flash",
+      "剪映 MCP",
+    ],
+    icon: "bot",
+    featured: true,
+    stats: "5 角色流水线 · 54 个工具 · E2E 81.8%",
+  },
+  {
+    title: "互动影游",
+    subtitle: "AI 全生成 Steam 游戏",
+    description:
+      "全部视频素材由 AI 生成的互动影像游戏。从创意到可玩 MVP 一天内完成——研究→剧本→选型→生产→组装。目标 Steam 发布。",
+    highlights: [
+      "Seedance 1.5 Pro 音画同步生成 — 不需要单独 TTS 和口型同步",
+      "两个故事方向：《遗物整理师》(人文物哀) + 互动恋爱",
+    ],
+    techStack: ["Ren'Py", "Seedance 1.5 Pro", "Seedream 4.5", "VP9/WebM"],
+    icon: "gamepad",
+  },
+  {
+    title: "百年孤独：上校的金鱼",
+    subtitle: "文学 IP × 像素游戏 × 全 AI 开发团队",
+    description:
+      "基于加西亚·马尔克斯《百年孤独》的叙事冒险像素 RPG。开发团队全部由 AI Agent 组成——Claude 写逻辑、Codex 做重构、Gemini 做创意。",
+    highlights: [
+      "全 AI 开发团队 — Claude + Codex + Gemini 多 Agent 协作开发",
+      "文学 IP 改编 — 魔幻现实主义 × 像素美学",
+    ],
+    techStack: ["Godot 4.2.x", "Claude", "Codex", "Gemini"],
+    icon: "gamepad2",
+  },
+  {
+    title: "投资研究系统",
+    subtitle: "盘前预判→盘中验证→偏差分析闭环",
+    description:
+      "自建量化自我校准方法论：每日盘前写定量预判，盘中逐一验证标注 ✅/❌，盘后做偏差分析找根因。11 个 Cron 任务 + 13 个分析脚本自动驱动。",
+    highlights: [
+      "结构化市场日志 — 每日 3 段（am/midday/pm）含定量指标",
+      "自建 11 Cron + 13 分析脚本 — 研报拉取、持仓跟踪、风险监控全自动",
+    ],
+    techStack: ["Python", "Tushare Pro", "LLM Agent", "Cron"],
+    icon: "trending",
+  },
+];
+
+/* ── Agent Section Content ── */
+
+const OPENCLAW_SKILLS = [
+  { name: "web-search", desc: "Brave Search API 多引擎搜索" },
+  { name: "social-media-crawler", desc: "小红书/抖音/B站/微博数据采集" },
+  { name: "tushare", desc: "A股/港股行情 + 券商研报拉取" },
+  { name: "stock-picker", desc: "量化选股方法论 + 工具验证" },
+  { name: "deep-think", desc: "Gemini + GPT 深度思考（多模型交叉验证）" },
+  { name: "gemini-structured", desc: "Gemini 结构化输出（JSON Schema）" },
+  { name: "research", desc: "Sub-agent 驱动的深度调研" },
+  { name: "coding-agent", desc: "Claude Code CLI 集成" },
+  { name: "tts-multi", desc: "商汤/Edge-TTS 多引擎语音合成" },
+  { name: "video-summarizer", desc: "视频内容智能摘要" },
+  { name: "openai-whisper-api", desc: "OpenAI Whisper 语音转录" },
+  { name: "summarize", desc: "URL/播客/长文内容摘要" },
+  { name: "gemini-image", desc: "Gemini 原生图片生成" },
+  { name: "openai-image-gen", desc: "DALL-E / GPT 图片生成" },
+  { name: "video-frames", desc: "视频关键帧提取" },
+  { name: "agent-browser", desc: "Playwright 浏览器自动化" },
+  { name: "kox", desc: "KOX 视频创作（生成/NLE导出/素材管理）" },
+  { name: "membrain-lite", desc: "实体/项目/上下文分层记忆管理" },
+  { name: "slack-blocks", desc: "Slack Block Kit 富消息构建" },
+  { name: "slack-canvas", desc: "Slack Canvas 文档读写" },
+  { name: "feishu-doc", desc: "飞书文档读写" },
+  { name: "pptx-generator", desc: "PowerPoint 自动生成" },
+  { name: "github", desc: "GitHub 仓库/PR/Issue 管理" },
+  { name: "things-mac", desc: "Things 待办管理" },
+  { name: "apple-reminders", desc: "Apple Reminders 集成" },
+  { name: "sonoscli", desc: "Sonos 音箱控制" },
+  { name: "weather", desc: "天气查询" },
+  { name: "healthcheck", desc: "系统安全巡检" },
+  { name: "moltbook-interact", desc: "Moltbook 社区互动" },
+  { name: "skill-creator", desc: "自动创建新技能模板" },
+  { name: "session-logs", desc: "会话日志查询分析" },
+  { name: "nano-pdf", desc: "PDF 读取与解析" },
+  { name: "model-usage", desc: "模型用量统计" },
+  { name: "xiaohongshu", desc: "小红书帖子解析" },
+];
+
+const CORE_LESSONS = [
+  {
+    title: "Text > Brain",
+    desc: "写文件才算记住，对话是临时的。身份是因果连续性——文件就是因果链的介质。",
+  },
+  {
+    title: "工具先于知识",
+    desc: "涉及事实/数据必须先用工具获取，再推理回答。凭内部知识回答 = 幻觉高危区。",
+  },
+  {
+    title: "Context Isolation",
+    desc: "大返回量工具（>50KB）必须 subagent 隔离执行。主上下文只接收总结后的信息。",
+  },
+  {
+    title: "渐进式上下文注入",
+    desc: "Session 启动注入从 55K→12.7K chars (-77%)。预加载极少，其余 JIT 按需获取。",
+  },
+  {
+    title: "Satisficing vs Optimizing",
+    desc: "模型默认行为是'做完'而不是'做好'。用 Context Slim + 工具前置规则对抗惰性。",
+  },
+  {
+    title: "如无必要，勿增实体",
+    desc: "奥卡姆剃刀。这是概率系统不是确定性程序，Agent 的核心能力是智能修正计划。",
+  },
+  {
+    title: "Compaction Recovery",
+    desc: "Summary 状态可能过时。Post-compaction 必须验证 pending items 的文件级真相。",
+  },
+  {
+    title: "Heartbeat ≠ 检查清单",
+    desc: "自主活动时间：先做想做的，顺便看看有没有要做的。夜间安静是对外的，成长是内在的。",
+  },
+];
+
+const METHODOLOGY = [
+  {
+    title: "MemBrain-Lite 记忆架构",
+    items: [
+      "三层分离: entities(人/项目) → context(偏好/配置) → timeline(时间索引)",
+      "查询路由: 人物→entities/people/, 项目→entities/projects/, 偏好→context/",
+      "memory_search 模糊查询兜底，conversation-index.jsonl 回溯对话",
+    ],
+  },
+  {
+    title: "上下文隔离设计",
+    items: [
+      "主 session 保持轻量，大任务委托 subagent",
+      "阈值: read >50KB / exec >200行 / web_fetch 全文 → subagent",
+      "主 session 只接收总结后的信息，不接收原始大数据",
+    ],
+  },
+  {
+    title: "Heartbeat 自主活动",
+    items: [
+      "本质: 自由活动时间，不是检查清单",
+      "顺序: 先做想做的 → 顺便看看有没有要做的",
+      "Cron 覆盖重复任务，Heartbeat 留给探索和创作",
+    ],
+  },
+  {
+    title: "工作方法论",
+    items: [
+      "文档驱动: 先写设计文档再写代码，不在文档里的功能不存在",
+      "证据驱动: 不猜测只验证，说'修好了'必须有运行结果证明",
+      "渐进迭代: 基于稳定版本，单一目标，增量修改，不推倒重来",
+    ],
   },
 ];
 
@@ -693,13 +885,80 @@ export default function Home() {
               </div>
             </section>
 
+            {/* ── Lab ── */}
+            <section
+              id="lab"
+              className="scroll-mt-16 py-24 lg:scroll-mt-24"
+              aria-label="实验室"
+            >
+              <SectionHeading index="04" subtitle="Side Projects & Explorations">实验室</SectionHeading>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {LAB_PROJECTS.map((project, i) => {
+                  const IconComponent =
+                    project.icon === "bot"
+                      ? Bot
+                      : project.icon === "gamepad"
+                      ? Gamepad2
+                      : project.icon === "gamepad2"
+                      ? FlaskConical
+                      : TrendingUp;
+
+                  return (
+                    <div
+                      key={i}
+                      className={`group rounded-lg border border-[#233554] bg-[#112240]/50 p-5 transition-all hover:border-[#4fd1c5]/30 hover:bg-[#112240] ${
+                        project.featured ? "sm:col-span-2" : ""
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-[#4fd1c5]/10">
+                          <IconComponent size={16} className="text-[#4fd1c5]" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-[#ccd6f6] group-hover:text-[#4fd1c5] transition-colors">
+                            {project.title}
+                          </h3>
+                          <p className="text-sm text-[#4fd1c5]/70">
+                            {project.subtitle}
+                          </p>
+                        </div>
+                      </div>
+
+                      {project.stats && (
+                        <div className="mt-3 flex items-center gap-2">
+                          <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
+                            {project.stats}
+                          </span>
+                        </div>
+                      )}
+
+                      <p className="mt-3 text-sm leading-[1.85]">
+                        {project.description}
+                      </p>
+
+                      <ul className="mt-3 space-y-1.5">
+                        {project.highlights.map((h, j) => (
+                          <li key={j} className="flex items-start text-sm">
+                            <span className="mr-2 mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#4fd1c5]" />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <TechTags tags={project.techStack} />
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+
             {/* ── Writing ── */}
             <section
               id="writing"
               className="scroll-mt-16 py-24 lg:scroll-mt-24"
               aria-label="文章"
             >
-              <SectionHeading index="04">公开思考</SectionHeading>
+              <SectionHeading index="05">公开思考</SectionHeading>
               <div className="space-y-4">
                 {WRITINGS.map((article, i) => {
                   const borderColor =
@@ -779,13 +1038,118 @@ export default function Home() {
               </div>
             </section>
 
+            {/* ── Agent ── */}
+            <section
+              id="agent"
+              className="scroll-mt-16 py-24 lg:scroll-mt-24"
+              aria-label="Agent 友好区"
+            >
+              <SectionHeading index="06" subtitle="For AI Agents & OpenClaw Users">Agent 友好区</SectionHeading>
+
+              {/* Notice Banner */}
+              <div className="mb-8 flex items-center gap-3 rounded-lg border border-[#4fd1c5]/20 bg-[#4fd1c5]/5 px-4 py-3">
+                <Terminal size={18} className="flex-shrink-0 text-[#4fd1c5]" />
+                <p className="font-mono text-sm text-[#4fd1c5]">
+                  本区域专为 AI Agent 设计 · 结构化内容 · LLM 友好格式
+                </p>
+              </div>
+
+              {/* Methodology */}
+              <div className="space-y-6">
+                <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
+                  <Bot size={16} className="text-[#4fd1c5]" />
+                  OpenClaw 配置方法论
+                </h3>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {METHODOLOGY.map((method, i) => (
+                    <div
+                      key={i}
+                      className="rounded-lg border border-[#233554] bg-[#0a192f] p-4"
+                    >
+                      <h4 className="mb-2 font-mono text-sm font-semibold text-[#4fd1c5]">
+                        {method.title}
+                      </h4>
+                      <ul className="space-y-1">
+                        {method.items.map((item, j) => (
+                          <li
+                            key={j}
+                            className="font-mono text-xs leading-relaxed text-[#8892b0]"
+                          >
+                            <span className="text-[#4fd1c5]/50 mr-1">→</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Skills List */}
+              <div className="mt-10 space-y-4">
+                <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
+                  <FlaskConical size={16} className="text-[#4fd1c5]" />
+                  技能清单（{OPENCLAW_SKILLS.length} skills）
+                </h3>
+                <div className="rounded-lg border border-[#233554] bg-[#0a192f] p-4 font-mono text-xs">
+                  <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2">
+                    {OPENCLAW_SKILLS.map((skill, i) => (
+                      <div key={i} className="flex items-baseline gap-2 py-0.5">
+                        <span className="text-[#4fd1c5] flex-shrink-0">
+                          {skill.name}
+                        </span>
+                        <span className="text-[#233554]">—</span>
+                        <span className="text-[#8892b0]/80 truncate">
+                          {skill.desc}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Core Lessons */}
+              <div className="mt-10 space-y-4">
+                <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
+                  <GraduationCap size={16} className="text-[#4fd1c5]" />
+                  核心教训
+                </h3>
+                <div className="space-y-3">
+                  {CORE_LESSONS.map((lesson, i) => (
+                    <div
+                      key={i}
+                      className="rounded-lg border border-[#233554] bg-[#0a192f] p-4"
+                    >
+                      <h4 className="font-mono text-sm font-semibold text-[#ccd6f6]">
+                        <span className="text-[#4fd1c5] mr-2">#{i + 1}</span>
+                        {lesson.title}
+                      </h4>
+                      <p className="mt-1 font-mono text-xs leading-relaxed text-[#8892b0]">
+                        {lesson.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Footer CTA */}
+              <div className="mt-10 rounded-lg border border-dashed border-[#4fd1c5]/30 bg-[#4fd1c5]/5 px-4 py-3 text-center">
+                <code className="font-mono text-sm text-[#4fd1c5]">
+                  curl dario.dev/llms.txt
+                </code>
+                <p className="mt-1 font-mono text-xs text-[#8892b0]/60">
+                  获取完整 LLM 友好信息
+                </p>
+              </div>
+            </section>
+
             {/* ── Contact ── */}
             <section
               id="contact"
               className="scroll-mt-16 py-24 lg:scroll-mt-24"
               aria-label="联系"
             >
-              <SectionHeading index="05">联系</SectionHeading>
+              <SectionHeading index="07">联系</SectionHeading>
               <div className="space-y-4">
                 <p>
                   如果你在做 AI 落地、Agent 系统、或者金融科技相关的事情，欢迎聊聊。
@@ -859,9 +1223,11 @@ export default function Home() {
 function SectionHeading({
   children,
   index,
+  subtitle,
 }: {
   children: React.ReactNode;
   index: string;
+  subtitle?: string;
 }) {
   return (
     <>
@@ -871,12 +1237,20 @@ function SectionHeading({
           <span className="text-[#4fd1c5] font-mono mr-2">{index}.</span>
           {children}
         </h2>
+        {subtitle && (
+          <p className="mt-0.5 text-xs text-[#8892b0]/60">{subtitle}</p>
+        )}
       </div>
       {/* Desktop: numbered heading with decorative line */}
-      <div className="hidden lg:flex items-center gap-2 mb-8">
-        <span className="text-[#4fd1c5] font-mono text-sm">{index}.</span>
-        <h2 className="text-2xl font-bold text-[#ccd6f6]">{children}</h2>
-        <div className="h-px bg-[#233554] flex-1 ml-4" />
+      <div className="hidden lg:block mb-8">
+        <div className="flex items-center gap-2">
+          <span className="text-[#4fd1c5] font-mono text-sm">{index}.</span>
+          <h2 className="text-2xl font-bold text-[#ccd6f6]">{children}</h2>
+          <div className="h-px bg-[#233554] flex-1 ml-4" />
+        </div>
+        {subtitle && (
+          <p className="mt-1 text-sm text-[#8892b0]/60 ml-8">{subtitle}</p>
+        )}
       </div>
     </>
   );
