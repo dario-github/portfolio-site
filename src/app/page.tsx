@@ -30,7 +30,7 @@ interface Experience {
 const EXPERIENCES: Experience[] = [
   {
     period: "2023 — 至今",
-    title: "AI 技术副总监",
+    title: "AI 技术总监",
     company: "蓝色光标",
     description:
       "从零搭建企业级 AI 中台 Smart Canvas，支撑全集团 1600+ 用户和 2000+ Agent 的日常调用。带领 10 人产研团队完成从传统开发到 AI 工程化的转型。",
@@ -269,7 +269,7 @@ export default function Home() {
                 Dario Zhang
               </p>
               <h2 className="mt-3 text-lg font-medium tracking-tight text-[#ccd6f6] sm:text-xl">
-                AI 技术副总监
+                AI 技术总监
               </h2>
               <p className="mt-4 max-w-xs leading-normal">
                 让 AI 在真实业务里跑起来，不做 demo。
