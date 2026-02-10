@@ -699,20 +699,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Resume Download */}
-              <div className="mt-8">
-                <a
-                  href="/resume-dario-zhang.pdf"
-                  className="group inline-flex items-center gap-2 rounded-lg border border-[#4fd1c5]/30 bg-[#4fd1c5]/5 px-4 py-2 text-sm font-medium text-[#4fd1c5] transition-all hover:bg-[#4fd1c5]/10 hover:border-[#4fd1c5]/50"
-                >
-                  <Download size={16} />
-                  下载简历 PDF
-                  <ArrowUpRight
-                    size={14}
-                    className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                </a>
-              </div>
+              {/* Resume removed for privacy */}
             </section>
 
             {/* ── Experience ── */}
