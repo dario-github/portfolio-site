@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Mail,
   Github,
@@ -17,6 +18,7 @@ import {
   Bot,
   Terminal,
 } from "lucide-react";
+import TerminalOverlay from "@/components/Terminal";
 
 /* ─────────────────── Data ─────────────────── */
 
@@ -495,9 +497,31 @@ const METHODOLOGY = [
 
 /* ─────────────────── Component ─────────────────── */
 
+/* ── Title Cycling ── */
+const CYCLING_TITLES = [
+  "AI 技术总监",
+  "猫奴 🐱",
+  "业余投资者 📈",
+  "INTJ",
+  "德语 B2 🇩🇪",
+  "Code Geass 粉",
+];
+
+/* ── Section Glow Colors ── */
+const SECTION_GLOW_COLORS: Record<string, string> = {
+  about: "79, 209, 197",      // #4fd1c5 cyan
+  experience: "59, 130, 246",  // #3b82f6 blue
+  projects: "139, 92, 246",    // #8b5cf6 purple
+  lab: "34, 197, 94",          // #22c55e green
+  writing: "245, 158, 11",     // #f59e0b amber
+  agent: "6, 182, 212",        // #06b6d4 cyan-500
+  contact: "79, 209, 197",     // #4fd1c5 cyan
+};
+
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeSection, setActiveSection] = useState("about");
+  const [titleIndex, setTitleIndex] = useState(0);
   const [activeCategory, setActiveCategory] = useState("ai-platform");
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
 
@@ -531,6 +555,17 @@ export default function Home() {
     (p) => p.category === activeCategory
   );
 
+  // Section-based glow color
+  const glowColor = useMemo(
+    () => SECTION_GLOW_COLORS[activeSection] || SECTION_GLOW_COLORS.about,
+    [activeSection]
+  );
+
+  // Title cycling handler
+  const handleTitleClick = useCallback(() => {
+    setTitleIndex((prev) => (prev + 1) % CYCLING_TITLES.length);
+  }, []);
+
   return (
     <div
       className="relative min-h-screen bg-[#0a192f] leading-[1.85] text-[#8892b0] antialiased"
@@ -538,9 +573,9 @@ export default function Home() {
     >
       {/* ── Mouse follow glow ── */}
       <div
-        className="pointer-events-none fixed inset-0 z-30 transition duration-300 lg:absolute"
+        className="pointer-events-none fixed inset-0 z-30 transition-all duration-500 lg:absolute"
         style={{
-          background: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`,
+          background: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(${glowColor}, 0.15), transparent 80%)`,
         }}
       />
 
@@ -550,13 +585,24 @@ export default function Home() {
           <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
             <div>
               <h1 className="text-4xl font-bold tracking-tight text-[#ccd6f6] sm:text-5xl">
-                <a href="/">章东丞</a>
+                <a href="/" onClick={(e) => { e.preventDefault(); handleTitleClick(); }} className="cursor-pointer hover:text-[#4fd1c5] transition-colors">章东丞</a>
               </h1>
               <p className="mt-1 text-lg font-light text-[#8892b0]">
                 Dario Zhang
               </p>
-              <h2 className="mt-3 text-lg font-medium tracking-tight text-[#ccd6f6] sm:text-xl">
-                AI 技术总监
+              <h2 className="mt-3 h-8 text-lg font-medium tracking-tight text-[#ccd6f6] sm:text-xl">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={titleIndex}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="inline-block"
+                  >
+                    {CYCLING_TITLES[titleIndex]}
+                  </motion.span>
+                </AnimatePresence>
               </h2>
               <p className="mt-4 max-w-xs leading-[1.85]">
                 构建主动式 Agent 系统，让 AI 从被动响应走向自主规划执行。
@@ -1035,7 +1081,16 @@ export default function Home() {
               className="scroll-mt-16 py-24 lg:scroll-mt-24"
               aria-label="Agent 友好区"
             >
-              <SectionHeading index="06" subtitle="For AI Agents & OpenClaw Users">Agent 友好区</SectionHeading>
+              <SectionHeading index="06" subtitle="For AI Agents & OpenClaw Users">
+                <span className="inline-flex items-center gap-3">
+                  Agent 友好区
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
+                  </span>
+                  <span className="text-green-500 text-xs font-normal tracking-normal normal-case">在线中</span>
+                </span>
+              </SectionHeading>
 
               {/* Notice Banner */}
               <div className="mb-8 flex items-center gap-3 rounded-lg border border-[#4fd1c5]/20 bg-[#4fd1c5]/5 px-4 py-3">
@@ -1205,6 +1260,9 @@ export default function Home() {
           </main>
         </div>
       </div>
+
+      {/* ── Terminal Easter Egg ── */}
+      <TerminalOverlay />
     </div>
   );
 }
