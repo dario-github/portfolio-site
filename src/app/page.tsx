@@ -119,11 +119,11 @@ const NARRATIVES: Narrative[] = [
         techStack: ["AWS Serverless", "MCP", "RAG", "Buffer of Thoughts"],
       },
       {
-        name: "企业级视频 Agent 系统",
+        name: "视频 Agent / KOX AgentCore",
         role: "系统架构 & Agent 编排",
         highlight:
-          "4 Agent 流水线（脚本→素材→剪辑→审核），因果策略做内容归因，在雀巢、飞鹤验证落地",
-        techStack: ["Multi-Agent", "因果策略", "剪映 API", "Gemini"],
+          "在中台基础上搭建视频内容全自动生产系统（详见 Multi-Agent 叙事线），30 天→6 小时，在雀巢、飞鹤验证落地",
+        techStack: ["Multi-Agent", "AWS Bedrock", "因果策略"],
       },
       {
         name: "团队 AI 工程化转型",
@@ -143,11 +143,11 @@ const NARRATIVES: Narrative[] = [
       "自研 StreamingOrchestrator 替代 AWS Swarm（v1.16.0 无 stream_async()），设计 Context Variables 系统将 Token 消耗降低 85-90%。5 角色 Agent 流水线搭配 54 个工具，E2E 验证通过率 81.8%。从技术原型到真实客户落地。",
     projects: [
       {
-        name: "KOX AgentCore",
+        name: "KOX AgentCore / 视频 Agent 系统",
         role: "系统架构 & 核心开发",
         highlight:
-          "发现 AWS Swarm 框架不够用，自研 StreamingOrchestrator；Context Variables 资产引用系统替代 URL 传递",
-        techStack: ["AWS Bedrock", "AgentCore Runtime", "DynamoDB", "ECS"],
+          "企业级视频全自动生产系统（产品代号 DDD）。自研 StreamingOrchestrator 替代 AWS Swarm；Context Variables 资产引用系统替代 URL 传递，Token↓85-90%",
+        techStack: ["AWS Bedrock", "AgentCore Runtime", "DynamoDB", "ECS", "剪映 API"],
       },
       {
         name: "雀巢 KOS AIGC",
