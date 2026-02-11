@@ -7,14 +7,9 @@ import {
   Github,
   Globe,
   ArrowUpRight,
-  ChevronDown,
-  ChevronUp,
   Linkedin,
   GraduationCap,
-  Download,
   FlaskConical,
-  Gamepad2,
-  TrendingUp,
   Bot,
   Terminal,
 } from "lucide-react";
@@ -26,10 +21,9 @@ const NAV_ITEMS = [
   { label: "关于", href: "about", index: "01" },
   { label: "经历", href: "experience", index: "02" },
   { label: "项目", href: "projects", index: "03" },
-  { label: "实验室", href: "lab", index: "04" },
-  { label: "文章", href: "writing", index: "05" },
-  { label: "Agent", href: "agent", index: "06" },
-  { label: "联系", href: "contact", index: "07" },
+  { label: "文章", href: "writing", index: "04" },
+  { label: "Agent", href: "agent", index: "05" },
+  { label: "联系", href: "contact", index: "06" },
 ];
 
 interface Experience {
@@ -92,147 +86,197 @@ const EXPERIENCES: Experience[] = [
   },
 ];
 
-/* ── Project Categories ── */
+/* ── Narrative Threads ── */
 
-const PROJECT_CATEGORIES = [
-  { key: "ai-platform", label: "🎯AI中台" },
-  { key: "client-delivery", label: "🚀客户交付" },
-  { key: "tech-innovation", label: "🔧技术创新" },
-  { key: "team-enablement", label: "🏗️团队赋能" },
-  { key: "personal", label: "🎮个人兴趣" },
-] as const;
-
-interface Project {
-  title: string;
-  description: string;
+interface NarrativeProject {
+  name: string;
+  role: string;
+  highlight: string;
   techStack: string[];
-  url?: string;
-  category: string;
-  background?: string;
-  breakdown?: string;
-  execution?: string;
-  outcome?: string;
 }
 
-const PROJECTS: Project[] = [
+interface Narrative {
+  title: string;
+  subtitle: string;
+  description: string;
+  projects: NarrativeProject[];
+  keyMetrics: string[];
+  icon: string;
+}
+
+const NARRATIVES: Narrative[] = [
   {
-    title: "内容宇宙 AI 平台",
+    title: "企业 AI 基建",
+    subtitle: "从零搭建支撑 1600 人的 AI 中台",
     description:
-      "企业级 AI 中台，1600+ 用户、2000+ Agent、日均 4000+ 调用",
-    techStack: ["AWS Serverless", "LLM Agent", "RAG", "Buffer of Thoughts"],
-    category: "ai-platform",
-    background: "蓝色光标各业务线 AI 工具碎片化严重，缺乏统一的 Agent 调度和知识管理能力，各团队重复造轮子。",
-    breakdown: "拆解为三层：底层模型路由与成本优化（多模型 fallback + token 预算控制）、中层 Agent 编排框架（MCP 协议统一通信）、上层业务场景模板（可复用 workflow）。关键挑战：多租户隔离和峰谷流量调度。",
-    execution: "基于 AWS Lambda + API Gateway 实现弹性扩缩（冷启动 < 2s），设计 MCP 协议统一 Agent 通信，构建 RAG 知识库支撑企业专有数据检索。选择 Serverless 而非 K8s 是因为流量峰谷比达 10:1，按需付费显著降低基础设施成本。",
-    outcome: "支撑 1600+ 用户、2000+ Agent，日均 4000+ 调用。获 2024 集团年度 AI Native 团队奖。",
+      "发现各业务线重复造轮子，设计统一中台架构 Smart Canvas，支撑 1600+ 用户和 2000+ Agent。在此基础上搭建视频 Agent 系统，把广告素材生产从 30 天压到 6 小时。带 10 人团队完成从传统开发到 AI 工程化的转型。",
+    projects: [
+      {
+        name: "AI 中台 Smart Canvas",
+        role: "架构设计 & 技术负责人",
+        highlight:
+          "多租户 + MCP 协议 + Serverless，选择按需付费（峰谷比 10:1）替代 K8s 固定成本",
+        techStack: ["AWS Serverless", "MCP", "RAG", "Buffer of Thoughts"],
+      },
+      {
+        name: "企业级视频 Agent 系统",
+        role: "系统架构 & Agent 编排",
+        highlight:
+          "4 Agent 流水线（脚本→素材→剪辑→审核），因果策略做内容归因，在雀巢、飞鹤验证落地",
+        techStack: ["Multi-Agent", "因果策略", "剪映 API", "Gemini"],
+      },
+      {
+        name: "团队 AI 工程化转型",
+        role: "团队负责人",
+        highlight:
+          "10 人团队从传统开发转型 AI 工程师，Vibe Coding 效率提升 ~50%。附带搭建 ChatBI 数据分析模块和 Claude Code 企业共享管控",
+        techStack: ["Vibe Coding", "Claude Code", "AI MCN"],
+      },
+    ],
+    keyMetrics: ["1600+ 用户", "2000+ Agent", "30天→6小时", "10 人团队转型"],
+    icon: "🏗️",
   },
   {
-    title: "企业级视频 Agent 系统",
+    title: "Multi-Agent 架构",
+    subtitle: "5 角色流水线，从创意到成片全自动",
     description:
-      "广告素材从脚本到成片从 30 天压缩到 6 小时，在雀巢、飞鹤等项目验证落地",
-    techStack: ["Multi-Agent", "因果策略", "剪映 API", "Gemini"],
-    category: "ai-platform",
-    background: "广告行业腰部视频产量大但制作效率低，传统流程从脚本到成片需要约 30 天。",
-    breakdown: "将视频生产拆解为脚本生成、素材匹配、剪辑编排、审核优化四个独立 Agent，每个环节可替换可并行。核心技术决策：选择 Agent 编排而非端到端模型，因为广告视频需要精确控制每个环节的品牌合规性。",
-    execution: "Multi-Agent 协作架构，脚本 Agent（GPT-4o）→ 素材 Agent（Gemini Vision 匹配）→ 剪辑 Agent（剪映 API 编排）→ 审核 Agent（品牌合规检查）。因果策略优化素材选择，从相关性匹配升级为因果效果预测。",
-    outcome: "广告素材制作周期从 30 天压缩到 6 小时。用因果策略做内容效果归因，在雀巢、飞鹤项目上验证落地。",
+      "自研 StreamingOrchestrator 替代 AWS Swarm（v1.16.0 无 stream_async()），设计 Context Variables 系统将 Token 消耗降低 85-90%。5 角色 Agent 流水线搭配 54 个工具，E2E 验证通过率 81.8%。从技术原型到真实客户落地。",
+    projects: [
+      {
+        name: "KOX AgentCore",
+        role: "系统架构 & 核心开发",
+        highlight:
+          "发现 AWS Swarm 框架不够用，自研 StreamingOrchestrator；Context Variables 资产引用系统替代 URL 传递",
+        techStack: ["AWS Bedrock", "AgentCore Runtime", "DynamoDB", "ECS"],
+      },
+      {
+        name: "雀巢 KOS AIGC",
+        role: "技术方案 & 落地交付",
+        highlight:
+          "因果推断分析爆款因素指导选题策略——不是让 AI 写，是让 AI 写对的东西。1000+ 篇种草图文",
+        techStack: ["Multi-Agent", "因果归因", "小红书 API"],
+      },
+      {
+        name: "AIdience 慧像",
+        role: "Agent 编排设计",
+        highlight:
+          "消费者洞察 Agent 系统，从数据采集到报告生成全自动化，落地到欧莱雅等客户",
+        techStack: ["Multi-Agent", "NLP", "消费者洞察"],
+      },
+    ],
+    keyMetrics: ["5 角色流水线", "54 个工具", "E2E 81.8%", "Token ↓85-90%"],
+    icon: "🤖",
   },
   {
-    title: "数据策略大脑 ChatBI",
-    description: "自然语言驱动的企业数据分析与策略洞察平台",
-    techStack: ["Streamlit", "Python", "LLM", "SQL"],
-    category: "ai-platform",
-    background: "企业数据分析依赖 BI 工程师手动出报表，业务人员无法自助获取数据洞察。",
-    breakdown: "NL2SQL 为核心，增加意图识别、多轮对话、图表自动生成三个模块。",
-    execution: "LLM 解析自然语言生成 SQL，Streamlit 搭建交互界面，支持多数据源接入。",
-    outcome: "业务人员可自助完成常规数据查询，减少对 BI 工程师的依赖。",
+    title: "因果推断跨领域",
+    subtitle: "从金融量化到内容归因，同一把刀切两个行业",
+    description:
+      "在同花顺用因果推断做量化（实盘跑出 Alpha），在奇绩创坛用因果做投资决策（降低漏筛率），在蓝色光标用因果做内容归因。同一个方法论在金融、创投、内容营销三个行业验证有效。",
+    projects: [
+      {
+        name: "因果 AI 量化策略",
+        role: "算法研究 & 实盘验证",
+        highlight:
+          "与 CMU 张坤教授合作，将 PC/FCI 因果发现从 i.i.d. 扩展到非平稳时序，处理 regime change",
+        techStack: ["因果推断", "时序分析", "量化交易"],
+      },
+      {
+        name: "金融知识图谱 & 智能选股",
+        role: "领域建模 & 推理引擎",
+        highlight:
+          "与爱丁堡大学 Jeff Pan 教授合作，概念-因果-事理三层知识表示设计",
+        techStack: ["知识图谱", "NLP", "因果推理"],
+      },
+      {
+        name: "创业者画像归因模型",
+        role: "因果建模",
+        highlight:
+          "因果图谱区分真因果 vs 伪相关，模型纳入奇绩创坛常规尽调流程",
+        techStack: ["因果推断", "NLP", "标签体系"],
+      },
+      {
+        name: "内容效果归因",
+        role: "方法论迁移",
+        highlight:
+          "将金融因果推断方法迁移到内容营销，从 A/B 测试升级为因果归因",
+        techStack: ["因果推断", "内容营销", "数据分析"],
+      },
+    ],
+    keyMetrics: [
+      "3 个行业验证",
+      "实盘 Alpha",
+      "CMU + 爱丁堡合作",
+      "纳入常规流程",
+    ],
+    icon: "🔬",
   },
   {
-    title: "雀巢 KOS 小红书 AIGC",
-    description: "AI 驱动的小红书 KOS 内容批量生产与分发。累计产出 1000+ 篇种草图文，效率提升 90%，成本降低 50%。",
-    techStack: ["Multi-Agent", "小红书 API", "AIGC", "因果归因"],
-    category: "client-delivery",
-    background: "雀巢需要在小红书快速铺量 KOS（Key Opinion Sales）内容，但人工创作产能有限且爆文率低。",
-    breakdown: "拆解为选题挖掘（因果归因爆款因素）→ 文案生成（Multi-Agent 协作）→ 视觉匹配 → 发布调度四阶段。",
-    execution: "因果推断分析爆款视频成功要素，指导选题和内容策略；Multi-Agent 系统批量生成差异化文案。",
-    outcome: "累计产出 1000+ 篇种草图文，效率提升 90%，成本降低 50%。模式复制到飞鹤等其他客户。",
+    title: "AI 原生工作方式",
+    subtitle: "用 AI 的方式重新定义日常工作",
+    description:
+      "搭建个人 AI 操作系统 OpenClaw（30+ 技能 / MemBrain 记忆系统 / 上下文隔离），用 AI 做投资研究（预判→验证→偏差分析闭环），用 AI 一天做出可玩的 Steam 游戏。不是「用了 AI」，是建立了系统化的 AI 工作方法论。",
+    projects: [
+      {
+        name: "OpenClaw AI Workflow",
+        role: "系统设计 & 日常使用",
+        highlight:
+          "30+ 技能插件、Sub-agent 架构、MemBrain 记忆管理——设计 AI 如何工作，而非用 AI 写代码",
+        techStack: ["OpenClaw", "Claude", "Sub-agent", "Context Engineering"],
+      },
+      {
+        name: "投资研究系统",
+        role: "方法论设计 & 运维",
+        highlight:
+          "盘前预判→盘中验证→偏差分析闭环，18 个分析脚本 + Cron 自动驱动",
+        techStack: ["Python", "Tushare Pro", "LLM Agent", "Cron"],
+      },
+      {
+        name: "互动影游 / 百年孤独 RPG",
+        role: "产品判断 & AI 团队管理",
+        highlight:
+          "AI 全生成 Steam 游戏——重点不是 AI 写代码，是如何管理 Claude + Codex + Gemini 的 AI 开发团队",
+        techStack: ["Ren'Py", "Godot", "Seedance", "Claude", "Codex"],
+      },
+    ],
+    keyMetrics: ["30+ 技能插件", "18 分析脚本", "1天→可玩MVP", "Sub-agent 架构"],
+    icon: "⚡",
   },
   {
-    title: "太保数智化改造",
-    description: "保险行业 AI + 数据中台数智化转型，从理赔智能审核到客户画像，落地 3 个核心场景。",
-    techStack: ["数据中台", "AI Agent", "知识图谱"],
-    category: "client-delivery",
-    background: "太保传统 IT 系统数据孤岛严重，AI 能力缺乏统一调度。",
-    breakdown: "聚焦理赔智能审核、客户画像精准营销、内部知识库三个高 ROI 场景。",
-    execution: "构建数据中台打通多源数据，AI Agent 编排业务流程，知识图谱支撑专业领域推理。",
-    outcome: "主导设计保险行业 AI 技术合作方案，聚焦理赔审核、客户画像、内部知识库三个场景。",
-  },
-  {
-    title: "Video Highlight Extractor",
-    description: "四层处理架构的企业级 AI 视频精彩片段自动提取",
-    techStack: ["Python", "Whisper", "Gemini"],
-    category: "tech-innovation",
-  },
-  {
-    title: "剪映自动化 & pyJianYingDraft",
-    description: "剪映 API 集成 + Python 草稿生成工具",
-    techStack: ["Python", "剪映 API"],
-    category: "tech-innovation",
-  },
-  {
-    title: "金融知识图谱 & 智能选股",
-    description: "概念-因果-事理三层知识图谱 + 事件驱动推理引擎",
-    techStack: ["NLP", "知识图谱", "因果推理"],
-    category: "tech-innovation",
-    background: "传统选股依赖技术指标和基本面数据，缺乏对事件驱动和因果关系的系统建模。",
-    breakdown: "构建概念图谱、因果图谱、事理图谱三层知识表示，设计事件驱动推理引擎。",
-    execution: "NLP 抽取实体关系构建多维图谱。与爱丁堡大学 Jeff Pan 教授合作设计知识表示与推理框架，落地内部推理引擎。",
-    outcome: "搭建覆盖 A 股主要标的的概念和事件链，推理引擎应用于智能选股产品。",
-  },
-  {
-    title: "因果 AI 量化策略",
-    description: "宏观→行业→个股三层因果择时模型，实盘验证有效",
-    techStack: ["因果推断", "时序分析", "量化交易"],
-    category: "tech-innovation",
-    background: "量化策略多基于相关性，容易被伪相关误导，尤其在市场结构性变化时回撤严重。",
-    breakdown: "三层择时：宏观经济因果图（领先指标识别）→ 行业轮动因果链（产业链传导）→ 个股因果信号（事件驱动），逐层过滤。",
-    execution: "与 CMU 张坤教授团队合作，应用 PC/FCI 因果发现算法于金融时序数据。核心创新：将因果发现从 i.i.d. 数据扩展到非平稳时序，处理金融数据的 regime change 问题。",
-    outcome: "回测和实盘均跑出显著 Alpha，验证因果推断在量化交易中的有效性。",
-  },
-  {
-    title: "创业者画像归因模型",
-    description: "数据驱动的创投决策系统，因果推断辅助项目初筛",
-    techStack: ["因果推断", "NLP", "标签体系"],
-    category: "tech-innovation",
-    background: "VC 项目初筛依赖合伙人经验判断，主观性强且漏筛率高。",
-    breakdown: "构建创始人特征→创业成功率的因果图谱，区分真因果和伪相关。",
-    execution: "NLP 提取创始人背景特征，因果推断建模替代传统相关性打分。",
-    outcome: "降低漏筛率，提升评估一致性。模型被纳入常规尽调流程。",
-  },
-  {
-    title: "Claude Code Enterprise Proxy",
-    description: "企业团队 Claude Code CLI 共享与管控服务",
-    techStack: ["Node.js", "LiteLLM", "AWS Bedrock"],
-    // url removed — repo is private/not yet published
-    category: "team-enablement",
-  },
-  {
-    title: "TeamAssist 协作服务",
-    description: "团队协作与知识管理服务",
-    techStack: ["TypeScript", "MongoDB"],
-    category: "team-enablement",
-  },
-  {
-    title: "OpenClaw AI Workflow",
-    description: "个人 AI 操作系统，30+ 技能插件的工作流编排",
-    techStack: ["OpenClaw", "Claude", "Slack"],
-    category: "personal",
-  },
-  {
-    title: "A股智能看板",
-    description: "AI 驱动的 A 股投资分析与市场监控系统",
-    techStack: ["Python", "Tushare", "LLM Agent"],
-    category: "personal",
+    title: "全链路客户交付",
+    subtitle: "从技术方案到客户签单",
+    description:
+      "不只是写代码——面对真实客户需求，设计技术方案，交付可运行系统，拿到业务结果。从太保保险数智化到飞鹤视频审稿，从欧莱雅消费者洞察到宁德时代合作，总监级全链路交付能力。",
+    projects: [
+      {
+        name: "太保数智化改造",
+        role: "技术方案负责人",
+        highlight:
+          "保险行业 AI + 数据中台转型，理赔审核 / 客户画像 / 内部知识库三个核心场景",
+        techStack: ["数据中台", "AI Agent", "知识图谱"],
+      },
+      {
+        name: "飞鹤视频审稿系统",
+        role: "技术交付",
+        highlight:
+          "视频 Agent 系统在飞鹤的落地，品牌合规审核自动化",
+        techStack: ["Multi-Agent", "视频审核", "品牌合规"],
+      },
+      {
+        name: "欧莱雅消费者洞察",
+        role: "解决方案设计",
+        highlight:
+          "AIdience 系统落地，消费者画像 + 市场趋势自动分析",
+        techStack: ["NLP", "消费者洞察", "数据分析"],
+      },
+      {
+        name: "宁德时代",
+        role: "技术合作",
+        highlight: "新能源行业 AI 应用方案设计与交付",
+        techStack: ["AI Agent", "行业解决方案"],
+      },
+    ],
+    keyMetrics: ["5+ 大客户", "3 个行业", "方案→交付→结果", "总监级全链路"],
+    icon: "🚀",
   },
 ];
 
@@ -345,82 +389,6 @@ const WRITINGS: Writing[] = [
       "Lanham et al. \"Measuring Faithfulness in Chain-of-Thought Reasoning.\" arXiv:2307.13702, 2023.",
       "Turpin et al. \"Language Models Don't Always Say What They Think.\" NeurIPS, 2024.",
     ],
-  },
-];
-
-/* ── Lab Projects ── */
-
-interface LabProject {
-  title: string;
-  subtitle: string;
-  description: string;
-  highlights: string[];
-  techStack: string[];
-  icon: "bot" | "gamepad" | "gamepad2" | "trending";
-  featured?: boolean;
-  stats?: string;
-}
-
-const LAB_PROJECTS: LabProject[] = [
-  {
-    title: "KOX AgentCore",
-    subtitle: "AWS 云原生多 Agent 视频生产系统",
-    description:
-      "从创意到成片的 AI 全自动化视频生产平台。5 角色 Agent 流水线协作，54 个集成工具，E2E 验证通过率 81.8%。",
-    highlights: [
-      "自研 StreamingOrchestrator 替代 AWS Swarm — Swarm v1.16.0 无 stream_async()，无法透传流式事件",
-      "Context Variables 资产引用系统 — {{asset:video_001}} 符号引用替代 URL 传递，Token 消耗 ↓ 85-90%",
-      "Bedrock + Cognito + ECS + DynamoDB 企业级安全链路 — JWT + IAM SigV4 两层认证隔离",
-    ],
-    techStack: [
-      "AWS Bedrock",
-      "AgentCore Runtime",
-      "DynamoDB",
-      "ECS",
-      "Cognito",
-      "Claude Opus",
-      "Gemini Flash",
-      "剪映 MCP",
-    ],
-    icon: "bot",
-    featured: true,
-    stats: "5 角色流水线 · 54 个工具 · E2E 81.8%",
-  },
-  {
-    title: "互动影游",
-    subtitle: "AI 全生成 Steam 游戏",
-    description:
-      "全部视频素材由 AI 生成的互动影像游戏。从创意到可玩 MVP 一天内完成——研究→剧本→选型→生产→组装。目标 Steam 发布。",
-    highlights: [
-      "Seedance 1.5 Pro 音画同步生成 — 不需要单独 TTS 和口型同步",
-      "两个故事方向：《遗物整理师》(人文物哀) + 互动恋爱",
-    ],
-    techStack: ["Ren'Py", "Seedance 1.5 Pro", "Seedream 4.5", "VP9/WebM"],
-    icon: "gamepad",
-  },
-  {
-    title: "百年孤独：上校的金鱼",
-    subtitle: "文学 IP × 像素游戏 × 全 AI 开发团队",
-    description:
-      "基于加西亚·马尔克斯《百年孤独》的叙事冒险像素 RPG。开发团队全部由 AI Agent 组成——Claude 写逻辑、Codex 做重构、Gemini 做创意。",
-    highlights: [
-      "全 AI 开发团队 — Claude + Codex + Gemini 多 Agent 协作开发",
-      "文学 IP 改编 — 魔幻现实主义 × 像素美学",
-    ],
-    techStack: ["Godot 4.2.x", "Claude", "Codex", "Gemini"],
-    icon: "gamepad2",
-  },
-  {
-    title: "投资研究系统",
-    subtitle: "盘前预判→盘中验证→偏差分析闭环",
-    description:
-      "自建量化自我校准方法论：每日盘前写定量预判，盘中逐一验证标注 ✅/❌，盘后做偏差分析找根因。18 个分析脚本 + 定时任务自动驱动。",
-    highlights: [
-      "结构化市场日志 — 每日 3 段（am/midday/pm）含定量指标",
-      "自建 18 分析脚本 — 研报拉取、持仓跟踪、风险监控全自动",
-    ],
-    techStack: ["Python", "Tushare Pro", "LLM Agent", "Cron"],
-    icon: "trending",
   },
 ];
 
@@ -549,7 +517,6 @@ const SECTION_GLOW_COLORS: Record<string, string> = {
   about: "79, 209, 197",      // #4fd1c5 cyan
   experience: "59, 130, 246",  // #3b82f6 blue
   projects: "139, 92, 246",    // #8b5cf6 purple
-  lab: "34, 197, 94",          // #22c55e green
   writing: "245, 158, 11",     // #f59e0b amber
   agent: "6, 182, 212",        // #06b6d4 cyan-500
   contact: "79, 209, 197",     // #4fd1c5 cyan
@@ -559,10 +526,7 @@ export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeSection, setActiveSection] = useState("about");
   const [titleIndex, setTitleIndex] = useState(0);
-  const [activeCategory, setActiveCategory] = useState("ai-platform");
-  const [expandedProject, setExpandedProject] = useState<number | null>(null);
-  const [projectsExpanded, setProjectsExpanded] = useState(false);
-  const [labExpanded, setLabExpanded] = useState(false);
+  const [narrativesExpanded, setNarrativesExpanded] = useState(false);
   const [writingExpanded, setWritingExpanded] = useState(false);
   const [agentExpanded, setAgentExpanded] = useState(false);
 
@@ -591,10 +555,6 @@ export default function Home() {
 
     return () => observer.disconnect();
   }, []);
-
-  const filteredProjects = PROJECTS.filter(
-    (p) => p.category === activeCategory
-  );
 
   // Section-based glow color
   const glowColor = useMemo(
@@ -838,7 +798,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* ── Projects ── */}
+            {/* ── Projects (Narrative Threads) ── */}
             <section
               id="projects"
               className="scroll-mt-16 py-24 lg:scroll-mt-24"
@@ -846,237 +806,99 @@ export default function Home() {
             >
               <SectionHeading index="03">项目</SectionHeading>
 
-              {/* Category Tabs */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                {PROJECT_CATEGORIES.map((cat) => (
-                  <button
-                    key={cat.key}
-                    onClick={() => {
-                      setActiveCategory(cat.key);
-                      setExpandedProject(null);
-                      setProjectsExpanded(false);
-                    }}
-                    className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
-                      activeCategory === cat.key
-                        ? "bg-[#4fd1c5]/10 text-[#4fd1c5] border border-[#4fd1c5]/30"
-                        : "text-[#8892b0] border border-transparent hover:text-[#4fd1c5] hover:border-[#4fd1c5]/20"
-                    }`}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Project Cards */}
               <div className="relative">
-                <ul className="group/list">
-                  {(projectsExpanded ? filteredProjects : filteredProjects.slice(0, 3)).map((project, i) => {
-                    const globalIndex = PROJECTS.indexOf(project);
-                    const hasNarrative =
-                      project.background ||
-                      project.breakdown ||
-                      project.execution ||
-                      project.outcome;
-                    const isExpanded = expandedProject === globalIndex;
-
-                    return (
-                      <li key={globalIndex} className="mb-6">
-                        <div className="group relative rounded-lg transition-all lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                          {/* Hover background */}
-                          <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-[#112240]/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg" />
-
-                          <div className="z-10 relative">
-                            <div className="flex items-start justify-between">
-                              <h3 className="font-medium leading-snug text-[#ccd6f6] group-hover:text-[#4fd1c5] transition-colors">
-                                {project.url ? (
-                                  <a
-                                    href={project.url}
-                                    target="_blank"
-                                    rel="noreferrer noopener"
-                                    className="inline-flex items-baseline"
-                                  >
-                                    {project.title}
-                                    <ArrowUpRight
-                                      size={14}
-                                      className="ml-1 inline-block transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                                    />
-                                  </a>
-                                ) : (
-                                  project.title
-                                )}
-                              </h3>
-                              {hasNarrative && (
-                                <button
-                                  onClick={() =>
-                                    setExpandedProject(
-                                      isExpanded ? null : globalIndex
-                                    )
-                                  }
-                                  className="ml-2 text-[#8892b0] hover:text-[#4fd1c5] transition-colors flex-shrink-0"
-                                  aria-label={isExpanded ? "收起详情" : "展开详情"}
-                                >
-                                  {isExpanded ? (
-                                    <ChevronUp size={18} />
-                                  ) : (
-                                    <ChevronDown size={18} />
-                                  )}
-                                </button>
-                              )}
-                            </div>
-                            <p className="mt-2 text-sm leading-normal">
-                              {project.description}
-                            </p>
-
-                            {/* 4-step narrative (expanded) */}
-                            {isExpanded && hasNarrative && (
-                              <div className="mt-4 space-y-3 border-l-2 border-[#4fd1c5]/20 pl-4">
-                                {project.background && (
-                                  <NarrativeStep
-                                    label="🎯 背景"
-                                    text={project.background}
-                                  />
-                                )}
-                                {project.breakdown && (
-                                  <NarrativeStep
-                                    label="🔍 拆解"
-                                    text={project.breakdown}
-                                  />
-                                )}
-                                {project.execution && (
-                                  <NarrativeStep
-                                    label="⚡ 执行"
-                                    text={project.execution}
-                                  />
-                                )}
-                                {project.outcome && (
-                                  <NarrativeStep
-                                    label="📊 成果"
-                                    text={project.outcome}
-                                  />
-                                )}
-                              </div>
-                            )}
-
-                            <TechTags tags={project.techStack} />
-                          </div>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-                {!projectsExpanded && filteredProjects.length > 3 && (
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a192f] to-transparent" />
-                )}
-              </div>
-              {!projectsExpanded && filteredProjects.length > 3 && (
-                <div className="flex justify-center pt-4 pb-2">
-                  <button
-                    onClick={() => setProjectsExpanded(true)}
-                    className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
-                  >
-                    查看全部 {filteredProjects.length} 个项目 →
-                  </button>
-                </div>
-              )}
-              {projectsExpanded && filteredProjects.length > 3 && (
-                <div className="flex justify-center pt-4 pb-2">
-                  <button
-                    onClick={() => setProjectsExpanded(false)}
-                    className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
-                  >
-                    收起
-                  </button>
-                </div>
-              )}
-            </section>
-            <section
-              id="lab"
-              className="scroll-mt-16 py-24 lg:scroll-mt-24"
-              aria-label="实验室"
-            >
-              <SectionHeading index="04" subtitle="Side Projects & Explorations">实验室</SectionHeading>
-              <div className="relative">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {LAB_PROJECTS.map((project, i) => {
-                    const IconComponent =
-                      project.icon === "bot"
-                        ? Bot
-                        : project.icon === "gamepad"
-                        ? Gamepad2
-                        : project.icon === "gamepad2"
-                        ? FlaskConical
-                        : TrendingUp;
-                    const isCompact = !labExpanded && !project.featured;
-
-                    return (
+                <div className="space-y-12">
+                  {(narrativesExpanded ? NARRATIVES : NARRATIVES.slice(0, 2)).map(
+                    (narrative, i) => (
                       <div
                         key={i}
-                        className={`group rounded-lg border border-[#233554] bg-[#112240]/50 p-5 transition-all hover:border-[#4fd1c5]/30 hover:bg-[#112240] ${
-                          project.featured ? "sm:col-span-2" : ""
-                        }`}
+                        className="rounded-xl bg-[#112240]/30 p-8 border border-[#1e3a5f]/30 hover:bg-[#112240]/50 transition-colors duration-300"
                       >
-                        <div className="flex items-start gap-3">
-                          <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-[#4fd1c5]/10">
-                            <IconComponent size={16} className="text-[#4fd1c5]" />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-[#ccd6f6] group-hover:text-[#4fd1c5] transition-colors">
-                              {project.title}
+                        {/* Header */}
+                        <div className="flex items-start gap-3 mb-4">
+                          <span className="text-2xl flex-shrink-0 mt-0.5">
+                            {narrative.icon}
+                          </span>
+                          <div>
+                            <h3 className="text-lg font-semibold text-[#ccd6f6]">
+                              {narrative.title}
                             </h3>
-                            <p className="text-sm text-[#4fd1c5]/70">
-                              {project.subtitle}
+                            <p className="text-sm text-[#4fd1c5]/80">
+                              {narrative.subtitle}
                             </p>
                           </div>
                         </div>
 
-                        {!isCompact && (
-                          <>
-                            {project.stats && (
-                              <div className="mt-3 flex items-center gap-2">
-                                <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
-                                  {project.stats}
+                        {/* Description */}
+                        <p className="text-sm leading-[1.85] mb-5">
+                          {narrative.description}
+                        </p>
+
+                        {/* Key Metrics */}
+                        <div className="flex flex-wrap gap-3 mb-6">
+                          {narrative.keyMetrics.map((metric) => (
+                            <span
+                              key={metric}
+                              className="rounded-md bg-[#4fd1c5]/5 px-3 py-1.5 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20"
+                            >
+                              {metric}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Project List */}
+                        <div className="space-y-3">
+                          {narrative.projects.map((project, j) => (
+                            <div
+                              key={j}
+                              className="rounded-lg bg-[#0a192f]/50 px-4 py-3 border border-[#233554]/50"
+                            >
+                              <div className="flex items-baseline justify-between gap-2 mb-1">
+                                <h4 className="font-medium text-sm text-[#ccd6f6]">
+                                  {project.name}
+                                </h4>
+                                <span className="text-[11px] text-[#4fd1c5]/60 font-mono whitespace-nowrap flex-shrink-0">
+                                  {project.role}
                                 </span>
                               </div>
-                            )}
-
-                            <p className="mt-3 text-sm leading-[1.85]">
-                              {project.description}
-                            </p>
-
-                            <ul className="mt-3 space-y-1.5">
-                              {project.highlights.map((h, j) => (
-                                <li key={j} className="flex items-start text-sm">
-                                  <span className="mr-2 mt-[7px] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#4fd1c5]" />
-                                  {h}
-                                </li>
-                              ))}
-                            </ul>
-
-                            <TechTags tags={project.techStack} />
-                          </>
-                        )}
+                              <p className="text-xs leading-relaxed text-[#8892b0]/80">
+                                {project.highlight}
+                              </p>
+                              <div className="mt-2 flex flex-wrap gap-1.5">
+                                {project.techStack.map((tech) => (
+                                  <span
+                                    key={tech}
+                                    className="rounded-full bg-[#4fd1c5]/10 px-2 py-0.5 font-mono text-[10px] tracking-wider text-[#4fd1c5]"
+                                  >
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    );
-                  })}
+                    )
+                  )}
                 </div>
-                {!labExpanded && (
+                {!narrativesExpanded && NARRATIVES.length > 2 && (
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a192f] to-transparent" />
                 )}
               </div>
-              {!labExpanded && (
+              {!narrativesExpanded && NARRATIVES.length > 2 && (
                 <div className="flex justify-center pt-4 pb-2">
                   <button
-                    onClick={() => setLabExpanded(true)}
+                    onClick={() => setNarrativesExpanded(true)}
                     className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
                   >
-                    探索更多实验 →
+                    展开更多叙事 →
                   </button>
                 </div>
               )}
-              {labExpanded && (
+              {narrativesExpanded && (
                 <div className="flex justify-center pt-4 pb-2">
                   <button
-                    onClick={() => setLabExpanded(false)}
+                    onClick={() => setNarrativesExpanded(false)}
                     className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
                   >
                     收起
@@ -1091,7 +913,7 @@ export default function Home() {
               className="scroll-mt-16 py-24 lg:scroll-mt-24"
               aria-label="文章"
             >
-              <SectionHeading index="05">研究笔记</SectionHeading>
+              <SectionHeading index="04">研究笔记</SectionHeading>
               <div className="relative">
                 <div className="space-y-4">
                   {(writingExpanded ? WRITINGS : WRITINGS.slice(0, 3)).map((article, i) => {
@@ -1221,7 +1043,7 @@ export default function Home() {
               className="scroll-mt-16 py-24 lg:scroll-mt-24"
               aria-label="Agent 友好区"
             >
-              <SectionHeading index="06" subtitle="For AI Agents & OpenClaw Users">
+              <SectionHeading index="05" subtitle="For AI Agents & OpenClaw Users">
                 <span className="inline-flex items-center gap-3">
                   Agent 友好区
                   <span className="relative flex h-3 w-3">
@@ -1380,7 +1202,7 @@ export default function Home() {
               className="scroll-mt-16 py-24 lg:scroll-mt-24"
               aria-label="联系"
             >
-              <SectionHeading index="07">联系</SectionHeading>
+              <SectionHeading index="06">联系</SectionHeading>
               <div className="space-y-4">
                 <p>
                   如果你在做 AI 落地、Agent 系统、或者金融科技相关的事情，欢迎聊聊。
@@ -1507,14 +1329,5 @@ function TechTags({ tags }: { tags: string[] }) {
         </li>
       ))}
     </ul>
-  );
-}
-
-function NarrativeStep({ label, text }: { label: string; text: string }) {
-  return (
-    <div>
-      <span className="text-xs font-semibold text-[#ccd6f6]">{label}</span>
-      <p className="mt-0.5 text-sm leading-normal">{text}</p>
-    </div>
   );
 }

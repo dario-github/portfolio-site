@@ -20,27 +20,54 @@ Currently leading a 10-person team building enterprise AI infrastructure.
 - 2021–2022: Causal Algorithm Researcher @ Miracle Plus (奇绩创坛) — VC data-driven due diligence
 - 2018–2021: NLP Algorithm Engineer @ Hithink (同花顺) — Financial knowledge graphs, CMU/Edinburgh collaborations
 
-## Projects
+## Projects — 5 Narrative Threads
 
-### 🏢 Enterprise (BlueFocus)
-- 内容宇宙 AI 平台 (Smart Canvas): Enterprise AI platform, 1600+ users, 2000+ Agents, 4000+ daily calls (AWS Serverless + MCP + RAG)
-- 企业级视频 Agent 系统: Ad video production 30 days → 6 hours (Multi-Agent pipeline + causal attribution)
-- 数据策略大脑 ChatBI: Natural language-driven enterprise data analytics (Streamlit + LLM + SQL)
-- 雀巢 KOS 小红书 AIGC: AI-driven Xiaohongshu content mass production (1000+ posts, 90% efficiency gain)
-- 太平洋保险数智化改造: Insurance industry AI + data platform transformation
+### 🏗️ Thread 1: Enterprise AI Infrastructure — "Building an AI platform for 1,600 people from scratch"
+**Narrative**: Discovered fragmented AI tools across business lines → Designed unified Smart Canvas platform → Supported 1,600+ users / 2,000+ Agents → Built video Agent system compressing 30-day production to 6 hours → Led 10-person team through AI engineering transformation.
+**Key Metrics**: 1600+ users · 2000+ Agents · 30 days→6 hours · 10-person team transformation
 
-### 🔧 Tech Innovation
-- Video Highlight Extractor: 4-layer AI video highlight extraction, cost optimization 69-95%
-- 剪映 MCP & pyJianYingDraft: JianYing API integration + Python draft generation
-- 金融知识图谱 & 智能选股: Multi-dimensional knowledge graph + event-driven reasoning (with Edinburgh Univ.)
-- 因果 AI 量化策略: Multi-level causal timing model with significant Alpha (with CMU)
-- Claude Code Enterprise Proxy: Enterprise team Claude Code CLI sharing (Node.js + LiteLLM + AWS Bedrock)
+Projects:
+- AI 中台 Smart Canvas — Architecture & tech lead. Multi-tenant + MCP protocol + Serverless (peak-valley ratio 10:1 cost optimization). (AWS Serverless, MCP, RAG, Buffer of Thoughts)
+- 企业级视频 Agent 系统 — System architecture & Agent orchestration. 4-Agent pipeline (script→assets→editing→review), causal attribution, deployed at Nestlé & Feihe. (Multi-Agent, Causal Strategy, JianYing API, Gemini)
+- 团队 AI 工程化转型 — Team lead. Traditional dev → AI engineers, Vibe Coding ~50% efficiency gain. Includes ChatBI data analytics module and Claude Code enterprise sharing. (Vibe Coding, Claude Code, AI MCN)
 
-### 🧪 Lab — Side Projects & Explorations
-- KOX AgentCore: AWS cloud-native multi-agent video production system. 5-role pipeline | 54 tools | E2E 81.8%. Custom StreamingOrchestrator replacing AWS Swarm; Context Variables asset referencing (Token ↓ 85-90%); Bedrock + Cognito + ECS + DynamoDB enterprise security.
-- 互动影游: AI-generated interactive film game for Steam. All video assets AI-generated. Creative to playable MVP in one day. (Ren'Py + Seedance 1.5 Pro)
-- 百年孤独：上校的金鱼: Narrative adventure pixel RPG based on "One Hundred Years of Solitude". All-AI development team (Claude + Codex + Gemini). (Godot 4.2.x)
-- 投资研究系统: Daily pre-market prediction → intraday verification → deviation analysis closed loop. 11 cron jobs + 13 analysis scripts. Quantitative self-calibration methodology.
+### 🤖 Thread 2: Multi-Agent Architecture — "5-role pipeline, fully automated from concept to finished video"
+**Narrative**: Custom-built StreamingOrchestrator replacing AWS Swarm (v1.16.0 lacked stream_async()) → Context Variables system reduced Token consumption 85-90% → 5-role pipeline with 54 tools, E2E pass rate 81.8% → Deployed to real clients.
+**Key Metrics**: 5-role pipeline · 54 tools · E2E 81.8% · Token ↓85-90%
+
+Projects:
+- KOX AgentCore — System architecture & core development. Custom StreamingOrchestrator; Context Variables asset referencing replacing URL passing. (AWS Bedrock, AgentCore Runtime, DynamoDB, ECS)
+- 雀巢 KOS AIGC — Technical solution & delivery. Causal inference analyzing viral factors to guide content strategy. 1000+ Xiaohongshu posts. (Multi-Agent, Causal Attribution, Xiaohongshu API)
+- AIdience 慧像 — Agent orchestration design. Consumer insights Agent system, end-to-end automation from data collection to report generation. Deployed to L'Oréal. (Multi-Agent, NLP, Consumer Insights)
+
+### 🔬 Thread 3: Cross-domain Causal Inference — "Same methodology, three different industries"
+**Narrative**: Causal inference for quantitative trading at Hithink (live Alpha) → Causal inference for VC decisions at Miracle Plus (reduced screening miss rate) → Causal inference for content attribution at BlueFocus. Same methodology validated across finance, venture capital, and content marketing.
+**Key Metrics**: 3 industries validated · Live trading Alpha · CMU + Edinburgh collaboration · Integrated into regular workflows
+
+Projects:
+- 因果 AI 量化策略 — Algorithm research & live validation. Extended PC/FCI causal discovery from i.i.d. to non-stationary time series with CMU Prof. Kun Zhang. (Causal Inference, Time Series, Quantitative Trading)
+- 金融知识图谱 & 智能选股 — Domain modeling & reasoning engine. Concept-causal-event triple-layer knowledge representation with Edinburgh Prof. Jeff Pan. (Knowledge Graph, NLP, Causal Reasoning)
+- 创业者画像归因模型 — Causal modeling. Causal graph distinguishing true causation vs spurious correlation, integrated into Miracle Plus due diligence workflow. (Causal Inference, NLP, Label System)
+- 内容效果归因 — Methodology transfer. Migrated financial causal inference methods to content marketing, upgrading from A/B testing to causal attribution. (Causal Inference, Content Marketing, Data Analysis)
+
+### ⚡ Thread 4: AI-Native Workflow — "Redefining daily work with AI"
+**Narrative**: Built personal AI OS OpenClaw (30+ skills / MemBrain memory system / context isolation) → AI-powered investment research (prediction→verification→deviation analysis loop) → Built playable Steam game in one day with AI. Not just "using AI" — established systematic AI work methodology.
+**Key Metrics**: 30+ skill plugins · 18 analysis scripts · 1 day→playable MVP · Sub-agent architecture
+
+Projects:
+- OpenClaw AI Workflow — System design & daily use. 30+ skills, Sub-agent architecture, MemBrain memory management — designing how AI works, not using AI to write code. (OpenClaw, Claude, Sub-agent, Context Engineering)
+- 投资研究系统 — Methodology design & operations. Pre-market prediction→intraday verification→deviation analysis loop, 18 analysis scripts + Cron automation. (Python, Tushare Pro, LLM Agent, Cron)
+- 互动影游 / 百年孤独 RPG — Product judgment & AI team management. AI-generated Steam games — focus on managing Claude + Codex + Gemini AI development team. (Ren'Py, Godot, Seedance, Claude, Codex)
+
+### 🚀 Thread 5: Full-stack Client Delivery — "From technical proposal to client sign-off"
+**Narrative**: Not just writing code — facing real client needs, designing technical solutions, delivering working systems, achieving business results. Director-level full-stack delivery capability across insurance, dairy, cosmetics, and energy industries.
+**Key Metrics**: 5+ major clients · 3 industries · Proposal→Delivery→Results · Director-level full-stack
+
+Projects:
+- 太保数智化改造 — Technical proposal lead. Insurance industry AI + data platform transformation, 3 core scenarios: claims review / customer profiles / internal knowledge base. (Data Platform, AI Agent, Knowledge Graph)
+- 飞鹤视频审稿系统 — Technical delivery. Video Agent system deployed at Feihe, automated brand compliance review. (Multi-Agent, Video Review, Brand Compliance)
+- 欧莱雅消费者洞察 — Solution design. AIdience system deployed, consumer profiling + market trend auto-analysis. (NLP, Consumer Insights, Data Analysis)
+- 宁德时代 — Technical partnership. AI application solution design and delivery for new energy industry. (AI Agent, Industry Solutions)
 
 ## Writing (6 Research Articles)
 - AI Agent 长期记忆架构：从 ChatGPT 到 MemBrain 的方案对比 [high confidence, v3]
