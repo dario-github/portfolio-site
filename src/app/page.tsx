@@ -304,33 +304,53 @@ export default function Home() {
 
   return (
     <>
-      {/* ── Identity Snapshot ── */}
-      <section className="mb-16" aria-label="身份快照">
-        <h2 className="text-2xl font-bold text-[#ccd6f6] sm:text-3xl">
+      {/* ── Compact Hero ── */}
+      <section className="py-16 mb-8" aria-label="身份快照">
+        <h1 className="text-3xl font-bold text-[#ccd6f6] sm:text-4xl">
           章东丞 <span className="text-[#8892b0] font-light">/ Dario Zhang</span>
-        </h2>
-        <p className="mt-2 text-lg text-[#ccd6f6]/80">
-          AI 技术总监 · 8 年算法与 AI 经验
+        </h1>
+        <p className="mt-3 text-xl font-semibold text-[#4fd1c5]">
+          AI 技术总监
         </p>
-        <p className="mt-2 max-w-lg leading-relaxed">
+        <p className="mt-3 max-w-lg text-base leading-relaxed text-[#8892b0]">
           专注于将 AI 推理能力工程化为可交付的生产系统
         </p>
-        <div className="mt-4 flex flex-wrap gap-4">
+
+        {/* Mini stat cards */}
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+          {[
+            { value: "8年+", label: "AI 经验" },
+            { value: "18+", label: "项目交付" },
+            { value: "5+", label: "覆盖行业" },
+            { value: "10人", label: "团队管理" },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-lg bg-[#112240]/30 px-4 py-3 text-center border border-[#233554]/50"
+            >
+              <div className="text-xl font-bold text-[#ccd6f6]">{stat.value}</div>
+              <div className="mt-0.5 text-xs text-[#8892b0]">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA links */}
+        <div className="mt-8 flex flex-wrap gap-4">
           <Link
             href="/about"
-            className="text-sm font-medium text-[#4fd1c5] hover:text-[#4fd1c5]/80 transition-colors"
+            className="rounded-md border border-[#4fd1c5]/30 px-4 py-2 text-sm font-medium text-[#4fd1c5] hover:bg-[#4fd1c5]/10 transition-colors"
           >
-            查看完整介绍 →
+            关于 →
           </Link>
           <Link
             href="/experience"
-            className="text-sm font-medium text-[#4fd1c5] hover:text-[#4fd1c5]/80 transition-colors"
+            className="rounded-md border border-[#4fd1c5]/30 px-4 py-2 text-sm font-medium text-[#4fd1c5] hover:bg-[#4fd1c5]/10 transition-colors"
           >
-            工作经历 →
+            经历 →
           </Link>
           <Link
             href="/projects"
-            className="text-sm font-medium text-[#4fd1c5] hover:text-[#4fd1c5]/80 transition-colors"
+            className="rounded-md border border-[#4fd1c5]/30 px-4 py-2 text-sm font-medium text-[#4fd1c5] hover:bg-[#4fd1c5]/10 transition-colors"
           >
             项目 →
           </Link>
@@ -341,9 +361,9 @@ export default function Home() {
       <section
         id="writing"
         className="scroll-mt-16 py-24 lg:scroll-mt-24"
-        aria-label="研究笔记"
+        aria-label="田野笔记"
       >
-        <SectionHeading index="04">研究笔记</SectionHeading>
+        <SectionHeading index="04">田野笔记 Fieldnotes</SectionHeading>
         <div className="relative">
           <div className="space-y-4">
             {(writingExpanded ? WRITINGS : WRITINGS.slice(0, 3)).map(
@@ -454,7 +474,7 @@ export default function Home() {
               onClick={() => setWritingExpanded(true)}
               className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
             >
-              查看全部 {WRITINGS.length} 篇研究笔记 →
+              查看全部 {WRITINGS.length} 篇田野笔记 →
             </button>
           </div>
         )}

@@ -36,7 +36,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "关于", href: "/about", index: "01", type: "route" },
   { label: "经历", href: "/experience", index: "02", type: "route" },
   { label: "项目", href: "/projects", index: "03", type: "route" },
-  { label: "研究笔记", href: "/#writing", index: "04", type: "anchor", sectionId: "writing" },
+  { label: "田野笔记", href: "/#writing", index: "04", type: "anchor", sectionId: "writing" },
   { label: "实验室", href: "/#lab", index: "05", type: "anchor", sectionId: "lab" },
   { label: "Agent", href: "/#agent", index: "06", type: "anchor", sectionId: "agent" },
   { label: "联系", href: "/#contact", index: "07", type: "anchor", sectionId: "contact" },
