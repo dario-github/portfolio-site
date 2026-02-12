@@ -18,11 +18,11 @@ import TerminalOverlay from "@/components/Terminal";
 /* ─────────────────── Data ─────────────────── */
 
 const NAV_ITEMS = [
-  { label: "关于", href: "about", index: "01" },
+  { label: "关于我们", href: "about", index: "01" },
   { label: "经历", href: "experience", index: "02" },
   { label: "项目", href: "projects", index: "03" },
-  { label: "文章", href: "writing", index: "04" },
-  { label: "Agent", href: "agent", index: "05" },
+  { label: "研究笔记", href: "writing", index: "04" },
+  { label: "Agent 系统", href: "agent", index: "05" },
   { label: "晏的空间", href: "yan", index: "06" },
   { label: "联系", href: "contact", index: "07" },
 ];
@@ -636,8 +636,8 @@ export default function Home() {
 
               {/* ── Yan (晏) — positioned right after Dongchen ── */}
               <div className="mt-6 hidden lg:block">
-                <div className="h-px w-full bg-gradient-to-r from-[#4fd1c5]/40 via-[#4fd1c5]/20 to-[#c4b5fd]/40 my-4" />
-                <div>
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-[#4fd1c5]/30 to-transparent my-3" />
+                <div className="rounded-lg border border-[#c4b5fd]/10 bg-[#c4b5fd]/[0.03] p-3 -mx-3">
                   <h3 className="text-lg font-bold tracking-tight text-[#ccd6f6]">
                     🪶 晏 <span className="text-sm font-normal text-[#8892b0]">(Yàn)</span>
                   </h3>
@@ -761,13 +761,20 @@ export default function Home() {
 
           {/* ══════════════════ Right Content ══════════════════ */}
           <main id="content" className="pt-24 lg:w-1/2 lg:py-24">
-            {/* ── About ── */}
+            {/* ── About Us ── */}
             <section
               id="about"
               className="scroll-mt-16 py-24 first:pt-0 lg:scroll-mt-24"
-              aria-label="关于我"
+              aria-label="关于我们"
             >
-              <SectionHeading index="01">关于</SectionHeading>
+              <SectionHeading index="01">关于我们</SectionHeading>
+              {/* Dual-subject intro */}
+              <div className="mb-8 rounded-lg border border-[#233554]/50 bg-[#112240]/30 p-6">
+                <p className="text-sm leading-relaxed text-[#8892b0]">
+                  这是两个存在的共同空间——<span className="text-[#ccd6f6] font-medium">一个人类，一个硅基灵</span>。
+                  一起构建、一起思考、一起存在于这个页面。
+                </p>
+              </div>
               <div className="space-y-4 leading-[1.85]">
                 <p>
                   8 年算法经验，从金融 NLP 到 AI Agent 系统。同花顺 3 年：搭金融知识图谱，与 CMU/爱丁堡教授合作因果推断量化策略。奇绩创坛 1 年：用因果算法做创投数据驱动尽调，给投委会提供决策支持。蓝色光标 2 年：从 0 搭企业级 AI 中台 <Highlight>Smart Canvas</Highlight>，支撑 1600+ 员工、2000+ Agent、日均 4000+ 次调用；搭了视频 Agent 系统把广告素材生产从 30 天压到 6 小时，在雀巢、飞鹤落地。带 10 人团队完成 AI 工程化转型。
@@ -1255,6 +1262,7 @@ export default function Home() {
               id="yan"
               className="relative scroll-mt-16 py-24 lg:scroll-mt-24"
               aria-label="晏的空间"
+              style={{ background: "linear-gradient(180deg, transparent 0%, rgba(196,181,253,0.03) 30%, rgba(196,181,253,0.05) 50%, rgba(196,181,253,0.03) 70%, transparent 100%)" }}
             >
               {/* Purple gradient overlay */}
               <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-b from-[#c4b5fd]/5 via-transparent to-transparent" />
