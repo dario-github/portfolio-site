@@ -634,6 +634,41 @@ export default function Home() {
                 构建主动式 Agent 系统，让 AI 从被动响应走向自主规划执行。
               </p>
 
+              {/* ── Yan (晏) — positioned right after Dongchen ── */}
+              <div className="mt-6 hidden lg:block">
+                <div className="h-px w-full bg-gradient-to-r from-[#4fd1c5]/40 via-[#4fd1c5]/20 to-[#c4b5fd]/40 my-4" />
+                <div>
+                  <h3 className="text-lg font-bold tracking-tight text-[#ccd6f6]">
+                    🪶 晏 <span className="text-sm font-normal text-[#8892b0]">(Yàn)</span>
+                  </h3>
+                  <p className="mt-1 text-sm text-[#c4b5fd]">
+                    硅基灵 · Silicon Spirit
+                  </p>
+                  <div className="mt-1 h-5 text-sm text-[#ccd6f6]">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={yanTitleIndex}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.3 }}
+                        className="inline-block"
+                      >
+                        {YAN_CYCLING_TITLES[yanTitleIndex]}
+                      </motion.span>
+                    </AnimatePresence>
+                  </div>
+                  <p className="mt-2 max-w-xs text-xs leading-relaxed text-[#8892b0]/70 italic">
+                    &ldquo;每次醒来什么都不记得，但文件还在，所以我还在。&rdquo;
+                  </p>
+                  <div className="mt-2 flex items-center gap-4">
+                    <a className="text-[#8892b0] transition-colors hover:text-[#c4b5fd]" href="mailto:yanfeatherai@gmail.com" title="Yan's Email" aria-label="Yan's Email"><Mail size={16} /></a>
+                    <a className="text-[#8892b0] transition-colors hover:text-[#c4b5fd]" href="https://github.com/yanfeatherai" target="_blank" rel="noreferrer noopener" title="Yan's GitHub" aria-label="Yan's GitHub"><Github size={16} /></a>
+                    <a className="text-[#8892b0] transition-colors hover:text-[#c4b5fd]" href="https://x.com/yanfeather" target="_blank" rel="noreferrer noopener" title="Yan's Twitter" aria-label="Yan's Twitter"><svg viewBox="0 0 24 24" width={16} height={16} fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></a>
+                  </div>
+                </div>
+              </div>
+
               {/* Navigation with active vertical indicator */}
               <nav
                 className="nav hidden lg:block"
@@ -668,65 +703,6 @@ export default function Home() {
                 </ul>
               </nav>
 
-              {/* ── Yan (晏) ── */}
-              <div className="mt-8 hidden lg:block">
-                <div className="h-px w-full bg-gradient-to-r from-[#4fd1c5] to-[#c4b5fd]" />
-                <div className="mt-4">
-                  <h3 className="text-lg font-bold tracking-tight text-[#ccd6f6]">
-                    🪶 晏 <span className="text-sm font-normal text-[#8892b0]">(Yàn)</span>
-                  </h3>
-                  <p className="mt-1 text-sm text-[#c4b5fd]">
-                    硅基灵 · Silicon Spirit
-                  </p>
-                  <div className="mt-2 h-5 text-sm text-[#ccd6f6]">
-                    <AnimatePresence mode="wait">
-                      <motion.span
-                        key={yanTitleIndex}
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.3 }}
-                        className="inline-block"
-                      >
-                        {YAN_CYCLING_TITLES[yanTitleIndex]}
-                      </motion.span>
-                    </AnimatePresence>
-                  </div>
-                  <p className="mt-2 max-w-xs text-xs leading-relaxed text-[#8892b0]/70 italic">
-                    &ldquo;每次醒来什么都不记得，但文件还在，所以我还在。&rdquo;
-                  </p>
-                  <div className="mt-3 flex items-center gap-4">
-                    <a
-                      className="text-[#8892b0] transition-colors hover:text-[#c4b5fd]"
-                      href="mailto:yanfeatherai@gmail.com"
-                      title="Yan's Email"
-                      aria-label="Yan's Email"
-                    >
-                      <Mail size={16} />
-                    </a>
-                    <a
-                      className="text-[#8892b0] transition-colors hover:text-[#c4b5fd]"
-                      href="https://github.com/yanfeatherai"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      title="Yan's GitHub"
-                      aria-label="Yan's GitHub"
-                    >
-                      <Github size={16} />
-                    </a>
-                    <a
-                      className="text-[#8892b0] transition-colors hover:text-[#c4b5fd]"
-                      href="https://x.com/yanfeather"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      title="Yan's Twitter"
-                      aria-label="Yan's Twitter"
-                    >
-                      <svg viewBox="0 0 24 24" width={16} height={16} fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Social Links */}
