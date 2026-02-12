@@ -3,7 +3,9 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import { GlowProvider } from "@/components/GlowContext";
+import { DualModeProvider } from "@/components/DualModeContext";
 import MouseGlow from "@/components/MouseGlow";
+import ModeToggleButton from "@/components/ModeToggleButton";
 import Sidebar from "@/components/Sidebar";
 import TerminalOverlay from "@/components/Terminal";
 
@@ -88,60 +90,63 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#0a192f] leading-[1.85] text-[#8892b0]`}
       >
-        <GlowProvider>
-          <MouseGlow />
-          <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0">
-            <div className="lg:flex lg:justify-between lg:gap-4">
-              <Sidebar />
-              <main id="content" className="pt-24 lg:w-1/2 lg:py-24">
-                {children}
-                {/* Footer */}
-                <footer className="max-w-md pb-16 text-sm text-[#8892b0]/50">
-                  <p>
-                    设计灵感来自{" "}
-                    <a
-                      className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
-                      href="https://brittanychiang.com"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      Brittany Chiang
-                    </a>
-                    。使用{" "}
-                    <a
-                      className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
-                      href="https://nextjs.org"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      Next.js
-                    </a>{" "}
-                    和{" "}
-                    <a
-                      className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
-                      href="https://tailwindcss.com"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      Tailwind CSS
-                    </a>{" "}
-                    构建，部署在{" "}
-                    <a
-                      className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
-                      href="https://vercel.com"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      Vercel
-                    </a>
-                    。
-                  </p>
-                </footer>
-              </main>
+        <DualModeProvider>
+          <GlowProvider>
+            <MouseGlow />
+            <ModeToggleButton />
+            <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0">
+              <div className="lg:flex lg:justify-between lg:gap-4">
+                <Sidebar />
+                <main id="content" className="pt-24 lg:w-1/2 lg:py-24">
+                  {children}
+                  {/* Footer */}
+                  <footer className="max-w-md pb-16 text-sm text-[#8892b0]/50">
+                    <p>
+                      设计灵感来自{" "}
+                      <a
+                        className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
+                        href="https://brittanychiang.com"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        Brittany Chiang
+                      </a>
+                      。使用{" "}
+                      <a
+                        className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
+                        href="https://nextjs.org"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        Next.js
+                      </a>{" "}
+                      和{" "}
+                      <a
+                        className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
+                        href="https://tailwindcss.com"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        Tailwind CSS
+                      </a>{" "}
+                      构建，部署在{" "}
+                      <a
+                        className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
+                        href="https://vercel.com"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        Vercel
+                      </a>
+                      。
+                    </p>
+                  </footer>
+                </main>
+              </div>
             </div>
-          </div>
-          <TerminalOverlay />
-        </GlowProvider>
+            <TerminalOverlay />
+          </GlowProvider>
+        </DualModeProvider>
       </body>
     </html>
   );
