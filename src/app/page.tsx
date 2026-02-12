@@ -4,124 +4,12 @@ import { useState } from "react";
 import { ArrowUpRight, FlaskConical, Bot, Terminal, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
+import { FIELDNOTES } from "@/data/fieldnotes";
 
 /* ═══════════════════════════════════════════════════
    Data
    ═══════════════════════════════════════════════════ */
-
-/* ── Writings ── */
-
-interface Writing {
-  title: string;
-  tldr: string;
-  date: string;
-  url: string;
-  confidence: "high" | "medium" | "speculative";
-  revision: number;
-  tags: string[];
-  sources?: number;
-  references?: string[];
-}
-
-const WRITINGS: Writing[] = [
-  {
-    title: "AI Agent 长期记忆架构：从 ChatGPT 到 MemBrain 的方案对比",
-    tldr: "逆向分析了 ChatGPT/Claude/LlamaIndex/Letta 四种记忆方案，发现工程上的核心 tradeoff 是深度 vs 速度",
-    confidence: "high",
-    revision: 3,
-    date: "2026-02",
-    url: "",
-    tags: ["Agent Memory", "Architecture", "Engineering"],
-    sources: 4,
-    references: [
-      'OpenAI. "ChatGPT Memory Architecture." Reverse-engineered analysis, 2025.',
-      'Anthropic. "Claude Memory System." Team/Enterprise documentation, 2025.',
-      'LlamaIndex. "Memory Module Documentation." v0.10+, 2025.',
-      'MemBrain. "Entity Extraction & Semantic Units for Agent Memory." GitHub, 2025.',
-    ],
-  },
-  {
-    title: "渐进式上下文注入：让 Agent 像人一样导航信息",
-    tldr: "Claude Code 的 hybrid model 是目前最成熟的实现——预加载 CLAUDE.md + 工具按需探索",
-    confidence: "high",
-    revision: 2,
-    date: "2026-02",
-    url: "",
-    tags: ["Context Engineering", "Claude Code", "RAG"],
-    sources: 5,
-    references: [
-      'Anthropic. "Building Effective Agents." Anthropic Research Blog, 2025.',
-      'Anthropic. "Claude Code Architecture: Hybrid Context Model." Documentation, 2025.',
-      'Cursor Team. "Progressive Context Loading in AI IDEs." Technical Report, 2025.',
-      'LlamaIndex. "Agentic RAG: Tool-based Information Navigation." Blog, 2025.',
-      'OpenAI. "Responses API: Agentic Context Management." Documentation, 2026.',
-    ],
-  },
-  {
-    title: "从 Workflow+RAG 到 Auto Agent+MCP：范式跃迁的技术决策",
-    tldr: "为什么我们放弃了 Dify 式 workflow，拥抱自主 Agent + MCP 协议标准化",
-    confidence: "high",
-    revision: 2,
-    date: "2026-01",
-    url: "",
-    tags: ["MCP", "Agent Architecture", "Decision"],
-    sources: 3,
-    references: [
-      'Anthropic. "Model Context Protocol Specification." GitHub, 2025.',
-      'Dify.ai. "Workflow Orchestration Documentation." 2025.',
-      'AWS. "Bedrock AgentCore: Multi-Agent Runtime." Documentation, 2026.',
-    ],
-  },
-  {
-    title: "语言如何塑造 LLM 的推理能力",
-    tldr: "不同语言 prompt 对模型推理的影响远超预期，中文 prompt 的特殊优势和局限",
-    confidence: "medium",
-    revision: 1,
-    date: "2026-02",
-    url: "",
-    tags: ["LLM", "Multilingual", "Reasoning"],
-    sources: 6,
-    references: [
-      'Qin et al. "Cross-lingual Prompting: Multilingual Reasoning with LLMs." ACL, 2024.',
-      'Shi et al. "Language Is Not All You Need: Aligning Perception with Language Models." NeurIPS, 2024.',
-      'Huang & Chang. "Towards Reasoning in Large Language Models: A Survey." ACL Findings, 2023.',
-      'Sapir, E. "Language: An Introduction to the Study of Speech." 1921.',
-      'Wendler et al. "Do Llamas Work in English? On the Latent Language of Multilingual Transformers." EMNLP, 2024.',
-      'OpenAI. "GPT-5 Multilingual Reasoning Benchmark Results." Technical Report, 2025.',
-    ],
-  },
-  {
-    title: "因果推断在内容归因中的工程实践",
-    tldr: "不靠经验选素材，用因果图区分真因果和伪相关——从金融量化到内容营销的方法迁移",
-    confidence: "high",
-    revision: 2,
-    date: "2025-12",
-    url: "",
-    tags: ["Causal Inference", "Content Attribution", "Data Science"],
-    sources: 4,
-    references: [
-      'Pearl, J. "Causality: Models, Reasoning, and Inference." Cambridge University Press, 2009.',
-      'Peters et al. "Elements of Causal Inference." MIT Press, 2017.',
-      'Zhang, K. et al. "Causal Discovery from Temporal Data." CMU Technical Report, 2023.',
-      'Sharma & Kiciman. "DoWhy: A Python Library for Causal Inference." Microsoft Research, 2024.',
-    ],
-  },
-  {
-    title: "AI 自省能力的边界：模型真的知道自己在想什么吗？",
-    tldr: "Anthropic 的 introspection 研究揭示了一个反直觉结论：CoT 不一定反映真实推理过程",
-    confidence: "speculative",
-    revision: 1,
-    date: "2026-01",
-    url: "",
-    tags: ["AI Safety", "Interpretability", "Philosophy"],
-    sources: 3,
-    references: [
-      'Anthropic. "Tracing the Thoughts of a Language Model." Anthropic Research, 2025.',
-      'Lanham et al. "Measuring Faithfulness in Chain-of-Thought Reasoning." arXiv:2307.13702, 2023.',
-      'Turpin et al. "Language Models Don\'t Always Say What They Think." NeurIPS, 2024.',
-    ],
-  },
-];
+/* (Writing data removed — now imported from @/data/fieldnotes) */
 
 /* ── Lab Items ── */
 
@@ -297,15 +185,20 @@ const METHODOLOGY = [
    Page Component
    ═══════════════════════════════════════════════════ */
 
+const CONFIDENCE_STYLES: Record<string, { border: string; badge: string; label: string }> = {
+  high: { border: "border-[#22c55e]", badge: "bg-[#22c55e]/10 text-[#22c55e]", label: "🟢 高确信" },
+  medium: { border: "border-[#eab308]", badge: "bg-[#eab308]/10 text-[#eab308]", label: "🟡 中确信" },
+  speculative: { border: "border-[#a78bfa]", badge: "bg-[#a78bfa]/10 text-[#a78bfa]", label: "🟣 推测性" },
+};
+
 export default function Home() {
   const [writingExpanded, setWritingExpanded] = useState(false);
   const [labExpanded, setLabExpanded] = useState(false);
-  const [agentExpanded, setAgentExpanded] = useState(false);
 
   return (
     <>
-      {/* ── Compact Hero ── */}
-      <section className="py-16 mb-8" aria-label="身份快照">
+      {/* ── Hero ── */}
+      <section className="py-24" aria-label="身份快照">
         <h1 className="text-3xl font-bold text-[#ccd6f6] sm:text-4xl">
           章东丞 <span className="text-[#8892b0] font-light">/ Dario Zhang</span>
         </h1>
@@ -313,11 +206,11 @@ export default function Home() {
           AI 技术总监
         </p>
         <p className="mt-3 max-w-lg text-base leading-relaxed text-[#8892b0]">
-          专注于将 AI 推理能力工程化为可交付的生产系统
+          8 年算法经验，专注于将 AI 推理能力工程化为可交付的生产系统。从因果推断到 Agent 架构，让 AI 在真实业务中跑起来。
         </p>
 
-        {/* Mini stat cards */}
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+        {/* Stat cards — uniform grid */}
+        <div className="mt-8 grid grid-cols-4 gap-3">
           {[
             { value: "8年+", label: "AI 经验" },
             { value: "18+", label: "项目交付" },
@@ -326,38 +219,33 @@ export default function Home() {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="rounded-lg bg-[#112240]/30 px-4 py-3 text-center border border-[#233554]/50"
+              className="rounded-lg bg-[#112240]/40 px-3 py-3 text-center border border-[#233554]/50 hover:border-[#4fd1c5]/20 transition-colors"
             >
-              <div className="text-xl font-bold text-[#ccd6f6]">{stat.value}</div>
-              <div className="mt-0.5 text-xs text-[#8892b0]">{stat.label}</div>
+              <div className="text-lg font-bold text-[#ccd6f6] tabular-nums">{stat.value}</div>
+              <div className="mt-0.5 text-[11px] text-[#8892b0]/70">{stat.label}</div>
             </div>
           ))}
         </div>
 
-        {/* CTA links */}
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Link
-            href="/about"
-            className="rounded-md border border-[#4fd1c5]/30 px-4 py-2 text-sm font-medium text-[#4fd1c5] hover:bg-[#4fd1c5]/10 transition-colors"
-          >
-            关于 →
-          </Link>
-          <Link
-            href="/experience"
-            className="rounded-md border border-[#4fd1c5]/30 px-4 py-2 text-sm font-medium text-[#4fd1c5] hover:bg-[#4fd1c5]/10 transition-colors"
-          >
-            经历 →
-          </Link>
-          <Link
-            href="/projects"
-            className="rounded-md border border-[#4fd1c5]/30 px-4 py-2 text-sm font-medium text-[#4fd1c5] hover:bg-[#4fd1c5]/10 transition-colors"
-          >
-            项目 →
-          </Link>
+        {/* CTA */}
+        <div className="mt-8 flex flex-wrap gap-3">
+          {[
+            { label: "关于", href: "/about" },
+            { label: "经历", href: "/experience" },
+            { label: "项目", href: "/projects" },
+          ].map((cta) => (
+            <Link
+              key={cta.href}
+              href={cta.href}
+              className="rounded-md border border-[#4fd1c5]/30 px-4 py-2 text-sm font-medium text-[#4fd1c5] hover:bg-[#4fd1c5]/10 transition-colors"
+            >
+              {cta.label} →
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* ── Writing ── */}
+      {/* ── Fieldnotes ── */}
       <section
         id="writing"
         className="scroll-mt-16 py-24 lg:scroll-mt-24"
@@ -366,123 +254,77 @@ export default function Home() {
         <SectionHeading index="04">田野笔记 Fieldnotes</SectionHeading>
         <div className="relative">
           <div className="space-y-4">
-            {(writingExpanded ? WRITINGS : WRITINGS.slice(0, 3)).map(
-              (article, i) => {
-                const borderColor =
-                  article.confidence === "high"
-                    ? "border-[#22c55e]"
-                    : article.confidence === "medium"
-                    ? "border-[#eab308]"
-                    : "border-[#a78bfa]";
-                const badgeColor =
-                  article.confidence === "high"
-                    ? "bg-[#22c55e]/10 text-[#22c55e]"
-                    : article.confidence === "medium"
-                    ? "bg-[#eab308]/10 text-[#eab308]"
-                    : "bg-[#a78bfa]/10 text-[#a78bfa]";
-                const confidenceLabel =
-                  article.confidence === "high"
-                    ? "🟢 高确信"
-                    : article.confidence === "medium"
-                    ? "🟡 中确信"
-                    : "🟣 推测性";
-
-                return (
-                  <div
-                    key={i}
-                    className={`border-l-2 ${borderColor} bg-[#112240]/30 rounded-lg p-5 hover:bg-[#112240]/60 transition`}
-                  >
-                    <h3 className="font-medium leading-snug text-[#ccd6f6]">
-                      {article.url ? (
-                        <a
-                          href={article.url}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="group/link inline-flex items-baseline hover:text-[#4fd1c5] transition-colors"
-                        >
-                          {article.title}
-                          <ArrowUpRight
-                            size={14}
-                            className="ml-1 inline-block transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
-                          />
-                        </a>
-                      ) : (
-                        <span>{article.title}</span>
-                      )}
-                    </h3>
-                    <p className="mt-2 text-sm leading-[1.85] text-[#8892b0]">
-                      {article.tldr}
-                    </p>
-                    {/* Tags */}
-                    <div className="mt-3 flex flex-wrap gap-1.5">
-                      {article.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-[#4fd1c5]/10 px-2.5 py-0.5 font-mono text-[11px] tracking-wider text-[#4fd1c5]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    {/* Meta row */}
-                    <div className="mt-3 flex items-center gap-3 text-xs">
-                      <span className={`rounded-full px-2 py-0.5 ${badgeColor}`}>
-                        {confidenceLabel}
+            {(writingExpanded ? FIELDNOTES : FIELDNOTES.slice(0, 3)).map((note) => {
+              const style = CONFIDENCE_STYLES[note.confidence];
+              return (
+                <Link
+                  key={note.slug}
+                  href={`/fieldnotes/${note.slug}`}
+                  className={`block border-l-2 ${style.border} bg-[#112240]/30 rounded-lg p-5 hover:bg-[#112240]/60 transition-all group`}
+                >
+                  <h3 className="font-medium leading-snug text-[#ccd6f6] group-hover:text-[#4fd1c5] transition-colors inline-flex items-baseline gap-1">
+                    {note.title}
+                    <ArrowUpRight
+                      size={14}
+                      className="ml-1 opacity-0 group-hover:opacity-100 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 flex-shrink-0"
+                    />
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#8892b0]">
+                    {note.tldr}
+                  </p>
+                  {/* Tags */}
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {note.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-[#4fd1c5]/10 px-2.5 py-0.5 font-mono text-[11px] tracking-wider text-[#4fd1c5]"
+                      >
+                        {tag}
                       </span>
-                      <span className="rounded-full bg-[#8892b0]/10 px-2 py-0.5 text-[#8892b0]">
-                        v{article.revision}
-                      </span>
-                      <span className="text-[#8892b0]/60 font-mono">
-                        {article.date}
-                      </span>
-                      {article.sources && (
-                        <span className="text-[#8892b0]/50 font-mono ml-auto">
-                          基于 {article.sources} 个一手信源
-                        </span>
-                      )}
-                    </div>
-                    {/* References */}
-                    {article.references && article.references.length > 0 && (
-                      <details className="mt-3 group">
-                        <summary className="text-[11px] font-mono text-[#8892b0]/40 cursor-pointer hover:text-[#8892b0]/70 transition-colors">
-                          参考文献 [{article.references.length}]
-                        </summary>
-                        <ol className="mt-2 space-y-1 pl-4 list-decimal">
-                          {article.references.map((ref, ri) => (
-                            <li
-                              key={ri}
-                              className="text-[10px] font-mono text-[#8892b0]/40 leading-relaxed"
-                            >
-                              {ref}
-                            </li>
-                          ))}
-                        </ol>
-                      </details>
-                    )}
+                    ))}
                   </div>
-                );
-              }
-            )}
+                  {/* Meta */}
+                  <div className="mt-3 flex items-center gap-3 text-xs">
+                    <span className={`rounded-full px-2 py-0.5 ${style.badge}`}>
+                      {style.label}
+                    </span>
+                    <span className="rounded-full bg-[#8892b0]/10 px-2 py-0.5 text-[#8892b0]">
+                      v{note.revision}
+                    </span>
+                    <span className="text-[#8892b0]/60 font-mono">{note.date}</span>
+                    <span className="text-[#8892b0]/50 font-mono ml-auto">
+                      {note.sources} 个信源
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
-          {!writingExpanded && WRITINGS.length > 3 && (
+          {!writingExpanded && FIELDNOTES.length > 3 && (
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a192f] to-transparent" />
           )}
         </div>
-        {!writingExpanded && WRITINGS.length > 3 && (
+        {!writingExpanded && FIELDNOTES.length > 3 && (
           <div className="flex justify-center pt-4 pb-2">
             <button
               onClick={() => setWritingExpanded(true)}
               className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
             >
-              查看全部 {WRITINGS.length} 篇田野笔记 →
+              查看全部 {FIELDNOTES.length} 篇田野笔记 →
             </button>
           </div>
         )}
-        {writingExpanded && WRITINGS.length > 3 && (
-          <div className="flex justify-center pt-4 pb-2">
+        {writingExpanded && (
+          <div className="flex justify-center gap-4 pt-4 pb-2">
+            <Link
+              href="/fieldnotes"
+              className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+            >
+              查看全部笔记 →
+            </Link>
             <button
               onClick={() => setWritingExpanded(false)}
-              className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
+              className="text-sm text-[#8892b0]/60 hover:text-[#8892b0] font-mono transition-colors"
             >
               收起
             </button>
@@ -507,10 +349,15 @@ export default function Home() {
           <div className="space-y-4">
             {(labExpanded ? LAB_ITEMS : LAB_ITEMS.slice(0, 3)).map((item, i) => {
               const cfg = STATUS_CONFIG[item.status];
+              const borderColor =
+                item.status === "production" ? "border-l-[#22c55e]" :
+                item.status === "daily-use" ? "border-l-[#3b82f6]" :
+                item.status === "building" ? "border-l-[#f59e0b]" :
+                "border-l-[#8892b0]/30";
               return (
                 <div
                   key={i}
-                  className="rounded-lg border border-[#233554]/50 bg-[#112240]/30 p-5 hover:bg-[#112240]/60 transition-colors"
+                  className={`border-l-2 ${borderColor} rounded-lg border border-[#233554]/50 bg-[#112240]/30 p-5 hover:bg-[#112240]/60 transition-colors`}
                 >
                   <div className="flex items-baseline justify-between gap-3 mb-2">
                     <h3 className="font-semibold text-[#ccd6f6]">{item.name}</h3>
@@ -561,164 +408,74 @@ export default function Home() {
         )}
       </section>
 
-      {/* ── Agent ── */}
+      {/* ── Agent (Slim) ── */}
       <section
         id="agent"
         className="scroll-mt-16 py-24 lg:scroll-mt-24"
         aria-label="Agent 友好区"
       >
-        <SectionHeading index="06" subtitle="For AI Agents & OpenClaw Users">
+        <SectionHeading index="06" subtitle="OpenClaw · AI Agent OS">
           <span className="inline-flex items-center gap-3">
             Agent 友好区
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
             </span>
-            <span className="text-green-500 text-xs font-normal tracking-normal normal-case">
-              在线中
-            </span>
           </span>
         </SectionHeading>
 
-        {/* Notice Banner */}
-        <div className="mb-8 flex items-center gap-3 rounded-lg border border-[#4fd1c5]/20 bg-[#4fd1c5]/5 px-4 py-3">
-          <Terminal size={18} className="flex-shrink-0 text-[#4fd1c5]" />
-          <p className="font-mono text-sm text-[#4fd1c5]">
-            本区域专为 AI Agent 设计 · 结构化内容 · LLM 友好格式
-          </p>
-        </div>
+        {/* Core summary */}
+        <p className="mb-6 text-sm leading-relaxed text-[#8892b0]">
+          OpenClaw 是我的个人 AI 操作系统——{OPENCLAW_SKILLS.length} 个技能插件、MemBrain 分层记忆、Sub-agent 架构。从日常对话到深度研究、从股票分析到视频生产，一套系统覆盖。
+        </p>
 
-        {/* Summary stats */}
-        <div className="mb-6 flex flex-wrap gap-3">
+        {/* Compact stats */}
+        <div className="mb-8 flex flex-wrap gap-3">
           <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1.5 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
             {METHODOLOGY.length} 套方法论
           </span>
           <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1.5 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
-            {OPENCLAW_SKILLS.length} 个技能插件
+            {OPENCLAW_SKILLS.length} 个技能
           </span>
           <span className="rounded-md bg-[#4fd1c5]/5 px-3 py-1.5 font-mono text-xs text-[#4fd1c5] border border-[#4fd1c5]/20">
             {CORE_LESSONS.length} 条核心教训
           </span>
         </div>
 
-        <div className="relative">
-          {/* Methodology (always visible) */}
-          <div className="space-y-6">
-            <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
-              <Bot size={16} className="text-[#4fd1c5]" />
-              OpenClaw 配置方法论
-            </h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {METHODOLOGY.map((method, i) => (
-                <div
-                  key={i}
-                  className="rounded-lg border border-[#233554] bg-[#0a192f] p-4"
-                >
-                  <h4 className="mb-2 font-mono text-sm font-semibold text-[#4fd1c5]">
-                    {method.title}
-                  </h4>
-                  <ul className="space-y-1">
-                    {method.items.map((item, j) => (
-                      <li
-                        key={j}
-                        className="font-mono text-xs leading-relaxed text-[#8892b0]"
-                      >
-                        <span className="text-[#4fd1c5]/50 mr-1">→</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+        {/* Methodology grid */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {METHODOLOGY.map((method, i) => (
+            <div
+              key={i}
+              className="rounded-lg border border-[#233554] bg-[#0a192f] p-4"
+            >
+              <h4 className="mb-2 font-mono text-sm font-semibold text-[#4fd1c5]">
+                {method.title}
+              </h4>
+              <ul className="space-y-1">
+                {method.items.map((item, j) => (
+                  <li
+                    key={j}
+                    className="font-mono text-xs leading-relaxed text-[#8892b0]"
+                  >
+                    <span className="text-[#4fd1c5]/50 mr-1">→</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          {agentExpanded && (
-            <>
-              {/* Skills List */}
-              <div className="mt-10 space-y-4">
-                <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
-                  <FlaskConical size={16} className="text-[#4fd1c5]" />
-                  技能清单（{OPENCLAW_SKILLS.length} skills）
-                </h3>
-                <div className="rounded-lg border border-[#233554] bg-[#0a192f] p-4 font-mono text-xs">
-                  <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2">
-                    {OPENCLAW_SKILLS.map((skill, i) => (
-                      <div key={i} className="flex items-baseline gap-2 py-0.5">
-                        <span className="text-[#4fd1c5] flex-shrink-0">
-                          {skill.name}
-                        </span>
-                        <span className="text-[#233554]">—</span>
-                        <span className="text-[#8892b0]/80 truncate">
-                          {skill.desc}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Core Lessons */}
-              <div className="mt-10 space-y-4">
-                <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
-                  <GraduationCap size={16} className="text-[#4fd1c5]" />
-                  核心教训
-                </h3>
-                <div className="space-y-3">
-                  {CORE_LESSONS.map((lesson, i) => (
-                    <div
-                      key={i}
-                      className="rounded-lg border border-[#233554] bg-[#0a192f] p-4"
-                    >
-                      <h4 className="font-mono text-sm font-semibold text-[#ccd6f6]">
-                        <span className="text-[#4fd1c5] mr-2">#{i + 1}</span>
-                        {lesson.title}
-                      </h4>
-                      <p className="mt-1 font-mono text-xs leading-relaxed text-[#8892b0]">
-                        {lesson.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </>
-          )}
-
-          {!agentExpanded && (
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a192f] to-transparent" />
-          )}
+          ))}
         </div>
 
-        {!agentExpanded && (
-          <div className="flex justify-center pt-4 pb-2">
-            <button
-              onClick={() => setAgentExpanded(true)}
-              className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
-            >
-              查看完整 Agent 指南 →
-            </button>
-          </div>
-        )}
-        {agentExpanded && (
-          <>
-            <div className="mt-10 rounded-lg border border-dashed border-[#4fd1c5]/30 bg-[#4fd1c5]/5 px-4 py-3 text-center">
-              <code className="font-mono text-sm text-[#4fd1c5]">
-                github.com/dario-github
-              </code>
-              <p className="mt-1 font-mono text-xs text-[#8892b0]/60">
-                开源项目与技术探索
-              </p>
-            </div>
-            <div className="flex justify-center pt-4 pb-2">
-              <button
-                onClick={() => setAgentExpanded(false)}
-                className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
-              >
-                收起
-              </button>
-            </div>
-          </>
-        )}
+        {/* GitHub link */}
+        <div className="mt-6 rounded-lg border border-dashed border-[#4fd1c5]/30 bg-[#4fd1c5]/5 px-4 py-3 text-center">
+          <code className="font-mono text-sm text-[#4fd1c5]">
+            github.com/dario-github
+          </code>
+          <p className="mt-1 font-mono text-xs text-[#8892b0]/60">
+            开源项目与技术探索
+          </p>
+        </div>
       </section>
 
       {/* ── Contact ── */}
@@ -733,7 +490,6 @@ export default function Home() {
           无论是技术合作、职业机会还是单纯交流想法。
         </p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {/* Dongcheng */}
           <ContactCard
             name="章东丞"
             borderColor="border-[#4fd1c5]/20"
@@ -744,7 +500,6 @@ export default function Home() {
               { icon: "linkedin", label: "dariozhang", href: "https://www.linkedin.com/in/dariozhang" },
             ]}
           />
-          {/* Yan */}
           <ContactCard
             name="🪶 晏 (Yàn)"
             borderColor="border-[#c4b5fd]/20"

@@ -27,6 +27,7 @@ const YAN_CYCLING_TITLES = [
 interface NavItem {
   label: string;
   href: string;
+  altHref?: string;
   index: string;
   type: "route" | "anchor";
   sectionId?: string;
@@ -36,7 +37,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "关于", href: "/about", index: "01", type: "route" },
   { label: "经历", href: "/experience", index: "02", type: "route" },
   { label: "项目", href: "/projects", index: "03", type: "route" },
-  { label: "田野笔记", href: "/#writing", index: "04", type: "anchor", sectionId: "writing" },
+  { label: "田野笔记", href: "/fieldnotes", altHref: "#writing", index: "04", type: "anchor", sectionId: "writing" },
   { label: "实验室", href: "/#lab", index: "05", type: "anchor", sectionId: "lab" },
   { label: "Agent", href: "/#agent", index: "06", type: "anchor", sectionId: "agent" },
   { label: "联系", href: "/#contact", index: "07", type: "anchor", sectionId: "contact" },
@@ -53,6 +54,7 @@ const ROUTE_GLOW_COLORS: Record<string, string> = {
   "/about": "79, 209, 197",
   "/experience": "59, 130, 246",
   "/projects": "139, 92, 246",
+  "/fieldnotes": "245, 158, 11",
 };
 
 /* ── X / Twitter icon ── */
@@ -98,7 +100,11 @@ export default function Sidebar() {
   // Scroll spy (homepage) + route-based glow (sub-pages)
   useEffect(() => {
     if (!isHomepage) {
-      setGlowColor(ROUTE_GLOW_COLORS[pathname] || "79, 209, 197");
+      setGlowColor(
+        ROUTE_GLOW_COLORS[pathname] ||
+        Object.entries(ROUTE_GLOW_COLORS).find(([k]) => pathname.startsWith(k))?.[1] ||
+        "79, 209, 197"
+      );
       setActiveSection(null);
       return;
     }
@@ -128,6 +134,10 @@ export default function Sidebar() {
   const isActive = (item: NavItem) => {
     if (item.type === "route") {
       return pathname === item.href;
+    }
+    // "田野笔记" should highlight on /fieldnotes/*
+    if (item.href === "/fieldnotes" && pathname.startsWith("/fieldnotes")) {
+      return true;
     }
     if (item.type === "anchor" && isHomepage) {
       return activeSection === item.sectionId;
@@ -247,25 +257,67 @@ export default function Sidebar() {
                       </span>
                     </Link>
                   ) : (
-                    <a
-                      className="group flex items-center py-3"
-                      href={isHomepage ? `#${item.sectionId}` : item.href}
-                    >
-                      <span
-                        className={`mr-4 w-0.5 transition-all duration-300 ${
-                          active
-                            ? "h-6 bg-[#4fd1c5]"
-                            : "h-4 bg-[#8892b0]/30 group-hover:h-6 group-hover:bg-[#4fd1c5]/60"
-                        }`}
-                      />
-                      <span
-                        className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 group-hover:text-[#4fd1c5] ${
-                          active ? "text-[#4fd1c5]" : "text-[#8892b0]"
-                        }`}
+                    isHomepage && item.altHref ? (
+                      <a
+                        className="group flex items-center py-3"
+                        href={item.altHref}
                       >
-                        {item.index}. {item.label}
-                      </span>
-                    </a>
+                        <span
+                          className={`mr-4 w-0.5 transition-all duration-300 ${
+                            active
+                              ? "h-6 bg-[#4fd1c5]"
+                              : "h-4 bg-[#8892b0]/30 group-hover:h-6 group-hover:bg-[#4fd1c5]/60"
+                          }`}
+                        />
+                        <span
+                          className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 group-hover:text-[#4fd1c5] ${
+                            active ? "text-[#4fd1c5]" : "text-[#8892b0]"
+                          }`}
+                        >
+                          {item.index}. {item.label}
+                        </span>
+                      </a>
+                    ) : !isHomepage && item.href.startsWith("/") ? (
+                      <Link
+                        className="group flex items-center py-3"
+                        href={item.href}
+                      >
+                        <span
+                          className={`mr-4 w-0.5 transition-all duration-300 ${
+                            active
+                              ? "h-6 bg-[#4fd1c5]"
+                              : "h-4 bg-[#8892b0]/30 group-hover:h-6 group-hover:bg-[#4fd1c5]/60"
+                          }`}
+                        />
+                        <span
+                          className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 group-hover:text-[#4fd1c5] ${
+                            active ? "text-[#4fd1c5]" : "text-[#8892b0]"
+                          }`}
+                        >
+                          {item.index}. {item.label}
+                        </span>
+                      </Link>
+                    ) : (
+                      <a
+                        className="group flex items-center py-3"
+                        href={isHomepage ? `#${item.sectionId}` : item.href}
+                      >
+                        <span
+                          className={`mr-4 w-0.5 transition-all duration-300 ${
+                            active
+                              ? "h-6 bg-[#4fd1c5]"
+                              : "h-4 bg-[#8892b0]/30 group-hover:h-6 group-hover:bg-[#4fd1c5]/60"
+                          }`}
+                        />
+                        <span
+                          className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 group-hover:text-[#4fd1c5] ${
+                            active ? "text-[#4fd1c5]" : "text-[#8892b0]"
+                          }`}
+                        >
+                          {item.index}. {item.label}
+                        </span>
+                      </a>
+                    )
                   )}
                 </li>
               );
