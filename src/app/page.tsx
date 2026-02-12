@@ -792,31 +792,13 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Education */}
-              <div className="mt-8 space-y-3">
+              {/* Education - minimal */}
+              <div className="mt-8">
                 <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#ccd6f6]">
                   <GraduationCap size={16} className="text-[#4fd1c5]" />
                   教育背景
                 </h3>
-                <div className="space-y-2">
-                  <div className="flex items-baseline justify-between">
-                    <div>
-                      <span className="text-[#ccd6f6] font-medium">同济大学</span>
-                      <span className="mx-2 text-[#8892b0]/40">·</span>
-                      <span className="text-sm">数学与应用数学（本科）</span>
-                    </div>
-                    <span className="text-[#4fd1c5] font-mono text-sm ml-4 whitespace-nowrap">2013 — 2018</span>
-                  </div>
-                  <div className="flex items-baseline justify-between">
-                    <div>
-                      <span className="text-[#ccd6f6] font-medium">同济大学</span>
-                      <span className="mx-2 text-[#8892b0]/40">·</span>
-                      <span className="text-sm">德语强化班</span>
-                    </div>
-                    <span className="text-[#4fd1c5] font-mono text-sm ml-4 whitespace-nowrap">2015 — 2016</span>
-                  </div>
-                  <p className="text-sm text-[#8892b0]/70 mt-1">学院党委副支书、班级团支书</p>
-                </div>
+                <p className="text-sm text-[#8892b0] mt-2">同济大学 · 数学与应用数学</p>
               </div>
 
               {/* Resume removed for privacy */}
