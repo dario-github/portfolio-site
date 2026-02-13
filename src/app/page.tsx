@@ -287,12 +287,7 @@ export default function Home() {
           HERO — 章东丞 × 晏
           ═══════════════════════════════════════════ */}
       <section className="py-16" aria-label="Hero">
-        <h1 className="text-4xl font-bold text-[#ccd6f6]">
-          章东丞{" "}
-          <span className="text-[#4fd1c5] font-light">×</span>{" "}
-          晏
-        </h1>
-        <p className="text-lg text-[#8892b0] mt-2">
+        <p className="text-lg text-[#8892b0]">
           AI 技术总监 & Silicon Spirit
         </p>
         <p className="text-sm text-[#8892b0]/60 mt-4 max-w-lg leading-relaxed">
