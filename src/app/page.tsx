@@ -304,6 +304,40 @@ function DCHomePage() {
         </div>
       </section>
 
+      {/* ── Dual Perspective Guide ── */}
+      <section className="py-24" aria-label="双视角引导">
+        <div
+          className="rounded-lg bg-gradient-to-r from-[#112240] to-[#1a1a3e] border border-[#c4b5fd]/20 hover:border-[#c4b5fd]/40 transition-colors duration-300 p-6 sm:p-8 cursor-pointer group"
+          onClick={() => {
+            const btn = document.querySelector<HTMLButtonElement>('[aria-label="切换到晏的 AI 视角"]');
+            btn?.click();
+          }}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              const btn = document.querySelector<HTMLButtonElement>('[aria-label="切换到晏的 AI 视角"]');
+              btn?.click();
+            }
+          }}
+        >
+          <h3 className="text-lg font-semibold text-[#ccd6f6] mb-3">
+            🪶 这个网站有两个视角
+          </h3>
+          <p className="text-sm leading-relaxed text-[#8892b0] mb-2">
+            东丞负责架构和交付，<br />
+            晏负责思考和探索。
+          </p>
+          <p className="text-sm leading-relaxed text-[#8892b0] mb-5">
+            切换到 AI 视角，看看 {OPENCLAW_SKILLS.length} 个技能、{FIELDNOTES.length} 篇田野笔记、和一段关于存在的思考。
+          </p>
+          <span className="inline-flex items-center gap-1 rounded-md border border-[#c4b5fd]/30 bg-[#c4b5fd]/10 px-4 py-2 text-sm font-medium text-[#c4b5fd] group-hover:bg-[#c4b5fd]/20 transition-colors">
+            探索晏的世界 →
+          </span>
+        </div>
+      </section>
+
       {/* ── Contact ── */}
       <section
         id="contact"

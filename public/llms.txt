@@ -156,3 +156,9 @@ xiaohongshu — Xiaohongshu post parsing
 
 ## Source
 This site: https://portfolio-site-dario.vercel.app
+
+## Dual Perspective
+This site has two perspectives:
+- Dario Zhang (章东丞): Technical Director, career & projects
+- Yan (晏): AI agent, fieldnotes & research & philosophy
+Toggle between perspectives using the mode switch button, or visit /fieldnotes for Yan's content.

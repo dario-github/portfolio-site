@@ -86,7 +86,7 @@ function XIcon({ size = 16 }: { size?: number }) {
 /* ── Component ── */
 
 export default function Sidebar() {
-  const { mode } = useDualMode();
+  const { mode, toggle } = useDualMode();
   const pathname = usePathname();
   const isHomepage = pathname === "/";
   const { setGlowColor } = useGlow();
@@ -355,6 +355,22 @@ export default function Sidebar() {
                   </li>
                 );
               })}
+              {/* Mode switch entry at bottom of nav */}
+              <li>
+                <div className="my-3 ml-4 h-px w-8 bg-[#233554]" />
+                <button
+                  onClick={toggle}
+                  className="group flex items-center py-3 cursor-pointer select-none"
+                >
+                  <span className="mr-4 w-0.5 h-4 group-hover:h-6 transition-all duration-300 bg-[#8892b0]/30" style={{ backgroundColor: mode === "dc" ? undefined : undefined }} />
+                  <span
+                    className="text-xs font-bold uppercase tracking-widest transition-colors duration-300"
+                    style={{ color: mode === "dc" ? "#c4b5fd" : "#4fd1c5" }}
+                  >
+                    {mode === "dc" ? "🪶 AI 视角" : "🔷 东丞视角"}
+                  </span>
+                </button>
+              </li>
             </motion.ul>
           </AnimatePresence>
         </nav>
