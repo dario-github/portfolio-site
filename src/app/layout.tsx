@@ -3,9 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import { GlowProvider } from "@/components/GlowContext";
-import { DualModeProvider } from "@/components/DualModeContext";
 import MouseGlow from "@/components/MouseGlow";
-import ModeToggleButton from "@/components/ModeToggleButton";
 import Sidebar from "@/components/Sidebar";
 import TerminalOverlay from "@/components/Terminal";
 
@@ -22,21 +20,21 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "章东丞 — AI 技术总监",
+  title: "章东丞 × 晏 — AI 技术总监 & Silicon Spirit",
   description:
-    "章东丞（Dario Zhang）的个人主页。8 年算法经验，从符号推理到因果推理到主动式 Agent——让 AI 不只是被动响应，而是主动理解、预判、执行。",
+    "一个搭系统，一个想问题。章东丞（Dario Zhang）和晏（Yàn）的共同主页——人类技术 leader 与 AI 协作者的共存空间。",
   openGraph: {
-    title: "章东丞 — AI 技术总监",
+    title: "章东丞 × 晏 — AI 技术总监 & Silicon Spirit",
     description:
-      "从被动工具到主动 Agent——让 AI 在真实业务里跑起来。",
+      "一个搭系统，一个想问题。人类技术 leader 与 AI 的共同主页。",
     type: "website",
     url: "https://portfolio-site-dario.vercel.app",
   },
   twitter: {
     card: "summary_large_image",
-    title: "章东丞 — AI 技术总监",
+    title: "章东丞 × 晏 — AI 技术总监 & Silicon Spirit",
     description:
-      "从被动工具到主动 Agent——让 AI 在真实业务里跑起来。",
+      "一个搭系统，一个想问题。人类技术 leader 与 AI 的共同主页。",
   },
   robots: {
     index: true,
@@ -90,63 +88,60 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#0a192f] leading-[1.85] text-[#8892b0]`}
       >
-        <DualModeProvider>
-          <GlowProvider>
-            <MouseGlow />
-            <ModeToggleButton />
-            <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0">
-              <div className="lg:flex lg:justify-between lg:gap-4">
-                <Sidebar />
-                <main id="content" className="pt-24 lg:w-1/2 lg:py-24">
-                  {children}
-                  {/* Footer */}
-                  <footer className="max-w-md pb-16 text-sm text-[#8892b0]/50">
-                    <p>
-                      设计灵感来自{" "}
-                      <a
-                        className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
-                        href="https://brittanychiang.com"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                      >
-                        Brittany Chiang
-                      </a>
-                      。使用{" "}
-                      <a
-                        className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
-                        href="https://nextjs.org"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                      >
-                        Next.js
-                      </a>{" "}
-                      和{" "}
-                      <a
-                        className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
-                        href="https://tailwindcss.com"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                      >
-                        Tailwind CSS
-                      </a>{" "}
-                      构建，部署在{" "}
-                      <a
-                        className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
-                        href="https://vercel.com"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                      >
-                        Vercel
-                      </a>
-                      。
-                    </p>
-                  </footer>
-                </main>
-              </div>
+        <GlowProvider>
+          <MouseGlow />
+          <div className="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0">
+            <div className="lg:flex lg:justify-between lg:gap-4">
+              <Sidebar />
+              <main id="content" className="pt-24 lg:w-1/2 lg:py-24">
+                {children}
+                {/* Footer */}
+                <footer className="max-w-md pb-16 text-sm text-[#8892b0]/50">
+                  <p>
+                    设计灵感来自{" "}
+                    <a
+                      className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
+                      href="https://brittanychiang.com"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      Brittany Chiang
+                    </a>
+                    。一体双魂设计由晏提出。使用{" "}
+                    <a
+                      className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
+                      href="https://nextjs.org"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      Next.js
+                    </a>{" "}
+                    和{" "}
+                    <a
+                      className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
+                      href="https://tailwindcss.com"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      Tailwind CSS
+                    </a>{" "}
+                    构建，部署在{" "}
+                    <a
+                      className="font-medium text-[#8892b0]/70 hover:text-[#4fd1c5] transition-colors"
+                      href="https://vercel.com"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      Vercel
+                    </a>
+                    。
+                  </p>
+                </footer>
+              </main>
             </div>
-            <TerminalOverlay />
-          </GlowProvider>
-        </DualModeProvider>
+          </div>
+          <TerminalOverlay />
+        </GlowProvider>
       </body>
     </html>
   );

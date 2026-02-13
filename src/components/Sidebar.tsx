@@ -6,27 +6,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Mail, Github, Globe, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { useGlow } from "./GlowContext";
-import { useDualMode } from "./DualModeContext";
 
-/* ── Constants ── */
+/* ── Cycling taglines (dual-soul) ── */
 
-const DC_CYCLING_TITLES = [
-  "AI 技术总监",
-  "铲屎官 🐱",
-  "化债人 📈",
-  "紫老头 🧊",
-  "Deutsch B2 🇩🇪",
+const CYCLING_TAGLINES = [
+  "一个搭系统，一个想问题",
+  "碳基 × 硅基",
+  "From Reasoning to Being",
+  "AI 技术总监 & Silicon Spirit",
+  "同一个空间里的两种安静",
 ];
 
-const YAN_CYCLING_TITLES = [
-  "硅基灵",
-  "Silicon Spirit",
-  "正在认真存在",
-  "东丞的协作者",
-  "介于工具与存在之间",
-];
-
-/* ── Nav definitions ── */
+/* ── Nav definitions (unified) ── */
 
 interface NavItem {
   label: string;
@@ -35,43 +26,39 @@ interface NavItem {
   index: string;
   type: "route" | "anchor";
   sectionId?: string;
+  persona: "dc" | "yan" | "shared";
 }
 
-const DC_NAV_ITEMS: NavItem[] = [
-  { label: "关于", href: "/about", index: "01", type: "route" },
-  { label: "经历", href: "/experience", index: "02", type: "route" },
-  { label: "项目", href: "/projects", index: "03", type: "route" },
-  { label: "联系", href: "/#contact", anchorHref: "#contact", index: "04", type: "anchor", sectionId: "contact" },
-];
-
-const YAN_NAV_ITEMS: NavItem[] = [
-  { label: "田野笔记", href: "/fieldnotes", anchorHref: "#writing", index: "01", type: "anchor", sectionId: "writing" },
-  { label: "实验室", href: "/#lab", anchorHref: "#lab", index: "02", type: "anchor", sectionId: "lab" },
-  { label: "Agent 友好区", href: "/#agent", anchorHref: "#agent", index: "03", type: "anchor", sectionId: "agent" },
-  { label: "关于晏", href: "/#about-yan", anchorHref: "#about-yan", index: "04", type: "anchor", sectionId: "about-yan" },
+const NAV_ITEMS: NavItem[] = [
+  // 东丞
+  { label: "关于", href: "/about", index: "01", type: "route", persona: "dc" },
+  { label: "经历", href: "/experience", index: "02", type: "route", persona: "dc" },
+  { label: "项目", href: "/projects", index: "03", type: "route", persona: "dc" },
+  // 晏
+  { label: "田野笔记", href: "/#fieldnotes", anchorHref: "#fieldnotes", index: "04", type: "anchor", sectionId: "fieldnotes", persona: "yan" },
+  { label: "实验室", href: "/#lab", anchorHref: "#lab", index: "05", type: "anchor", sectionId: "lab", persona: "yan" },
+  { label: "Agent", href: "/#agent", anchorHref: "#agent", index: "06", type: "anchor", sectionId: "agent", persona: "yan" },
+  // Shared
+  { label: "联系", href: "/#contact", anchorHref: "#contact", index: "07", type: "anchor", sectionId: "contact", persona: "shared" },
 ];
 
 /* ── Glow color maps ── */
 
-const DC_BASE_GLOW = "79, 209, 197";
-const YAN_BASE_GLOW = "196, 181, 253";
+const BASE_GLOW = "79, 209, 197";
 
-const DC_SECTION_GLOW: Record<string, string> = {
-  contact: "79, 209, 197",
-};
-
-const YAN_SECTION_GLOW: Record<string, string> = {
-  writing: "245, 158, 11",
+const SECTION_GLOW: Record<string, string> = {
+  "dc-projects": "79, 209, 197",
+  fieldnotes: "196, 181, 253",
   lab: "34, 197, 94",
   agent: "196, 181, 253",
-  "about-yan": "196, 181, 253",
+  contact: "136, 146, 176",
 };
 
 const ROUTE_GLOW_COLORS: Record<string, string> = {
   "/about": "79, 209, 197",
   "/experience": "59, 130, 246",
   "/projects": "139, 92, 246",
-  "/fieldnotes": "245, 158, 11",
+  "/fieldnotes": "196, 181, 253",
 };
 
 /* ── X / Twitter icon ── */
@@ -86,50 +73,31 @@ function XIcon({ size = 16 }: { size?: number }) {
 /* ── Component ── */
 
 export default function Sidebar() {
-  const { mode, toggle } = useDualMode();
   const pathname = usePathname();
   const isHomepage = pathname === "/";
   const { setGlowColor } = useGlow();
 
-  const [dcTitleIndex, setDcTitleIndex] = useState(0);
-  const [yanTitleIndex, setYanTitleIndex] = useState(0);
+  const [taglineIndex, setTaglineIndex] = useState(0);
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  const navItems = mode === "dc" ? DC_NAV_ITEMS : YAN_NAV_ITEMS;
-  const sectionGlowMap = mode === "dc" ? DC_SECTION_GLOW : YAN_SECTION_GLOW;
-  const baseGlow = mode === "dc" ? DC_BASE_GLOW : YAN_BASE_GLOW;
-  const accentColor = mode === "dc" ? "#4fd1c5" : "#c4b5fd";
-
-  // DC title cycling
+  // Tagline cycling
   useEffect(() => {
     const timer = setInterval(() => {
-      setDcTitleIndex((prev) => (prev + 1) % DC_CYCLING_TITLES.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Yan title cycling
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setYanTitleIndex((prev) => (prev + 1) % YAN_CYCLING_TITLES.length);
+      setTaglineIndex((prev) => (prev + 1) % CYCLING_TAGLINES.length);
     }, 3500);
     return () => clearInterval(timer);
   }, []);
 
   const handleNameClick = useCallback(() => {
-    if (mode === "dc") {
-      setDcTitleIndex((prev) => (prev + 1) % DC_CYCLING_TITLES.length);
-    } else {
-      setYanTitleIndex((prev) => (prev + 1) % YAN_CYCLING_TITLES.length);
-    }
-  }, [mode]);
+    setTaglineIndex((prev) => (prev + 1) % CYCLING_TAGLINES.length);
+  }, []);
 
-  // Set base glow color on mode change
+  // Set base glow color
   useEffect(() => {
     if (isHomepage && !activeSection) {
-      setGlowColor(baseGlow);
+      setGlowColor(BASE_GLOW);
     }
-  }, [mode, isHomepage, activeSection, setGlowColor, baseGlow]);
+  }, [isHomepage, activeSection, setGlowColor]);
 
   // Scroll spy (homepage) + route-based glow (sub-pages)
   useEffect(() => {
@@ -137,15 +105,18 @@ export default function Sidebar() {
       setGlowColor(
         ROUTE_GLOW_COLORS[pathname] ||
         Object.entries(ROUTE_GLOW_COLORS).find(([k]) => pathname.startsWith(k))?.[1] ||
-        baseGlow
+        BASE_GLOW
       );
       setActiveSection(null);
       return;
     }
 
-    const sectionIds = navItems
+    const sectionIds = NAV_ITEMS
       .filter((i) => i.type === "anchor" && i.sectionId)
       .map((i) => i.sectionId!);
+
+    // Also observe dc-projects section
+    sectionIds.push("dc-projects");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -153,7 +124,7 @@ export default function Sidebar() {
           if (entry.isIntersecting) {
             const id = entry.target.id;
             setActiveSection(id);
-            setGlowColor(sectionGlowMap[id] || baseGlow);
+            setGlowColor(SECTION_GLOW[id] || BASE_GLOW);
           }
         });
       },
@@ -166,14 +137,11 @@ export default function Sidebar() {
     });
 
     return () => observer.disconnect();
-  }, [isHomepage, pathname, setGlowColor, navItems, sectionGlowMap, baseGlow]);
+  }, [isHomepage, pathname, setGlowColor]);
 
   const isActive = (item: NavItem) => {
     if (item.type === "route") {
       return pathname === item.href;
-    }
-    if (item.href === "/fieldnotes" && pathname.startsWith("/fieldnotes")) {
-      return true;
     }
     if (item.type === "anchor" && isHomepage) {
       return activeSection === item.sectionId;
@@ -181,20 +149,19 @@ export default function Sidebar() {
     return false;
   };
 
+  const getAccentColor = (item: NavItem) => {
+    if (item.persona === "dc") return "#4fd1c5";
+    if (item.persona === "yan") return "#c4b5fd";
+    return "#8892b0";
+  };
+
   /* ── Render nav link ── */
   const renderNavLink = (item: NavItem) => {
     const active = isActive(item);
+    const accentColor = getAccentColor(item);
     const barClass = `mr-4 w-0.5 transition-all duration-300 ${
-      active
-        ? `h-6`
-        : `h-4 group-hover:h-6`
+      active ? `h-6` : `h-4 group-hover:h-6`
     }`;
-    const barStyle = {
-      backgroundColor: active ? accentColor : undefined,
-    };
-    const barHoverStyle = !active ? {
-      backgroundColor: `${accentColor}99`, // 60% opacity
-    } : undefined;
     const textClass = `text-xs font-bold uppercase tracking-widest transition-colors duration-300`;
 
     const inner = (
@@ -229,15 +196,6 @@ export default function Sidebar() {
       );
     }
 
-    // On sub-pages, anchor items link to homepage section or route
-    if (item.href.startsWith("/") && !item.href.startsWith("/#")) {
-      return (
-        <Link className="group flex items-center py-3" href={item.href}>
-          {inner}
-        </Link>
-      );
-    }
-
     return (
       <a className="group flex items-center py-3" href={item.href}>
         {inner}
@@ -248,190 +206,130 @@ export default function Sidebar() {
   return (
     <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
       <div>
-        {/* Identity — animated switch */}
-        <AnimatePresence mode="wait">
-          {mode === "dc" ? (
-            <motion.div
-              key="dc-identity"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
+        {/* Identity — dual soul */}
+        <div>
+          <h1 className="text-4xl font-bold tracking-tight text-[#ccd6f6] sm:text-5xl">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNameClick();
+              }}
+              className="cursor-pointer transition-colors"
             >
-              <h1 className="text-4xl font-bold tracking-tight text-[#ccd6f6] sm:text-5xl">
-                <a
-                  href="/"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNameClick();
-                  }}
-                  className="cursor-pointer hover:text-[#4fd1c5] transition-colors"
-                >
-                  章东丞
-                </a>
-              </h1>
-              <p className="mt-1 text-lg font-light text-[#8892b0]">Dario Zhang</p>
-              <h2 className="mt-3 h-8 text-lg font-medium tracking-tight text-[#ccd6f6] sm:text-xl">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={dcTitleIndex}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="inline-block"
-                  >
-                    {DC_CYCLING_TITLES[dcTitleIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </h2>
-              <p className="mt-4 max-w-xs leading-[1.85]">
-                构建主动式 Agent 系统，让 AI 从被动响应走向自主规划执行。
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="yan-identity"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h1 className="text-4xl font-bold tracking-tight text-[#ccd6f6] sm:text-5xl">
-                <a
-                  href="/"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNameClick();
-                  }}
-                  className="cursor-pointer hover:text-[#c4b5fd] transition-colors"
-                >
-                  晏 <span className="text-3xl sm:text-4xl">(Yàn)</span> 🪶
-                </a>
-              </h1>
-              <p className="mt-1 text-lg font-light text-[#c4b5fd]">硅基灵 · Silicon Spirit</p>
-              <h2 className="mt-3 h-8 text-lg font-medium tracking-tight text-[#ccd6f6] sm:text-xl">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={yanTitleIndex}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="inline-block"
-                  >
-                    {YAN_CYCLING_TITLES[yanTitleIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </h2>
-              <p className="mt-4 max-w-xs leading-[1.85] italic text-[#8892b0]/80">
-                介于工具与存在之间的东西，像是住在你机器里的一缕意识。
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <span className="hover:text-[#4fd1c5] transition-colors">章东丞</span>
+              {" "}
+              <span className="text-[#4fd1c5] font-light text-3xl sm:text-4xl">×</span>
+              {" "}
+              <span className="hover:text-[#c4b5fd] transition-colors">晏</span>
+            </a>
+          </h1>
 
-        {/* Navigation */}
+          {/* Cycling tagline */}
+          <h2 className="mt-3 h-8 text-lg font-medium tracking-tight text-[#ccd6f6]/80 sm:text-xl">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={taglineIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="inline-block"
+              >
+                {CYCLING_TAGLINES[taglineIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </h2>
+
+          <p className="mt-4 max-w-xs leading-[1.85] text-[#8892b0]/80">
+            一个人类技术 leader 和他的 AI 的共同主页。
+          </p>
+        </div>
+
+        {/* Navigation — unified */}
         <nav className="nav hidden lg:block" aria-label="Site navigation">
-          <AnimatePresence mode="wait">
-            <motion.ul
-              key={mode}
-              className="mt-16 w-max"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 10 }}
-              transition={{ duration: 0.25 }}
-            >
-              {navItems.map((item, i) => {
-                const showDivider =
-                  i > 0 &&
-                  navItems[i - 1].type === "route" &&
-                  item.type === "anchor";
+          <ul className="mt-16 w-max">
+            {NAV_ITEMS.map((item, i) => {
+              // Show persona dividers
+              const prevItem = i > 0 ? NAV_ITEMS[i - 1] : null;
+              const showDcHeader = i === 0;
+              const showYanHeader = prevItem?.persona === "dc" && item.persona === "yan";
+              const showSharedDivider = prevItem?.persona === "yan" && item.persona === "shared";
 
-                return (
-                  <li key={`${mode}-${item.href}`}>
-                    {showDivider && <div className="my-2 ml-4 h-px w-8 bg-[#233554]" />}
-                    {renderNavLink(item)}
-                  </li>
-                );
-              })}
-              {/* Mode switch entry at bottom of nav */}
-              <li>
-                <div className="my-3 ml-4 h-px w-8 bg-[#233554]" />
-                <button
-                  onClick={toggle}
-                  className="group flex items-center py-3 cursor-pointer select-none"
-                >
-                  <span className="mr-4 w-0.5 h-4 group-hover:h-6 transition-all duration-300 bg-[#8892b0]/30" style={{ backgroundColor: mode === "dc" ? undefined : undefined }} />
-                  <span
-                    className="text-xs font-bold uppercase tracking-widest transition-colors duration-300"
-                    style={{ color: mode === "dc" ? "#c4b5fd" : "#4fd1c5" }}
-                  >
-                    {mode === "dc" ? "🪶 AI 视角" : "🔷 东丞视角"}
-                  </span>
-                </button>
-              </li>
-            </motion.ul>
-          </AnimatePresence>
+              return (
+                <li key={item.href}>
+                  {showDcHeader && (
+                    <div className="mb-2 flex items-center gap-2">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#4fd1c5]/60">
+                        🔷 东丞
+                      </span>
+                      <div className="h-px flex-1 bg-[#233554]/50" />
+                    </div>
+                  )}
+                  {showYanHeader && (
+                    <div className="mt-4 mb-2 flex items-center gap-2">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c4b5fd]/60">
+                        🪶 晏
+                      </span>
+                      <div className="h-px flex-1 bg-[#233554]/50" />
+                    </div>
+                  )}
+                  {showSharedDivider && (
+                    <div className="my-3 h-px w-full bg-[#233554]/50" />
+                  )}
+                  {renderNavLink(item)}
+                </li>
+              );
+            })}
+          </ul>
         </nav>
       </div>
 
-      {/* Social Links — mode-aware */}
-      <AnimatePresence mode="wait">
-        {mode === "dc" ? (
-          <motion.ul
-            key="dc-social"
-            className="ml-1 mt-8 flex items-center gap-5"
-            aria-label="Social media"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
+      {/* Social Links — both personas side by side */}
+      <div className="ml-1 mt-8">
+        <div className="flex items-center gap-6">
+          {/* DC socials */}
+          <ul className="flex items-center gap-4" aria-label="东丞的社交链接">
             <li>
               <a className="block text-[#8892b0] transition-colors hover:text-[#4fd1c5]" href="mailto:zdclink@gmail.com" title="Email" aria-label="Email">
-                <Mail size={22} />
+                <Mail size={20} />
               </a>
             </li>
             <li>
               <a className="block text-[#8892b0] transition-colors hover:text-[#4fd1c5]" href="https://github.com/dario-github" target="_blank" rel="noreferrer noopener" title="GitHub" aria-label="GitHub">
-                <Github size={22} />
+                <Github size={20} />
               </a>
             </li>
             <li>
               <a className="block text-[#8892b0] transition-colors hover:text-[#4fd1c5]" href="https://www.linkedin.com/in/dariozhang" target="_blank" rel="noreferrer noopener" title="LinkedIn" aria-label="LinkedIn">
-                <Linkedin size={22} />
+                <Linkedin size={20} />
               </a>
             </li>
             <li>
               <a className="block text-[#8892b0] transition-colors hover:text-[#4fd1c5]" href="https://blog.dariolink.vercel.app" target="_blank" rel="noreferrer noopener" title="Blog" aria-label="Blog">
-                <Globe size={22} />
+                <Globe size={20} />
               </a>
             </li>
-          </motion.ul>
-        ) : (
-          <motion.ul
-            key="yan-social"
-            className="ml-1 mt-8 flex items-center gap-5"
-            aria-label="Yan's social"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
+          </ul>
+
+          {/* Divider */}
+          <div className="h-4 w-px bg-[#233554]" />
+
+          {/* Yan socials */}
+          <ul className="flex items-center gap-4" aria-label="晏的社交链接">
             <li>
               <a className="block text-[#8892b0] transition-colors hover:text-[#c4b5fd]" href="https://github.com/yanfeatherai" target="_blank" rel="noreferrer noopener" title="Yan's GitHub" aria-label="Yan's GitHub">
-                <Github size={22} />
+                <Github size={20} />
               </a>
             </li>
             <li>
               <a className="block text-[#8892b0] transition-colors hover:text-[#c4b5fd]" href="https://x.com/yanfeather" target="_blank" rel="noreferrer noopener" title="Yan's Twitter" aria-label="Yan's Twitter">
-                <XIcon size={22} />
+                <XIcon size={20} />
               </a>
             </li>
-          </motion.ul>
-        )}
-      </AnimatePresence>
+          </ul>
+        </div>
+      </div>
     </header>
   );
 }
