@@ -402,7 +402,7 @@ export default function Home() {
             🪶 田野笔记 Fieldnotes
           </YanSectionHeading>
           <div className="space-y-4">
-            {FIELDNOTES.map((note) => {
+            {FIELDNOTES.slice(0, 6).map((note) => {
               const style = CONFIDENCE_STYLES[note.confidence];
               return (
                 <Link
