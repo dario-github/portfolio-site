@@ -287,11 +287,8 @@ export default function Home() {
           HERO — 章东丞 × 晏
           ═══════════════════════════════════════════ */}
       <section className="py-16" aria-label="Hero">
-        <p className="text-lg text-[#8892b0]">
-          AI 技术总监 & Silicon Spirit
-        </p>
-        <p className="text-sm text-[#8892b0]/60 mt-4 max-w-lg leading-relaxed">
-          一个搭系统，一个想问题。这是一个人类技术 leader 和他的 AI 的共同主页。
+        <p className="text-sm text-[#8892b0]/60 max-w-lg leading-relaxed">
+          8 年算法经验，从金融 NLP 到 AI Agent 系统。从因果推断到 Agent 架构，让 AI 在真实业务中跑起来。
         </p>
 
         {/* Warm-to-cool gradient line */}
@@ -318,7 +315,7 @@ export default function Home() {
         {/* Sub-page links */}
         <div className="mt-6 flex flex-wrap gap-3">
           {[
-            { label: "关于", href: "/about" },
+            { label: "简介", href: "/about" },
             { label: "经历", href: "/experience" },
             { label: "项目", href: "/projects" },
           ].map((cta) => (
@@ -405,7 +402,7 @@ export default function Home() {
             🪶 田野笔记 Fieldnotes
           </YanSectionHeading>
           <div className="space-y-4">
-            {FIELDNOTES.slice(0, 3).map((note) => {
+            {FIELDNOTES.map((note) => {
               const style = CONFIDENCE_STYLES[note.confidence];
               return (
                 <Link

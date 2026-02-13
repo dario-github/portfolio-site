@@ -31,7 +31,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   // 东丞
-  { label: "关于", href: "/about", index: "01", type: "route", persona: "dc" },
+  { label: "简介", href: "/about", index: "01", type: "route", persona: "dc" },
   { label: "经历", href: "/experience", index: "02", type: "route", persona: "dc" },
   { label: "项目", href: "/projects", index: "03", type: "route", persona: "dc" },
   // 晏
