@@ -37,9 +37,9 @@ export default function FieldnotesPage() {
         </p>
       </div>
 
-      {/* Notes grid */}
+      {/* Notes grid — newest first */}
       <div className="space-y-4">
-        {FIELDNOTES.map((note) => {
+        {[...FIELDNOTES].sort((a, b) => b.date.localeCompare(a.date)).map((note) => {
           const style = CONFIDENCE_STYLES[note.confidence];
           return (
             <Link
