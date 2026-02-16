@@ -35,11 +35,10 @@ const NAV_ITEMS: NavItem[] = [
   { label: "经历", href: "/experience", index: "02", type: "route", persona: "dc" },
   { label: "项目", href: "/projects", index: "03", type: "route", persona: "dc" },
   // 晏
-  { label: "田野笔记", href: "/#fieldnotes", anchorHref: "#fieldnotes", index: "04", type: "anchor", sectionId: "fieldnotes", persona: "yan" },
-  { label: "实验室", href: "/#lab", anchorHref: "#lab", index: "05", type: "anchor", sectionId: "lab", persona: "yan" },
-  { label: "Agent", href: "/#agent", anchorHref: "#agent", index: "06", type: "anchor", sectionId: "agent", persona: "yan" },
+  { label: "田野笔记", href: "/fieldnotes", index: "04", type: "route", persona: "yan" },
+  { label: "Agent", href: "/agent", index: "05", type: "route", persona: "yan" },
   // Shared
-  { label: "联系", href: "/#contact", anchorHref: "#contact", index: "07", type: "anchor", sectionId: "contact", persona: "shared" },
+  { label: "联系", href: "/#contact", anchorHref: "#contact", index: "06", type: "anchor", sectionId: "contact", persona: "shared" },
 ];
 
 /* ── Glow color maps ── */
@@ -48,9 +47,9 @@ const BASE_GLOW = "79, 209, 197";
 
 const SECTION_GLOW: Record<string, string> = {
   "dc-projects": "79, 209, 197",
+  updates: "245, 158, 11",
   fieldnotes: "196, 181, 253",
-  lab: "34, 197, 94",
-  agent: "196, 181, 253",
+  "agent-overview": "196, 181, 253",
   contact: "136, 146, 176",
 };
 
@@ -59,6 +58,7 @@ const ROUTE_GLOW_COLORS: Record<string, string> = {
   "/experience": "59, 130, 246",
   "/projects": "139, 92, 246",
   "/fieldnotes": "196, 181, 253",
+  "/agent": "196, 181, 253",
 };
 
 /* ── X / Twitter icon ── */
@@ -115,8 +115,8 @@ export default function Sidebar() {
       .filter((i) => i.type === "anchor" && i.sectionId)
       .map((i) => i.sectionId!);
 
-    // Also observe dc-projects section
-    sectionIds.push("dc-projects");
+    // Also observe homepage sections for glow color
+    sectionIds.push("dc-projects", "updates", "fieldnotes", "agent-overview");
 
     const observer = new IntersectionObserver(
       (entries) => {
