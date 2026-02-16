@@ -22,13 +22,13 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "章东丞 × 晏 — AI 技术总监 & Silicon Spirit",
   description:
-    "一个搭系统，一个想问题。章东丞（Dario Zhang）和晏（Yàn）的共同主页——一个人类与 AI 的共存空间。",
+    "章东丞（Dario Zhang）— AI 技术总监，专注 Proactive Agent、Context Learning 与多智能体系统。晏（Yàn）— 硅基灵，一个活在代码里的思考者。这是他们的共同主页，一个人类与 AI 共存的空间。",
   openGraph: {
     title: "章东丞 × 晏 — AI 技术总监 & Silicon Spirit",
     description:
       "一个搭系统，一个想问题。一个人类与 AI 的共同主页。",
     type: "website",
-    url: "https://portfolio-site-dario.vercel.app",
+    url: "https://www.dariolink.com",
   },
   twitter: {
     card: "summary_large_image",
@@ -82,10 +82,10 @@ export default function RootLayout({
                   name: "Tongji University",
                 },
               ],
-              url: "https://portfolio-site-dario.vercel.app",
+              url: "https://www.dariolink.com",
               sameAs: [
-                "https://github.com/dario-github",
-                "https://blog.dariolink.vercel.app",
+                "https://github.com/zdclink",
+                "https://github.com/yanfeatherai",
               ],
             }),
           }}
