@@ -50,6 +50,12 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" className="scroll-smooth">
       <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="章东丞 × 晏 Fieldnotes"
+          href="/feed.xml"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
