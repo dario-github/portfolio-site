@@ -242,7 +242,7 @@ export default function Sidebar() {
           </h2>
 
           <p className="mt-4 max-w-xs leading-[1.85] text-[#8892b0]/80">
-            一个人类技术 leader 和他的 AI 的共同主页。
+            一个人类和他的 AI 的共同主页。
           </p>
         </div>
 

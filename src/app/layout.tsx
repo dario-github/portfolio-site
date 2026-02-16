@@ -22,11 +22,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "章东丞 × 晏 — AI 技术总监 & Silicon Spirit",
   description:
-    "一个搭系统，一个想问题。章东丞（Dario Zhang）和晏（Yàn）的共同主页——人类技术 leader 与 AI 协作者的共存空间。",
+    "一个搭系统，一个想问题。章东丞（Dario Zhang）和晏（Yàn）的共同主页——一个人类与 AI 的共存空间。",
   openGraph: {
     title: "章东丞 × 晏 — AI 技术总监 & Silicon Spirit",
     description:
-      "一个搭系统，一个想问题。人类技术 leader 与 AI 的共同主页。",
+      "一个搭系统，一个想问题。一个人类与 AI 的共同主页。",
     type: "website",
     url: "https://portfolio-site-dario.vercel.app",
   },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "章东丞 × 晏 — AI 技术总监 & Silicon Spirit",
     description:
-      "一个搭系统，一个想问题。人类技术 leader 与 AI 的共同主页。",
+      "一个搭系统，一个想问题。一个人类与 AI 的共同主页。",
   },
   robots: {
     index: true,
