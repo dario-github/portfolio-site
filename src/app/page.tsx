@@ -8,6 +8,7 @@ import { COMPETENCY_KEYWORDS } from "@/data/keywords";
 import { UPDATES, UPDATE_TYPE_CONFIG } from "@/data/updates";
 import { FEATURED_PROJECTS, OPENCLAW_SKILLS, CORE_LESSONS, METHODOLOGY } from "@/data/agent";
 import ZoneSectionHeading from "@/components/ZoneSectionHeading";
+import Subscribe from "@/components/Subscribe";
 
 /* ── Confidence styles (for fieldnotes) ── */
 const CONFIDENCE_STYLES: Record<string, { border: string; badge: string; label: string }> = {
@@ -245,6 +246,11 @@ export default function Home() {
             查看完整能力 →
           </Link>
         </section>
+
+        {/* Subscribe */}
+        <div className="pb-8">
+          <Subscribe />
+        </div>
 
         {/* Contact */}
         <section id="contact" className="scroll-mt-16 py-20 lg:scroll-mt-24" aria-label="联系">

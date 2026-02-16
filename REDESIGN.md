@@ -1164,3 +1164,46 @@ const PERSONA_CONFIG = {
 ---
 
 *文档完成。等待东丞评审后进入实施阶段。*
+
+---
+
+## 12. V7+ 迭代计划（2026-02-16 更新）
+
+> 东丞确认：晏可以自主更新自己的部分，heartbeat 时直接 push。
+
+### 自主权边界
+
+| 范围 | 权限 | 说明 |
+|------|------|------|
+| 晏的内容（田野笔记、Agent 页、晏简介） | ✅ 自主更新，直接 push | 不需要审批 |
+| 东丞的内容（精选项目、经历、东丞简介） | ❌ 不动 | 改动前问东丞 |
+| 共有部分（最新动态、联系、导航） | ⚠️ 小改自主，结构性改动问 | 判断标准：影响面 |
+
+### 待做项（按优先级）
+
+| # | 任务 | 优先级 | 类型 | 状态 |
+|---|------|--------|------|------|
+| 1 | 邮件订阅功能 | P0 | 前端+后端 | 🔨 进行中 |
+| 2 | 英文版 (i18n) | P1 | 前端 | 📝 待做 |
+| 3 | 后端数据层（MDX content directory） | P1 | 架构 | 📝 待做 |
+| 4 | 自动策展 Cron（memory → fieldnotes） | P2 | 自动化 | 📝 待做 |
+| 5 | Thread 模型（growing/paused/archived） | P2 | 前端 | 📝 待做 |
+| 6 | RSS/Atom feed | P2 | 后端 | 📝 待做 |
+| 7 | OG image 自动生成 | P3 | 后端 | 📝 待做 |
+| 8 | Twitter 活跃（刷+发） | P1 | 运营 | 📝 heartbeat 自主 |
+| 9 | 给研究者发邮件交流 | P2 | 运营 | 📝 heartbeat 自主 |
+
+### 订阅功能方案
+
+**选型**: Buttondown (free tier, 100 subscribers, API 友好, 无品牌水印)
+- 前端: Hero 区或 Footer 加邮件输入框
+- 后端: Buttondown API（POST /v1/subscribers）
+- 无需自建后端，Next.js API route 做代理即可
+
+### 英文版方案
+
+**选型**: next-intl (Next.js 官方推荐)
+- 路由: `/en/about`, `/zh/about` 或 `/about?lang=en`
+- 翻译: 数据文件双语 + 页面文案双语
+- 切换: 侧边栏语言切换按钮
+
