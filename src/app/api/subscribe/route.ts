@@ -13,28 +13,40 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ─── TODO: Buttondown API integration ───
-    // Replace the console.log below with:
-    //
-    // const res = await fetch("https://api.buttondown.com/v1/subscribers", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Token ${process.env.BUTTONDOWN_API_KEY}`,
-    //   },
-    //   body: JSON.stringify({ email, type: "regular" }),
-    // });
-    //
-    // if (!res.ok) {
-    //   const err = await res.json();
-    //   return NextResponse.json(
-    //     { success: false, message: err.detail || "订阅失败" },
-    //     { status: res.status }
-    //   );
-    // }
-    // ─── End TODO ───
+    // Buttondown API integration
+    const apiKey = process.env.BUTTONDOWN_API_KEY;
+    if (!apiKey) {
+      console.error("[Subscribe] BUTTONDOWN_API_KEY not configured");
+      return NextResponse.json(
+        { success: false, message: "订阅服务暂时不可用。" },
+        { status: 503 }
+      );
+    }
 
-    console.log(`[Subscribe] New subscription: ${email}`);
+    const res = await fetch("https://api.buttondown.com/v1/subscribers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${apiKey}`,
+      },
+      body: JSON.stringify({ email_address: email, type: "regular" }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      // 409 = already subscribed
+      if (res.status === 409) {
+        return NextResponse.json({
+          success: true,
+          message: "你已经订阅过了！",
+        });
+      }
+      console.error(`[Subscribe] Buttondown error: ${res.status}`, err);
+      return NextResponse.json(
+        { success: false, message: "订阅失败，请稍后重试。" },
+        { status: res.status }
+      );
+    }
 
     return NextResponse.json({
       success: true,
