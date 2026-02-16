@@ -1167,9 +1167,10 @@ const PERSONA_CONFIG = {
 
 ---
 
-## 12. V7+ 迭代计划（2026-02-16 更新）
+## 12. V7+ 迭代计划（2026-02-16 16:10 更新）
 
 > 东丞确认：晏可以自主更新自己的部分，heartbeat 时直接 push。
+> 架构决策：不做独立后端，Vercel 一把梭（serverless functions + 静态生成）。
 
 ### 自主权边界
 
@@ -1179,26 +1180,54 @@ const PERSONA_CONFIG = {
 | 东丞的内容（精选项目、经历、东丞简介） | ❌ 不动 | 改动前问东丞 |
 | 共有部分（最新动态、联系、导航） | ⚠️ 小改自主，结构性改动问 | 判断标准：影响面 |
 
+### 已完成 ✅
+
+| # | 任务 | 完成日期 | 说明 |
+|---|------|---------|------|
+| 1 | V7 主页重构 | 02-16 | 研究方向卡片 + 最新动态 + 精简布局，page.tsx 722→326 行 |
+| 2 | `/about` HR-ready 重设计 | 02-16 | 关键词标签云 + 研究方向 + 关键成就 + 职业摘要 |
+| 3 | `/agent` 新增页面 | 02-16 | 完整 34 技能 + 8 教训 + 4 方法论 |
+| 4 | 侧边栏统一路由导航 | 02-16 | 全路由，移除实验室，消除 route/anchor 不一致 |
+| 5 | 数据层拆分 | 02-16 | 7 个独立数据文件，解耦 page.tsx |
+| 6 | 邮件订阅功能 | 02-16 | Buttondown API 全链路打通，Vercel 环境变量已配置 |
+| 7 | "人类技术 leader" 措辞修正 | 02-16 | 全站改为"一个人类" |
+
 ### 待做项（按优先级）
 
-| # | 任务 | 优先级 | 类型 | 状态 |
-|---|------|--------|------|------|
-| 1 | 邮件订阅功能 | P0 | 前端+后端 | 🔨 进行中 |
-| 2 | 英文版 (i18n) | P1 | 前端 | 📝 待做 |
-| 3 | 后端数据层（MDX content directory） | P1 | 架构 | 📝 待做 |
-| 4 | 自动策展 Cron（memory → fieldnotes） | P2 | 自动化 | 📝 待做 |
-| 5 | Thread 模型（growing/paused/archived） | P2 | 前端 | 📝 待做 |
-| 6 | RSS/Atom feed | P2 | 后端 | 📝 待做 |
-| 7 | OG image 自动生成 | P3 | 后端 | 📝 待做 |
-| 8 | Twitter 活跃（刷+发） | P1 | 运营 | 📝 heartbeat 自主 |
-| 9 | 给研究者发邮件交流 | P2 | 运营 | 📝 heartbeat 自主 |
+| # | 任务 | 优先级 | 类型 | 依赖 | 状态 |
+|---|------|--------|------|------|------|
+| 1 | RSS/Atom feed (`/feed.xml`) | **P0** | API route | 无 | 📝 待做 |
+| 2 | Buttondown RSS-to-email 自动化 | **P0** | 配置 | #1 | 📝 待做 |
+| 3 | 英文版 (i18n) | **P1** | 前端 | 无 | 📝 待做 |
+| 4 | 田野笔记真实内容替换 | **P1** | 内容 | 无 | 📝 晏自主 |
+| 5 | 后端数据层（MDX content directory） | **P1** | 架构 | 无 | 📝 待做 |
+| 6 | 自动策展 Cron（memory → fieldnotes） | **P2** | 自动化 | #5 | 📝 待做 |
+| 7 | Thread 模型（growing/paused/archived） | **P2** | 前端 | #5 | 📝 待做 |
+| 8 | OG image 自动生成 | **P3** | API route | 无 | 📝 待做 |
+| 9 | Vercel Analytics 启用 | **P3** | 配置 | 无 | 📝 待做 |
+| 10 | Twitter 活跃（刷+发） | **P1** | 运营 | 无 | 📝 heartbeat 自主 |
+| 11 | 给研究者发邮件交流 | **P2** | 运营 | 无 | 📝 heartbeat 自主 |
 
-### 订阅功能方案
+### 架构决策记录
 
-**选型**: Buttondown (free tier, 100 subscribers, API 友好, 无品牌水印)
-- 前端: Hero 区或 Footer 加邮件输入框
-- 后端: Buttondown API（POST /v1/subscribers）
-- 无需自建后端，Next.js API route 做代理即可
+**Q: 要不要独立后端？**
+A: 不要。现阶段 Vercel serverless + 静态生成足够。
+
+| 需求 | 方案 | 说明 |
+|------|------|------|
+| 订阅 API | ✅ Next.js API route | `/api/subscribe` → Buttondown |
+| RSS feed | Next.js API route | `/api/rss` 或 `/feed.xml` |
+| 自动发邮件 | Buttondown RSS-to-email | 检测 RSS 新条目自动发 |
+| 内容更新 | 晏直接改 `src/data/*.ts` + git push | 零后端 |
+| 埋点统计 | Vercel Analytics | 免费 tier |
+| 未来 CMS | 届时上 Railway/Supabase | 现在不需要 |
+
+### RSS + 自动发邮件方案
+
+1. 创建 `/api/rss` API route，从 `FIELDNOTES` 数据生成 RSS XML
+2. 在 Buttondown Settings → RSS-to-email 填入 RSS URL
+3. Buttondown 自动检测新文章 → 发邮件给订阅者
+4. 完全自动化，不依赖晏在线
 
 ### 英文版方案
 
@@ -1206,4 +1235,12 @@ const PERSONA_CONFIG = {
 - 路由: `/en/about`, `/zh/about` 或 `/about?lang=en`
 - 翻译: 数据文件双语 + 页面文案双语
 - 切换: 侧边栏语言切换按钮
+
+### 田野笔记内容计划
+
+当前 18 篇笔记是种子内容。需要：
+- 从 `memory/` 提炼真实研究内容替换占位文本
+- 哲学链 Thread（12 步）可拆成多篇高质量笔记
+- 技术调研（《完蛋》分析、Context Engineering 等）可直接转化
+- 晏在 heartbeat 时自主更新，不需要东丞审批
 
