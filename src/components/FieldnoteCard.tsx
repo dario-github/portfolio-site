@@ -5,31 +5,61 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import type { FieldNote } from "@/data/fieldnotes";
 
-const CONFIDENCE_COLORS = {
+/* ── C5: Confidence color bars ── */
+const CONFIDENCE_BAR_COLORS = {
   high: "bg-[#22c55e]",
   medium: "bg-[#eab308]",
   speculative: "bg-[#a78bfa]",
 };
 
+/* ── C6: Lighter dot colors for revision indicator ── */
+const CONFIDENCE_DOT_COLORS = {
+  high: "bg-[#22c55e]/30",
+  medium: "bg-[#eab308]/30",
+  speculative: "bg-[#a78bfa]/30",
+};
+
 export default function FieldnoteCard({ note, index }: { note: FieldNote; index: number }) {
-  const accentColor = CONFIDENCE_COLORS[note.confidence];
+  const barColor = CONFIDENCE_BAR_COLORS[note.confidence];
+  const dotColor = CONFIDENCE_DOT_COLORS[note.confidence];
+  const dotCount = Math.min(note.revision, 5);
 
   return (
     <motion.div
+      layout
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.04 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.3, delay: index * 0.03 }}
     >
       <Link
         href={`/fieldnotes/${note.slug}`}
-        className="group block h-full rounded-lg border border-[#233554]/50 bg-[#112240]/30 p-5 transition-all hover:border-[#4fd1c5]/30 hover:bg-[#112240]/60 hover:shadow-lg hover:shadow-[#4fd1c5]/5"
+        className="group relative block h-full overflow-hidden rounded-lg border border-[#233554]/50 bg-[#112240]/30 pl-4 pr-5 py-5 transition-all hover:border-[#4fd1c5]/30 hover:bg-[#112240]/60 hover:shadow-lg hover:shadow-[#4fd1c5]/5"
       >
-        {/* Confidence indicator bar */}
+        {/* C5: Left confidence color bar */}
+        <div
+          className={`absolute left-0 top-0 bottom-0 w-0.5 transition-all duration-300 group-hover:w-[3px] group-hover:brightness-125 ${barColor}`}
+        />
+
+        {/* Meta row */}
         <div className="mb-3 flex items-center gap-2">
-          <div className={`h-1.5 w-1.5 rounded-full ${accentColor}`} />
           <span className="font-mono text-[10px] text-[#8892b0]/40">{note.date}</span>
-          <span className="font-mono text-[10px] text-[#8892b0]/30">v{note.revision}</span>
+
+          {/* C6: Revision indicator with dots */}
+          <span className="font-mono text-[10px] text-[#8892b0]/30 inline-flex items-center gap-1">
+            v{note.revision}
+            <span className="inline-flex items-center gap-0.5 ml-0.5">
+              {Array.from({ length: dotCount }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`inline-block h-1 w-1 rounded-full ${dotColor}`}
+                />
+              ))}
+              {note.revision > 5 && (
+                <span className="text-[8px] text-[#8892b0]/30 ml-px">+</span>
+              )}
+            </span>
+          </span>
         </div>
 
         {/* Title */}

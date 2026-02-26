@@ -37,6 +37,19 @@ body {
   background: #64ffda;
 }
 
+/* C4: Parallax grid background pattern */
+.bg-grid-pattern {
+  background-image: radial-gradient(circle, rgba(35, 53, 84, 0.5) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Hide grid on mobile */
+@media not (hover: hover) {
+  .bg-grid-pattern {
+    display: none;
+  }
+}
+
 /* MouseGlow: hide on touch-only devices */
 .mouse-glow {
   display: none;
