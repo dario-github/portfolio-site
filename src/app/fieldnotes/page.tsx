@@ -33,8 +33,8 @@ export default function FieldnotesPage() {
         </p>
       </div>
 
-      {/* Bento grid — newest first */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Grid — 2 columns, equal width */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {sorted.map((note, i) => (
           <FieldnoteCard key={note.slug} note={note} index={i} />
         ))}
