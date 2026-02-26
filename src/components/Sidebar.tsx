@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Mail, Github, Globe, Linkedin } from "lucide-react";
+import { Mail, Github, Globe, Linkedin, Search } from "lucide-react";
 import Link from "next/link";
 import { useGlow } from "./GlowContext";
 
@@ -282,6 +282,18 @@ export default function Sidebar() {
               );
             })}
           </ul>
+
+          {/* Search trigger */}
+          <button
+            onClick={() => window.dispatchEvent(new Event("open-command-palette"))}
+            className="mt-6 flex w-full items-center gap-3 rounded-lg border border-[#233554]/60 bg-[#112240]/40 px-3 py-2 text-sm text-[#8892b0]/60 transition-colors hover:border-[#4fd1c5]/30 hover:text-[#8892b0]"
+          >
+            <Search size={14} />
+            <span>搜索笔记…</span>
+            <kbd className="ml-auto rounded border border-[#233554] bg-[#0a192f] px-1.5 py-0.5 font-mono text-[10px] text-[#8892b0]/40">
+              ⌘K
+            </kbd>
+          </button>
         </nav>
       </div>
 

@@ -40,6 +40,13 @@ export default function CommandPalette() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [open]);
 
+  // Allow external trigger via custom event
+  useEffect(() => {
+    const handler = () => setOpen(true);
+    window.addEventListener("open-command-palette", handler);
+    return () => window.removeEventListener("open-command-palette", handler);
+  }, []);
+
   const navigate = useCallback(
     (href: string) => {
       setOpen(false);
