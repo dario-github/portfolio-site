@@ -36,3 +36,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #64ffda;
 }
+
+/* MouseGlow: hide on touch-only devices */
+.mouse-glow {
+  display: none;
+}
+@media (hover: hover) {
+  .mouse-glow {
+    display: block;
+  }
+}

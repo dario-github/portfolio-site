@@ -6,6 +6,7 @@ import { GlowProvider } from "@/components/GlowContext";
 import MouseGlow from "@/components/MouseGlow";
 import Sidebar from "@/components/Sidebar";
 import TerminalOverlay from "@/components/Terminal";
+import CommandPalette from "@/components/CommandPalette";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -147,6 +148,7 @@ export default function RootLayout({
             </div>
           </div>
           <TerminalOverlay />
+          <CommandPalette />
         </GlowProvider>
       </body>
     </html>
