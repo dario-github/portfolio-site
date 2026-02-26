@@ -7,7 +7,7 @@ export interface ResearchDirection {
   brief: string;
   tags: string[];
   icon: string;
-  color: "teal" | "blue" | "purple";
+  color: "teal" | "blue" | "purple" | "amber";
 }
 
 export const RESEARCH_DIRECTIONS: ResearchDirection[] = [
@@ -34,5 +34,13 @@ export const RESEARCH_DIRECTIONS: ResearchDirection[] = [
     tags: ["MemBrain", "Progressive Injection", "Context Isolation"],
     icon: "🧠",
     color: "purple",
+  },
+  {
+    title: "AI 安全与自主性",
+    brief:
+      "Agent 的安全边界、自主权设计、行为约束机制——从 RSP 政策到工程实践",
+    tags: ["AI Safety", "RSP", "Autonomy", "Behavioral Constraints"],
+    icon: "🛡️",
+    color: "amber",
   },
 ];

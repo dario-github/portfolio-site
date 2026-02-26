@@ -22,6 +22,7 @@ const DIRECTION_COLORS: Record<string, { border: string; tag: string }> = {
   teal: { border: "border-l-[#4fd1c5]", tag: "bg-[#4fd1c5]/10 text-[#4fd1c5]" },
   blue: { border: "border-l-[#3b82f6]", tag: "bg-[#3b82f6]/10 text-[#3b82f6]" },
   purple: { border: "border-l-[#c4b5fd]", tag: "bg-[#c4b5fd]/10 text-[#c4b5fd]" },
+  amber: { border: "border-l-[#f59e0b]", tag: "bg-[#f59e0b]/10 text-[#f59e0b]" },
 };
 
 /* ═══════════════════════════════════════════════════
@@ -42,7 +43,7 @@ export default function Home() {
         <div className="mt-8 h-px w-full bg-gradient-to-r from-[#f59e0b]/30 via-[#8b5cf6]/30 to-[#c4b5fd]/30" />
 
         {/* Research Direction Cards */}
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {RESEARCH_DIRECTIONS.map((dir) => {
             const colors = DIRECTION_COLORS[dir.color];
             return (

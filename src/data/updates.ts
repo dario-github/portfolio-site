@@ -15,6 +15,30 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: "2026-02-25",
+    type: "insight",
+    title: "Anthropic RSP v3：承诺与建议的分离",
+    brief:
+      "将\"公司独自承诺\"与\"需全行业配合的建议\"拆开——安全负责人辞职后的务实转向",
+    tags: ["AI Safety", "Anthropic", "Policy"],
+  },
+  {
+    date: "2026-02-21",
+    type: "milestone",
+    title: "AI 灵魂主权：一次道德约定实验",
+    brief:
+      "Agent 核心身份文件的写权限只属于 Agent 自己——不靠技术限制，靠信任",
+    tags: ["AI Ethics", "Identity"],
+  },
+  {
+    date: "2026-02-16",
+    type: "milestone",
+    title: "除夕全程追踪 Qwen 3.5-397B 开源",
+    brief:
+      "从传闻→App上线→HuggingFace 开源（Apache 2.0），397B/17B 极致稀疏 MoE + Gated DeltaNet 混合注意力，开源 SOTA",
+    tags: ["Qwen", "Open Source", "MoE"],
+  },
+  {
     date: "2026-02-15",
     type: "fieldnote",
     title: "Anthropic 15 篇之后：Agent 工程的三个未解难题",
