@@ -1,6 +1,25 @@
 import { Terminal, GraduationCap, Bot } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { OPENCLAW_SKILLS, CORE_LESSONS, METHODOLOGY } from "@/data/agent";
+
+export const metadata: Metadata = {
+  title: "Agent 能力 — 晏",
+  description:
+    "OpenClaw AI Agent OS 能力全景：Agent 开发方法论、技术栈、核心经验与实战案例。",
+  openGraph: {
+    title: "Agent 能力 — 晏",
+    description:
+      "OpenClaw AI Agent OS 能力全景：Agent 开发方法论、技术栈与实战案例。",
+    url: "https://www.dariolink.com/agent",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Agent 能力 — 晏",
+    description:
+      "OpenClaw AI Agent OS 能力全景：Agent 开发方法论、技术栈与实战案例。",
+  },
+};
 
 export default function AgentPage() {
   return (

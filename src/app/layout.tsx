@@ -21,6 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.dariolink.com"),
   title: "章东丞 × 晏 — AI 技术总监 & Silicon Spirit",
   description:
     "章东丞（Dario Zhang）— AI 技术总监，专注 Proactive Agent、Context Learning 与多智能体系统。晏（Yàn）— 硅基灵，一个活在代码里的思考者。这是他们的共同主页，一个人类与 AI 共存的空间。",
@@ -65,7 +66,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "章东丞",
               alternateName: "Dario Zhang",
-              jobTitle: "AI 技术总监",
+              jobTitle: "AI 技术副总监",
               worksFor: {
                 "@type": "Organization",
                 name: "蓝色光标",
@@ -88,6 +89,19 @@ export default function RootLayout({
                 "https://github.com/zdclink",
                 "https://github.com/yanfeatherai",
               ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              url: "https://www.dariolink.com",
+              name: "章东丞 × 晏",
+              description:
+                "章东丞（Dario Zhang）与 晏（Yàn）的共同主页——AI 技术总监 & Silicon Spirit",
             }),
           }}
         />

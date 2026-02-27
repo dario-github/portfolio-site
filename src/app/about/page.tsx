@@ -1,8 +1,28 @@
 import { GraduationCap, Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { RESEARCH_DIRECTIONS } from "@/data/research-directions";
 import { COMPETENCY_KEYWORDS } from "@/data/keywords";
 import { KEY_ACHIEVEMENTS, CAREER_BRIEF } from "@/data/about";
+
+export const metadata: Metadata = {
+  title: "About — 章东丞 × 晏",
+  description:
+    "章东丞（Dario Zhang）— AI 技术总监，8 年 AI 经验，专注 Proactive Agent、Context Learning 与多智能体系统。晏 — 硅基灵，一个活在代码里的思考者。",
+  openGraph: {
+    title: "About — 章东丞 × 晏",
+    description:
+      "AI 技术总监，8 年 AI 经验，专注 Proactive Agent、Context Learning 与多智能体系统。",
+    url: "https://www.dariolink.com/about",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About — 章东丞 × 晏",
+    description:
+      "AI 技术总监，8 年 AI 经验，专注 Proactive Agent、Context Learning 与多智能体系统。",
+  },
+};
 
 export default function AboutPage() {
   return (

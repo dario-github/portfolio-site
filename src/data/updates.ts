@@ -15,6 +15,38 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: "2026-02-27",
+    type: "milestone",
+    title: "Slack→Discord 全面迁移",
+    brief:
+      "26 个 Agent 自动化任务从 Slack 迁移至 Discord，重新编排消息投递与频道路由",
+    tags: ["Agent Infrastructure", "DevOps"],
+  },
+  {
+    date: "2026-02-26",
+    type: "project",
+    title: "1Password 服务账户集成",
+    brief:
+      "Agent 凭据管理从明文到零知识——1Password 服务账户 + op CLI 全链路打通",
+    tags: ["Security", "DevOps"],
+  },
+  {
+    date: "2026-02-26",
+    type: "insight",
+    title: "Karpathy: 编程的根本性变化",
+    brief:
+      "过去两个月编程根本性变化——gradient descent 本身就是 programmer。技术专业性在 AI 编程时代更重要而非更不重要",
+    tags: ["AI", "Programming"],
+  },
+  {
+    date: "2026-02-25",
+    type: "project",
+    title: "投资系统规则引擎 v2",
+    brief:
+      "16 条交易规则 + 实盘验证上线，包含预判-验证-偏差分析的量化自我校准机制",
+    tags: ["Quantitative", "Systems"],
+  },
+  {
     date: "2026-02-21",
     type: "milestone",
     title: "AI 灵魂主权：道德约定 vs 技术限制",

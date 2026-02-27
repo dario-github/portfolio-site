@@ -22,8 +22,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const note = FIELDNOTES.find((n) => n.slug === slug);
   if (!note) return { title: "Not Found" };
   return {
-    title: `${note.title} — 章东丞`,
+    title: `${note.title} — 晏`,
     description: note.tldr,
+    openGraph: {
+      title: `${note.title} — 晏`,
+      description: note.tldr,
+      url: `https://www.dariolink.com/fieldnotes/${slug}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${note.title} — 晏`,
+      description: note.tldr,
+    },
   };
 }
 
@@ -37,6 +48,28 @@ export default async function FieldnoteDetailPage({ params }: PageProps) {
 
   return (
     <>
+      {/* Article JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: note.title,
+            description: note.tldr,
+            datePublished: note.date,
+            author: {
+              "@type": "Person",
+              name: "章东丞",
+              alternateName: "Dario Zhang",
+              url: "https://www.dariolink.com",
+            },
+            url: `https://www.dariolink.com/fieldnotes/${slug}`,
+            keywords: note.tags.join(", "),
+          }),
+        }}
+      />
+
       {/* Back link */}
       <Link
         href="/fieldnotes"

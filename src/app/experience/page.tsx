@@ -1,6 +1,25 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import SectionHeading from "@/components/SectionHeading";
 import { TechTags } from "@/components/SectionHeading";
+
+export const metadata: Metadata = {
+  title: "经历 — 章东丞",
+  description:
+    "章东丞的职业经历：蓝色光标 AI 技术总监，从 0 搭建企业级 AI 中台 Smart Canvas，支撑 1600+ 用户、2000+ Agent、日均 4000+ 调用。",
+  openGraph: {
+    title: "经历 — 章东丞",
+    description:
+      "AI 技术总监，企业级 AI 中台 Smart Canvas，1600+ 用户、2000+ Agent。",
+    url: "https://www.dariolink.com/experience",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "经历 — 章东丞",
+    description:
+      "AI 技术总监，企业级 AI 中台 Smart Canvas，1600+ 用户、2000+ Agent。",
+  },
+};
 
 /* ── Data ── */
 
