@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import type { FieldNote } from "@/data/fieldnotes";
+import { useDict } from "@/i18n/DictionaryContext";
 
 /* ── C5: Confidence color bars ── */
 const CONFIDENCE_BAR_COLORS = {
@@ -20,6 +21,7 @@ const CONFIDENCE_DOT_COLORS = {
 };
 
 export default function FieldnoteCard({ note, index }: { note: FieldNote; index: number }) {
+  const { locale } = useDict();
   const barColor = CONFIDENCE_BAR_COLORS[note.confidence];
   const dotColor = CONFIDENCE_DOT_COLORS[note.confidence];
   const dotCount = Math.min(note.revision, 5);
@@ -33,7 +35,7 @@ export default function FieldnoteCard({ note, index }: { note: FieldNote; index:
       transition={{ duration: 0.3, delay: index * 0.03 }}
     >
       <Link
-        href={`/fieldnotes/${note.slug}`}
+        href={`/${locale}/fieldnotes/${note.slug}`}
         className="group relative block h-full overflow-hidden rounded-lg border border-[#233554]/50 bg-[#112240]/30 pl-4 pr-5 py-5 transition-all hover:border-[#4fd1c5]/30 hover:bg-[#112240]/60 hover:shadow-lg hover:shadow-[#4fd1c5]/5"
       >
         {/* C5: Left confidence color bar */}

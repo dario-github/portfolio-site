@@ -1,24 +1,29 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FIELDNOTES, FIELDNOTE_CONTENT } from "@/data/fieldnotes";
+import { getDictionary } from "@/i18n/get-dictionary";
+import { locales } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 import type { Metadata } from "next";
 
-const CONFIDENCE_STYLES = {
-  high: { badge: "bg-[#22c55e]/10 text-[#22c55e] border-[#22c55e]/20", label: "🟢 高确信" },
-  medium: { badge: "bg-[#eab308]/10 text-[#eab308] border-[#eab308]/20", label: "🟡 中确信" },
-  speculative: { badge: "bg-[#a78bfa]/10 text-[#a78bfa] border-[#a78bfa]/20", label: "🟣 推测性" },
+const CONFIDENCE_STYLES_BASE = {
+  high: { badge: "bg-[#22c55e]/10 text-[#22c55e] border-[#22c55e]/20" },
+  medium: { badge: "bg-[#eab308]/10 text-[#eab308] border-[#eab308]/20" },
+  speculative: { badge: "bg-[#a78bfa]/10 text-[#a78bfa] border-[#a78bfa]/20" },
 };
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return FIELDNOTES.map((note) => ({ slug: note.slug }));
+  return locales.flatMap((locale) =>
+    FIELDNOTES.map((note) => ({ locale, slug: note.slug }))
+  );
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const note = FIELDNOTES.find((n) => n.slug === slug);
   if (!note) return { title: "Not Found" };
   return {
@@ -27,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${note.title} — 晏`,
       description: note.tldr,
-      url: `https://www.dariolink.com/fieldnotes/${slug}`,
+      url: `https://www.dariolink.com/${locale}/fieldnotes/${slug}`,
       type: "article",
     },
     twitter: {
@@ -39,12 +44,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function FieldnoteDetailPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  const dict = await getDictionary(locale as Locale);
   const note = FIELDNOTES.find((n) => n.slug === slug);
   if (!note) notFound();
 
   const paragraphs = FIELDNOTE_CONTENT[slug] || [];
-  const style = CONFIDENCE_STYLES[note.confidence];
+  const styleBase = CONFIDENCE_STYLES_BASE[note.confidence];
+
+  const confidenceLabels: Record<string, string> = {
+    high: dict.fieldnotesPage.filterHigh,
+    medium: dict.fieldnotesPage.filterMedium,
+    speculative: dict.fieldnotesPage.filterSpeculative,
+  };
+  const confidenceLabel = confidenceLabels[note.confidence];
 
   return (
     <>
@@ -64,7 +77,7 @@ export default async function FieldnoteDetailPage({ params }: PageProps) {
               alternateName: "Dario Zhang",
               url: "https://www.dariolink.com",
             },
-            url: `https://www.dariolink.com/fieldnotes/${slug}`,
+            url: `https://www.dariolink.com/${locale}/fieldnotes/${slug}`,
             keywords: note.tags.join(", "),
           }),
         }}
@@ -72,10 +85,10 @@ export default async function FieldnoteDetailPage({ params }: PageProps) {
 
       {/* Back link */}
       <Link
-        href="/fieldnotes"
+        href={`/${locale}/fieldnotes`}
         className="inline-flex items-center gap-1 text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 transition-colors mb-8"
       >
-        ← 田野笔记
+        {dict.fieldnotesPage.backToFieldnotes}
       </Link>
 
       {/* Title */}
@@ -85,15 +98,15 @@ export default async function FieldnoteDetailPage({ params }: PageProps) {
 
       {/* Meta row */}
       <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
-        <span className={`rounded-full border px-3 py-1 text-xs font-medium ${style.badge}`}>
-          {style.label}
+        <span className={`rounded-full border px-3 py-1 text-xs font-medium ${styleBase.badge}`}>
+          {confidenceLabel}
         </span>
         <span className="rounded-full bg-[#8892b0]/10 px-3 py-1 text-xs text-[#8892b0]">
           v{note.revision}
         </span>
         <span className="text-[#8892b0]/60 font-mono text-xs">{note.date}</span>
         <span className="text-[#8892b0]/50 font-mono text-xs">
-          {note.sources} 个一手信源
+          {dict.fieldnotesPage.sourcesCount.replace("{count}", String(note.sources))}
         </span>
       </div>
 
@@ -131,7 +144,7 @@ export default async function FieldnoteDetailPage({ params }: PageProps) {
       {note.references.length > 0 && (
         <div className="mt-12 pt-8 border-t border-[#233554]">
           <h2 className="text-sm font-semibold uppercase tracking-widest text-[#ccd6f6] mb-4">
-            参考文献
+            {dict.fieldnotesPage.references}
           </h2>
           <ol className="space-y-2 list-decimal pl-5">
             {note.references.map((ref, i) => (
@@ -157,7 +170,7 @@ export default async function FieldnoteDetailPage({ params }: PageProps) {
               <div>
                 {prev && (
                   <Link
-                    href={`/fieldnotes/${prev.slug}`}
+                    href={`/${locale}/fieldnotes/${prev.slug}`}
                     className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 transition-colors"
                   >
                     ← {prev.title.length > 20 ? prev.title.slice(0, 20) + "…" : prev.title}
@@ -167,7 +180,7 @@ export default async function FieldnoteDetailPage({ params }: PageProps) {
               <div>
                 {next && (
                   <Link
-                    href={`/fieldnotes/${next.slug}`}
+                    href={`/${locale}/fieldnotes/${next.slug}`}
                     className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 transition-colors"
                   >
                     {next.title.length > 20 ? next.title.slice(0, 20) + "…" : next.title} →

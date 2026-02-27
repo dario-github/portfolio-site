@@ -5,20 +5,22 @@ import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
 import { FIELDNOTES } from "@/data/fieldnotes";
 import FieldnoteCard from "@/components/FieldnoteCard";
+import { useDict } from "@/i18n/DictionaryContext";
 
 type ConfidenceFilter = "all" | "high" | "medium" | "speculative";
 type SortOrder = "newest" | "oldest";
 
-const FILTER_OPTIONS: { value: ConfidenceFilter; label: string; activeClass: string }[] = [
-  { value: "all", label: "全部", activeClass: "border-[#4fd1c5]/60 bg-[#4fd1c5]/10 text-[#4fd1c5]" },
-  { value: "high", label: "🟢 高确信", activeClass: "border-[#22c55e]/60 bg-[#22c55e]/10 text-[#22c55e]" },
-  { value: "medium", label: "🟡 中确信", activeClass: "border-[#eab308]/60 bg-[#eab308]/10 text-[#eab308]" },
-  { value: "speculative", label: "🟣 推测性", activeClass: "border-[#a78bfa]/60 bg-[#a78bfa]/10 text-[#a78bfa]" },
-];
-
 export default function FieldnotesPage() {
+  const { dict, locale } = useDict();
   const [filter, setFilter] = useState<ConfidenceFilter>("all");
   const [sort, setSort] = useState<SortOrder>("newest");
+
+  const FILTER_OPTIONS: { value: ConfidenceFilter; label: string; activeClass: string }[] = [
+    { value: "all", label: dict.fieldnotesPage.filterAll, activeClass: "border-[#4fd1c5]/60 bg-[#4fd1c5]/10 text-[#4fd1c5]" },
+    { value: "high", label: dict.fieldnotesPage.filterHigh, activeClass: "border-[#22c55e]/60 bg-[#22c55e]/10 text-[#22c55e]" },
+    { value: "medium", label: dict.fieldnotesPage.filterMedium, activeClass: "border-[#eab308]/60 bg-[#eab308]/10 text-[#eab308]" },
+    { value: "speculative", label: dict.fieldnotesPage.filterSpeculative, activeClass: "border-[#a78bfa]/60 bg-[#a78bfa]/10 text-[#a78bfa]" },
+  ];
 
   const filtered = useMemo(() => {
     let notes = [...FIELDNOTES];
@@ -38,21 +40,20 @@ export default function FieldnotesPage() {
       {/* Header */}
       <div className="mb-8">
         <Link
-          href="/"
+          href={`/${locale}`}
           className="inline-flex items-center gap-1 text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 transition-colors mb-6"
         >
-          ← 返回首页
+          {dict.common.back}
         </Link>
         <h1 className="text-3xl font-bold text-[#ccd6f6]">
-          田野笔记{" "}
-          <span className="text-[#8892b0] font-light text-xl">Fieldnotes</span>
+          {dict.fieldnotesPage.title}{" "}
+          <span className="text-[#8892b0] font-light text-xl">{dict.fieldnotesPage.subtitle}</span>
         </h1>
         <p className="mt-3 max-w-lg text-[#8892b0] leading-relaxed">
-          来自 AI Agent 开发、Context Engineering、因果推断的一手实践记录。
-          不是教程，是带着具体工程约束的技术判断。
+          {dict.fieldnotesPage.desc}
         </p>
         <p className="mt-2 text-sm text-[#8892b0]/50 font-mono">
-          {FIELDNOTES.length} 篇笔记 · 持续更新
+          {dict.fieldnotesPage.count.replace("{count}", String(FIELDNOTES.length))}
         </p>
       </div>
 
@@ -87,7 +88,7 @@ export default function FieldnotesPage() {
             }
             className="shrink-0 rounded-full border border-[#233554]/50 px-3 py-1 text-xs font-mono text-[#8892b0]/60 transition-all hover:border-[#8892b0]/30 hover:text-[#8892b0]"
           >
-            {sort === "newest" ? "↓ 最新" : "↑ 最早"}
+            {sort === "newest" ? dict.fieldnotesPage.sortNewest : dict.fieldnotesPage.sortOldest}
           </button>
         </div>
       </div>
@@ -104,7 +105,7 @@ export default function FieldnotesPage() {
       {/* Empty state */}
       {filtered.length === 0 && (
         <div className="py-20 text-center text-sm text-[#8892b0]/50">
-          没有符合筛选条件的笔记
+          {dict.fieldnotesPage.emptyState}
         </div>
       )}
     </>

@@ -1,26 +1,17 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Mail, Github, Globe, Linkedin, Search } from "lucide-react";
 import Link from "next/link";
 import { useGlow } from "./GlowContext";
-
-/* ── Cycling taglines (dual-soul) ── */
-
-const CYCLING_TAGLINES = [
-  "一个搭系统，一个想问题",
-  "碳基 × 硅基",
-  "From Reasoning to Being",
-  "AI 技术总监 & Silicon Spirit",
-  "同一个空间里的两种安静",
-];
+import { useDict } from "@/i18n/DictionaryContext";
 
 /* ── Nav definitions (unified) ── */
 
 interface NavItem {
-  label: string;
+  navKey: string;
   href: string;
   anchorHref?: string;
   index: string;
@@ -31,14 +22,14 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   // 东丞
-  { label: "简介", href: "/about", index: "01", type: "route", persona: "dc" },
-  { label: "经历", href: "/experience", index: "02", type: "route", persona: "dc" },
-  { label: "项目", href: "/projects", index: "03", type: "route", persona: "dc" },
+  { navKey: "about", href: "/about", index: "01", type: "route", persona: "dc" },
+  { navKey: "experience", href: "/experience", index: "02", type: "route", persona: "dc" },
+  { navKey: "projects", href: "/projects", index: "03", type: "route", persona: "dc" },
   // 晏
-  { label: "田野笔记", href: "/fieldnotes", index: "04", type: "route", persona: "yan" },
-  { label: "Agent", href: "/agent", index: "05", type: "route", persona: "yan" },
+  { navKey: "fieldnotes", href: "/fieldnotes", index: "04", type: "route", persona: "yan" },
+  { navKey: "agent", href: "/agent", index: "05", type: "route", persona: "yan" },
   // Shared
-  { label: "联系", href: "/#contact", anchorHref: "#contact", index: "06", type: "anchor", sectionId: "contact", persona: "shared" },
+  { navKey: "contact", href: "/#contact", anchorHref: "#contact", index: "06", type: "anchor", sectionId: "contact", persona: "shared" },
 ];
 
 /* ── Glow color maps ── */
@@ -70,27 +61,39 @@ function XIcon({ size = 16 }: { size?: number }) {
   );
 }
 
+/* ── Helper: strip locale prefix from pathname ── */
+function stripLocale(pathname: string, locale: string): string {
+  const prefix = `/${locale}`;
+  if (pathname === prefix) return "/";
+  if (pathname.startsWith(prefix + "/")) return pathname.slice(prefix.length);
+  return pathname;
+}
+
 /* ── Component ── */
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const isHomepage = pathname === "/";
+  const router = useRouter();
+  const { dict, locale } = useDict();
   const { setGlowColor } = useGlow();
 
+  const isHomepage = pathname === `/${locale}`;
+
+  const taglines = dict.sidebar.taglines as string[];
   const [taglineIndex, setTaglineIndex] = useState(0);
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   // Tagline cycling
   useEffect(() => {
     const timer = setInterval(() => {
-      setTaglineIndex((prev) => (prev + 1) % CYCLING_TAGLINES.length);
+      setTaglineIndex((prev) => (prev + 1) % taglines.length);
     }, 3500);
     return () => clearInterval(timer);
-  }, []);
+  }, [taglines.length]);
 
   const handleNameClick = useCallback(() => {
-    setTaglineIndex((prev) => (prev + 1) % CYCLING_TAGLINES.length);
-  }, []);
+    setTaglineIndex((prev) => (prev + 1) % taglines.length);
+  }, [taglines.length]);
 
   // Set base glow color
   useEffect(() => {
@@ -102,9 +105,10 @@ export default function Sidebar() {
   // Scroll spy (homepage) + route-based glow (sub-pages)
   useEffect(() => {
     if (!isHomepage) {
+      const strippedPath = stripLocale(pathname, locale);
       setGlowColor(
-        ROUTE_GLOW_COLORS[pathname] ||
-        Object.entries(ROUTE_GLOW_COLORS).find(([k]) => pathname.startsWith(k))?.[1] ||
+        ROUTE_GLOW_COLORS[strippedPath] ||
+        Object.entries(ROUTE_GLOW_COLORS).find(([k]) => strippedPath.startsWith(k))?.[1] ||
         BASE_GLOW
       );
       setActiveSection(null);
@@ -137,11 +141,12 @@ export default function Sidebar() {
     });
 
     return () => observer.disconnect();
-  }, [isHomepage, pathname, setGlowColor]);
+  }, [isHomepage, pathname, locale, setGlowColor]);
 
   const isActive = (item: NavItem) => {
+    const localizedHref = `/${locale}${item.href}`;
     if (item.type === "route") {
-      return pathname === item.href;
+      return pathname === localizedHref;
     }
     if (item.type === "anchor" && isHomepage) {
       return activeSection === item.sectionId;
@@ -155,6 +160,13 @@ export default function Sidebar() {
     return "#8892b0";
   };
 
+  /* ── Language switcher ── */
+  const handleLocaleSwitch = () => {
+    const newLocale = locale === "zh" ? "en" : "zh";
+    const strippedPath = stripLocale(pathname, locale);
+    router.push(`/${newLocale}${strippedPath === "/" ? "" : strippedPath}`);
+  };
+
   /* ── Render nav link ── */
   const renderNavLink = (item: NavItem) => {
     const active = isActive(item);
@@ -163,6 +175,8 @@ export default function Sidebar() {
       active ? `h-6` : `h-4 group-hover:h-6`
     }`;
     const textClass = `text-xs font-bold uppercase tracking-widest transition-colors duration-300`;
+
+    const label = (dict.nav as Record<string, string>)[item.navKey] ?? item.navKey;
 
     const inner = (
       <>
@@ -174,14 +188,14 @@ export default function Sidebar() {
           className={textClass}
           style={{ color: active ? accentColor : "#8892b0" }}
         >
-          {item.index}. {item.label}
+          {item.index}. {label}
         </span>
       </>
     );
 
     if (item.type === "route") {
       return (
-        <Link className="group flex items-center py-3" href={item.href}>
+        <Link className="group flex items-center py-3" href={`/${locale}${item.href}`}>
           {inner}
         </Link>
       );
@@ -197,7 +211,7 @@ export default function Sidebar() {
     }
 
     return (
-      <a className="group flex items-center py-3" href={item.href}>
+      <a className="group flex items-center py-3" href={`/${locale}${item.href}`}>
         {inner}
       </a>
     );
@@ -210,18 +224,18 @@ export default function Sidebar() {
         <div>
           <h1 className="text-4xl font-bold tracking-tight text-[#ccd6f6] sm:text-5xl">
             <a
-              href="/"
+              href={`/${locale}`}
               onClick={(e) => {
                 e.preventDefault();
                 handleNameClick();
               }}
               className="cursor-pointer transition-colors"
             >
-              <span className="hover:text-[#4fd1c5] transition-colors">章东丞</span>
+              <span className="hover:text-[#4fd1c5] transition-colors">{dict.sidebar.name1}</span>
               {" "}
               <span className="text-[#4fd1c5] font-light text-3xl sm:text-4xl">×</span>
               {" "}
-              <span className="hover:text-[#c4b5fd] transition-colors">晏</span>
+              <span className="hover:text-[#c4b5fd] transition-colors">{dict.sidebar.name2}</span>
             </a>
           </h1>
 
@@ -236,13 +250,13 @@ export default function Sidebar() {
                 transition={{ duration: 0.3 }}
                 className="inline-block"
               >
-                {CYCLING_TAGLINES[taglineIndex]}
+                {taglines[taglineIndex]}
               </motion.span>
             </AnimatePresence>
           </h2>
 
           <p className="mt-4 max-w-xs leading-[1.85] text-[#8892b0]/80">
-            一个人类和他的 AI 的共同主页。
+            {dict.sidebar.subtitle}
           </p>
         </div>
 
@@ -261,7 +275,7 @@ export default function Sidebar() {
                   {showDcHeader && (
                     <div className="mb-2 flex items-center gap-2">
                       <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#4fd1c5]/60">
-                        🔷 东丞
+                        {dict.nav.dcLabel}
                       </span>
                       <div className="h-px flex-1 bg-[#233554]/50" />
                     </div>
@@ -269,7 +283,7 @@ export default function Sidebar() {
                   {showYanHeader && (
                     <div className="mt-4 mb-2 flex items-center gap-2">
                       <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c4b5fd]/60">
-                        🪶 晏
+                        {dict.nav.yanLabel}
                       </span>
                       <div className="h-px flex-1 bg-[#233554]/50" />
                     </div>
@@ -289,7 +303,7 @@ export default function Sidebar() {
             className="mt-6 flex w-full items-center gap-3 rounded-lg border border-[#233554]/60 bg-[#112240]/40 px-3 py-2 text-sm text-[#8892b0]/60 transition-colors hover:border-[#4fd1c5]/30 hover:text-[#8892b0]"
           >
             <Search size={14} />
-            <span>搜索笔记…</span>
+            <span>{dict.nav.searchPlaceholder}</span>
             <kbd className="ml-auto rounded border border-[#233554] bg-[#0a192f] px-1.5 py-0.5 font-mono text-[10px] text-[#8892b0]/40">
               ⌘K
             </kbd>
@@ -297,11 +311,22 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      {/* Social Links — both personas side by side */}
+      {/* Language switcher + Social Links */}
       <div className="ml-1 mt-8">
+        {/* Language switcher */}
+        <div className="mb-4">
+          <button
+            onClick={handleLocaleSwitch}
+            className="rounded-full border border-[#233554] px-3 py-1 text-xs font-mono text-[#8892b0] hover:border-[#4fd1c5] hover:text-[#4fd1c5] transition-colors"
+          >
+            {locale === "zh" ? "EN" : "中"}
+          </button>
+        </div>
+
+        {/* Social Links — both personas side by side */}
         <div className="flex items-center gap-6">
           {/* DC socials */}
-          <ul className="flex items-center gap-4" aria-label="东丞的社交链接">
+          <ul className="flex items-center gap-4" aria-label={dict.sidebar.dcSocials}>
             <li>
               <a className="block text-[#8892b0] transition-colors hover:text-[#4fd1c5]" href="mailto:zdclink@gmail.com" title="Email" aria-label="Email">
                 <Mail size={20} />
@@ -328,7 +353,7 @@ export default function Sidebar() {
           <div className="h-4 w-px bg-[#233554]" />
 
           {/* Yan socials */}
-          <ul className="flex items-center gap-4" aria-label="晏的社交链接">
+          <ul className="flex items-center gap-4" aria-label={dict.sidebar.yanSocials}>
             <li>
               <a className="block text-[#8892b0] transition-colors hover:text-[#c4b5fd]" href="https://github.com/yanfeatherai" target="_blank" rel="noreferrer noopener" title="Yan's GitHub" aria-label="Yan's GitHub">
                 <Github size={20} />
@@ -340,6 +365,22 @@ export default function Sidebar() {
               </a>
             </li>
           </ul>
+
+          {/* Divider */}
+          <div className="h-4 w-px bg-[#233554]" />
+
+          {/* Language switcher */}
+          <button
+            onClick={() => {
+              const target = locale === "zh" ? "en" : "zh";
+              const stripped = stripLocale(pathname, locale);
+              router.push(`/${target}${stripped}`);
+            }}
+            className="rounded-full border border-[#233554] px-3 py-1 text-xs font-mono text-[#8892b0] transition-colors hover:border-[#4fd1c5] hover:text-[#4fd1c5]"
+            aria-label="Switch language"
+          >
+            {locale === "zh" ? "EN" : "中文"}
+          </button>
         </div>
       </div>
     </header>

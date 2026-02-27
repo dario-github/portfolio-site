@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useDict } from "@/i18n/DictionaryContext";
 
 export default function Subscribe() {
+  const { dict } = useDict();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -21,15 +23,15 @@ export default function Subscribe() {
       const data = await res.json();
       if (data.success) {
         setStatus("success");
-        setMessage(data.message || "订阅成功！");
+        setMessage(data.message || dict.subscribe.successDefault);
         setEmail("");
       } else {
         setStatus("error");
-        setMessage(data.message || "订阅失败，请重试。");
+        setMessage(data.message || dict.subscribe.errorDefault);
       }
     } catch {
       setStatus("error");
-      setMessage("网络错误，请稍后重试。");
+      setMessage(dict.subscribe.networkError);
     }
   }
 
@@ -37,10 +39,10 @@ export default function Subscribe() {
     <div className="rounded-lg border border-[#233554] bg-[#112240]/30 p-6 sm:p-8">
       <div className="max-w-xl mx-auto text-center">
         <h3 className="text-sm font-semibold text-[#ccd6f6] tracking-wide">
-          订阅更新 · Subscribe
+          {dict.subscribe.title}
         </h3>
         <p className="mt-2 text-xs text-[#8892b0] leading-relaxed">
-          获取最新田野笔记和项目动态
+          {dict.subscribe.desc}
         </p>
 
         {status === "success" ? (
@@ -63,7 +65,7 @@ export default function Subscribe() {
                 background: "linear-gradient(135deg, #4fd1c5, #c4b5fd)",
               }}
             >
-              {status === "loading" ? "..." : "订阅"}
+              {status === "loading" ? "..." : dict.subscribe.button}
             </button>
           </form>
         )}

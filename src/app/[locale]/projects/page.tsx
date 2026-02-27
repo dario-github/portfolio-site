@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
+import { useDict } from "@/i18n/DictionaryContext";
 
 /* ── Data ── */
 
@@ -202,11 +203,12 @@ const NARRATIVES: Narrative[] = [
 
 export default function ProjectsPage() {
   const [narrativesExpanded, setNarrativesExpanded] = useState(false);
+  const { dict, locale } = useDict();
 
   return (
     <>
-      <section aria-label="项目">
-        <SectionHeading index="03">项目</SectionHeading>
+      <section aria-label={dict.projects.heading}>
+        <SectionHeading index="03">{dict.projects.heading}</SectionHeading>
 
         <div className="relative">
           <div className="space-y-12">
@@ -293,7 +295,7 @@ export default function ProjectsPage() {
               onClick={() => setNarrativesExpanded(true)}
               className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
             >
-              展开更多叙事 →
+              {dict.projects.expandMore}
             </button>
           </div>
         )}
@@ -303,7 +305,7 @@ export default function ProjectsPage() {
               onClick={() => setNarrativesExpanded(false)}
               className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors"
             >
-              收起
+              {dict.projects.collapse}
             </button>
           </div>
         )}
@@ -312,10 +314,10 @@ export default function ProjectsPage() {
       {/* Back to home */}
       <div className="mt-16 mb-8">
         <Link
-          href="/"
+          href={`/${locale}`}
           className="text-sm font-medium text-[#4fd1c5] hover:text-[#4fd1c5]/80 transition-colors"
         >
-          ← 返回首页
+          {dict.common.back}
         </Link>
       </div>
     </>

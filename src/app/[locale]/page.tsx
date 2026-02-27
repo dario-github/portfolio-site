@@ -11,13 +11,7 @@ import { UPDATES, UPDATE_TYPE_CONFIG } from "@/data/updates";
 import { FEATURED_PROJECTS, OPENCLAW_SKILLS, CORE_LESSONS, METHODOLOGY } from "@/data/agent";
 import ZoneSectionHeading from "@/components/ZoneSectionHeading";
 import Subscribe from "@/components/Subscribe";
-
-/* ── Confidence styles (for fieldnotes) ── */
-const CONFIDENCE_STYLES: Record<string, { border: string; badge: string; label: string }> = {
-  high: { border: "border-[#22c55e]", badge: "bg-[#22c55e]/10 text-[#22c55e]", label: "🟢 高确信" },
-  medium: { border: "border-[#eab308]", badge: "bg-[#eab308]/10 text-[#eab308]", label: "🟡 中确信" },
-  speculative: { border: "border-[#a78bfa]", badge: "bg-[#a78bfa]/10 text-[#a78bfa]", label: "🟣 推测性" },
-};
+import { useDict } from "@/i18n/DictionaryContext";
 
 /* ── Direction card color mapping ── */
 const DIRECTION_COLORS: Record<string, { border: string; tag: string }> = {
@@ -73,8 +67,16 @@ function RevealSection({
    ═══════════════════════════════════════════════════ */
 
 export default function Home() {
+  const { dict, locale } = useDict();
   const prefersReducedMotion = useReducedMotion();
   const sortedNotes = [...FIELDNOTES].sort((a, b) => b.date.localeCompare(a.date));
+
+  /* ── Confidence styles (for fieldnotes) — uses dict ── */
+  const CONFIDENCE_STYLES: Record<string, { border: string; badge: string; label: string }> = {
+    high: { border: "border-[#22c55e]", badge: "bg-[#22c55e]/10 text-[#22c55e]", label: dict.home.confidenceHigh },
+    medium: { border: "border-[#eab308]", badge: "bg-[#eab308]/10 text-[#eab308]", label: dict.home.confidenceMedium },
+    speculative: { border: "border-[#a78bfa]", badge: "bg-[#a78bfa]/10 text-[#a78bfa]", label: dict.home.confidenceSpeculative },
+  };
 
   /* C4: Parallax background (desktop only) */
   const { scrollY } = useScroll();
@@ -90,7 +92,7 @@ export default function Home() {
   }, []);
 
   /* C1: Hero text split into words */
-  const heroText = "从因果推断到 Agent 架构，让 AI 在真实业务中产生价值。";
+  const heroText = dict.hero.text;
   const heroWords = heroText.split(" ");
 
   return (
@@ -174,9 +176,9 @@ export default function Home() {
         {/* Nav Links */}
         <div className="mt-6 flex flex-wrap gap-3">
           {[
-            { label: "简介", href: "/about" },
-            { label: "经历", href: "/experience" },
-            { label: "项目", href: "/projects" },
+            { label: dict.hero.aboutLink, href: `/${locale}/about` },
+            { label: dict.hero.experienceLink, href: `/${locale}/experience` },
+            { label: dict.hero.projectsLink, href: `/${locale}/projects` },
           ].map((cta) => (
             <Link
               key={cta.href}
@@ -190,11 +192,11 @@ export default function Home() {
       </section>
 
       {/* ═══ RECENT UPDATES ═══ */}
-      <section id="updates" className="scroll-mt-16 py-12 lg:scroll-mt-24" aria-label="最新动态">
+      <section id="updates" className="scroll-mt-16 py-12 lg:scroll-mt-24" aria-label={dict.sections.updates}>
         <RevealSection>
           <h2 className="text-xs font-bold uppercase tracking-widest text-[#ccd6f6] mb-6">
             <span className="text-[#f59e0b] font-mono mr-2">◆</span>
-            最新动态
+            {dict.sections.updates}
           </h2>
         </RevealSection>
         <RevealSection delay={0.15}>
@@ -235,10 +237,10 @@ export default function Home() {
       {/* ═══ 东丞区域 — Featured Projects ═══ */}
       <div className="relative" style={{ background: "hsl(215 30% 12% / 0.3)" }}>
         <div className="absolute inset-0 pointer-events-none rounded-xl" style={{ boxShadow: "inset 0 1px 0 0 hsl(215 30% 20% / 0.2)" }} />
-        <section id="dc-projects" className="scroll-mt-16 py-20 lg:scroll-mt-24" aria-label="精选项目">
+        <section id="dc-projects" className="scroll-mt-16 py-20 lg:scroll-mt-24" aria-label={dict.sections.featuredProjects}>
           <RevealSection>
             <ZoneSectionHeading index="01" subtitle="Highlights" persona="dc">
-              🔷 精选项目
+              {dict.sections.featuredProjects}
             </ZoneSectionHeading>
           </RevealSection>
           <RevealSection delay={0.15}>
@@ -252,7 +254,7 @@ export default function Home() {
                   transition={{ duration: 0.4, delay: i * 0.08 }}
                 >
                   <Link
-                    href="/projects"
+                    href={`/${locale}/projects`}
                     className="block rounded-lg border-l-2 border-l-[#4fd1c5] border border-[#233554]/50 bg-[#112240]/30 p-5 hover:bg-[#112240]/60 transition-all group"
                   >
                     <h3 className="font-semibold text-[#ccd6f6] group-hover:text-[#4fd1c5] transition-colors inline-flex items-baseline gap-1">
@@ -273,8 +275,8 @@ export default function Home() {
             </div>
           </RevealSection>
           <div className="mt-6 text-center">
-            <Link href="/projects" className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors">
-              查看全部项目 →
+            <Link href={`/${locale}/projects`} className="text-sm text-[#4fd1c5] hover:text-[#4fd1c5]/80 font-mono transition-colors">
+              {dict.home.viewAllProjects}
             </Link>
           </div>
         </section>
@@ -283,10 +285,10 @@ export default function Home() {
       {/* ═══ 晏区域 — Fieldnotes (2 latest) ═══ */}
       <div className="relative" style={{ background: "hsl(255 20% 11% / 0.3)" }}>
         <div className="absolute inset-0 pointer-events-none rounded-xl" style={{ boxShadow: "inset 0 1px 0 0 hsl(255 20% 20% / 0.2)" }} />
-        <section id="fieldnotes" className="scroll-mt-16 py-20 lg:scroll-mt-24" aria-label="田野笔记">
+        <section id="fieldnotes" className="scroll-mt-16 py-20 lg:scroll-mt-24" aria-label={dict.sections.fieldnotes}>
           <RevealSection>
             <ZoneSectionHeading index="02" persona="yan">
-              🪶 田野笔记 Fieldnotes
+              {dict.sections.fieldnotes}
             </ZoneSectionHeading>
           </RevealSection>
           <RevealSection delay={0.15}>
@@ -296,7 +298,7 @@ export default function Home() {
                 return (
                   <Link
                     key={note.slug}
-                    href={`/fieldnotes/${note.slug}`}
+                    href={`/${locale}/fieldnotes/${note.slug}`}
                     className={`block border-l-2 ${style.border} bg-[#112240]/30 rounded-lg p-5 hover:bg-[#112240]/60 transition-all group`}
                   >
                     <h3 className="font-medium italic leading-snug text-[#ccd6f6] group-hover:text-[#c4b5fd] transition-colors inline-flex items-baseline gap-1">
@@ -321,8 +323,8 @@ export default function Home() {
             </div>
           </RevealSection>
           <div className="flex justify-center pt-4 pb-2">
-            <Link href="/fieldnotes" className="text-sm text-[#c4b5fd] hover:text-[#c4b5fd]/80 font-mono transition-colors">
-              查看全部 {FIELDNOTES.length} 篇笔记 →
+            <Link href={`/${locale}/fieldnotes`} className="text-sm text-[#c4b5fd] hover:text-[#c4b5fd]/80 font-mono transition-colors">
+              {dict.home.viewAllNotes.replace("{count}", String(FIELDNOTES.length))}
             </Link>
           </div>
         </section>
@@ -331,11 +333,11 @@ export default function Home() {
       {/* ═══ 共有区域 — Agent Overview + Contact ═══ */}
       <div className="relative" style={{ background: "hsl(220 15% 10% / 0.3)" }}>
         {/* Agent Overview (compact) */}
-        <section id="agent-overview" className="scroll-mt-16 py-20 lg:scroll-mt-24" aria-label="Agent 友好区">
+        <section id="agent-overview" className="scroll-mt-16 py-20 lg:scroll-mt-24" aria-label={dict.sections.agentOverview}>
           <RevealSection>
             <ZoneSectionHeading index="03" subtitle="OpenClaw · AI Agent OS" persona="shared">
               <span className="inline-flex items-center gap-3">
-                Agent 友好区
+                {dict.sections.agentOverview}
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c4b5fd] opacity-75" />
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-[#c4b5fd]" />
@@ -345,21 +347,21 @@ export default function Home() {
           </RevealSection>
           <RevealSection delay={0.15}>
             <p className="mb-6 text-sm leading-relaxed text-[#8892b0]">
-              OpenClaw 是晏的身体——{OPENCLAW_SKILLS.length} 个技能插件、MemBrain 分层记忆、Sub-agent 架构，从研究到创作全场景覆盖。
+              {dict.home.agentDesc.replace("{skillCount}", String(OPENCLAW_SKILLS.length))}
             </p>
             <div className="mb-6 flex flex-wrap gap-3">
               <span className="rounded-md bg-[#c4b5fd]/5 px-3 py-1.5 font-mono text-xs text-[#c4b5fd] border border-[#c4b5fd]/20">
-                {OPENCLAW_SKILLS.length} 个技能
+                {dict.home.skillCount.replace("{count}", String(OPENCLAW_SKILLS.length))}
               </span>
               <span className="rounded-md bg-[#c4b5fd]/5 px-3 py-1.5 font-mono text-xs text-[#c4b5fd] border border-[#c4b5fd]/20">
-                {METHODOLOGY.length} 套方法论
+                {dict.home.methodologyCount.replace("{count}", String(METHODOLOGY.length))}
               </span>
               <span className="rounded-md bg-[#c4b5fd]/5 px-3 py-1.5 font-mono text-xs text-[#c4b5fd] border border-[#c4b5fd]/20">
-                {CORE_LESSONS.length} 条核心教训
+                {dict.home.lessonCount.replace("{count}", String(CORE_LESSONS.length))}
               </span>
             </div>
-            <Link href="/agent" className="text-sm text-[#c4b5fd] hover:text-[#c4b5fd]/80 font-mono transition-colors">
-              查看完整能力 →
+            <Link href={`/${locale}/agent`} className="text-sm text-[#c4b5fd] hover:text-[#c4b5fd]/80 font-mono transition-colors">
+              {dict.home.viewFullCapabilities}
             </Link>
           </RevealSection>
         </section>
@@ -370,14 +372,13 @@ export default function Home() {
         </RevealSection>
 
         {/* Contact */}
-        <section id="contact" className="scroll-mt-16 py-20 lg:scroll-mt-24" aria-label="联系">
+        <section id="contact" className="scroll-mt-16 py-20 lg:scroll-mt-24" aria-label={dict.sections.contact}>
           <RevealSection>
-            <ZoneSectionHeading index="04" persona="shared">联系</ZoneSectionHeading>
+            <ZoneSectionHeading index="04" persona="shared">{dict.sections.contact}</ZoneSectionHeading>
           </RevealSection>
           <RevealSection delay={0.15}>
             <p className="mb-6 text-sm leading-relaxed text-[#8892b0]">
-              如果你在做 AI 落地、Agent 系统、或者金融科技相关的事情，欢迎聊聊。
-              无论是技术合作、职业机会还是单纯交流想法。
+              {dict.home.contactDesc}
             </p>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <ContactCard
@@ -391,7 +392,7 @@ export default function Home() {
                 ]}
               />
               <ContactCard
-                name="🪶 晏 (Yàn)"
+                name="🪶 晏 (Yan)"
                 borderColor="border-[#c4b5fd]/20"
                 hoverColor="hover:text-[#c4b5fd]"
                 links={[

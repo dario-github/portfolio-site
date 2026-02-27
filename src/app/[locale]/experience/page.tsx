@@ -2,24 +2,36 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SectionHeading from "@/components/SectionHeading";
 import { TechTags } from "@/components/SectionHeading";
+import { getDictionary } from "@/i18n/get-dictionary";
+import type { Locale } from "@/i18n/config";
 
-export const metadata: Metadata = {
-  title: "经历 — 章东丞",
-  description:
-    "章东丞的职业经历：蓝色光标 AI 技术总监，从 0 搭建企业级 AI 中台 Smart Canvas，支撑 1600+ 用户、2000+ Agent、日均 4000+ 调用。",
-  openGraph: {
-    title: "经历 — 章东丞",
-    description:
-      "AI 技术总监，企业级 AI 中台 Smart Canvas，1600+ 用户、2000+ Agent。",
-    url: "https://www.dariolink.com/experience",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "经历 — 章东丞",
-    description:
-      "AI 技术总监，企业级 AI 中台 Smart Canvas，1600+ 用户、2000+ Agent。",
-  },
-};
+/* ── Types ── */
+
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+/* ── Metadata ── */
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+
+  return {
+    title: dict.experience.metaTitle,
+    description: dict.experience.metaDesc,
+    openGraph: {
+      title: dict.experience.metaTitle,
+      description: dict.experience.metaDesc,
+      url: `https://www.dariolink.com/${locale}/experience`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.experience.metaTitle,
+      description: dict.experience.metaDesc,
+    },
+  };
+}
 
 /* ── Data ── */
 
@@ -85,11 +97,14 @@ const EXPERIENCES: Experience[] = [
 
 /* ── Page ── */
 
-export default function ExperiencePage() {
+export default async function ExperiencePage({ params }: PageProps) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+
   return (
     <>
       <section aria-label="工作经历">
-        <SectionHeading index="02">经历</SectionHeading>
+        <SectionHeading index="02">{dict.experience.heading}</SectionHeading>
         <div className="space-y-6">
           {EXPERIENCES.map((exp, i) => (
             <div
@@ -126,10 +141,10 @@ export default function ExperiencePage() {
       {/* Back to home */}
       <div className="mt-16 mb-8">
         <Link
-          href="/"
+          href={`/${locale}`}
           className="text-sm font-medium text-[#4fd1c5] hover:text-[#4fd1c5]/80 transition-colors"
         >
-          ← 返回首页
+          {dict.common.back}
         </Link>
       </div>
     </>
