@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { DictionaryProvider } from "@/i18n/DictionaryContext";
@@ -111,6 +113,8 @@ export default async function LocaleLayout({ children, params }: Props) {
           <TerminalOverlay />
           <CommandPalette />
         </GlowProvider>
+        <Analytics />
+        <SpeedInsights />
       </DictionaryProvider>
     </>
   );
