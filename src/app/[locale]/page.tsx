@@ -13,6 +13,16 @@ import ZoneSectionHeading from "@/components/ZoneSectionHeading";
 import Subscribe from "@/components/Subscribe";
 import { useDict } from "@/i18n/DictionaryContext";
 
+/* ── i18n helper: pick localized field ── */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function t(item: any, field: string, locale: string): string {
+  if (locale === "en") {
+    const enField = `${field}En`;
+    if (enField in item && item[enField]) return item[enField] as string;
+  }
+  return item[field] as string;
+}
+
 /* ── Direction card color mapping ── */
 const DIRECTION_COLORS: Record<string, { border: string; tag: string }> = {
   teal: { border: "border-l-[#4fd1c5]", tag: "bg-[#4fd1c5]/10 text-[#4fd1c5]" },
@@ -144,10 +154,10 @@ export default function Home() {
                   className={`rounded-lg border-l-2 ${colors.border} border border-[#233554]/30 bg-[#112240]/30 p-4 min-h-[140px] flex flex-col`}
                 >
                   <h3 className="text-sm font-semibold text-[#ccd6f6]">
-                    {dir.icon} {dir.title}
+                    {dir.icon} {t(dir, "title", locale)}
                   </h3>
                   <p className="mt-2 text-xs leading-relaxed text-[#8892b0] flex-1">
-                    {dir.brief}
+                    {t(dir, "brief", locale)}
                   </p>
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {dir.tags.map((tag) => (
@@ -212,12 +222,12 @@ export default function Home() {
                     </span>
                   </div>
                   <h3 className={`font-medium text-[#ccd6f6] text-sm ${update.link ? "group-hover:text-[#4fd1c5] transition-colors inline-flex items-baseline gap-1" : ""}`}>
-                    {update.title}
+                    {t(update, "title", locale)}
                     {update.link && (
                       <ArrowUpRight size={12} className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                     )}
                   </h3>
-                  <p className="mt-1 text-xs leading-relaxed text-[#8892b0]">{update.brief}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-[#8892b0]">{t(update, "brief", locale)}</p>
                 </>
               );
               return update.link ? (
