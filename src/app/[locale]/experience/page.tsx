@@ -44,11 +44,11 @@ interface Experience {
   techStack: string[];
 }
 
-const EXPERIENCES: Experience[] = [
+const EXPERIENCES_ZH: Experience[] = [
   {
     period: "2023 — 至今",
     title: "AI 技术总监",
-    company: "蓝色光标",
+    company: "蓝色光标 BlueFocus",
     description:
       "从 0 搭建企业级 AI 中台 Smart Canvas，基于 AWS Serverless + MCP 协议 + Buffer of Thoughts 推理框架，支撑全集团 1600+ 员工、2000+ Agent、日均 4000+ 次调用。带 10 人团队完成 AI 工程化转型。",
     highlights: [
@@ -69,7 +69,7 @@ const EXPERIENCES: Experience[] = [
   {
     period: "2021 — 2022",
     title: "因果算法研究员",
-    company: "奇绩创坛",
+    company: "奇绩创坛 Miracle Plus",
     description:
       "用因果算法做创投数据驱动尽调，给投委会提供决策支持。",
     highlights: [
@@ -82,7 +82,7 @@ const EXPERIENCES: Experience[] = [
   {
     period: "2018 — 2021",
     title: "NLP 算法工程师",
-    company: "同花顺",
+    company: "同花顺 Flush (10jqka)",
     description:
       "搭金融知识图谱，与 CMU/爱丁堡教授合作做因果推断量化策略。",
     highlights: [
@@ -95,18 +95,70 @@ const EXPERIENCES: Experience[] = [
   },
 ];
 
+const EXPERIENCES_EN: Experience[] = [
+  {
+    period: "2023 — Present",
+    title: "AI Tech Director",
+    company: "蓝色光标 BlueFocus",
+    description:
+      "Built the enterprise AI platform Smart Canvas from scratch on AWS Serverless + MCP protocol + Buffer of Thoughts reasoning framework, serving 1,600+ employees, 2,000+ Agents, and 4,000+ daily calls across the group. Led a 10-person team through full AI engineering transformation.",
+    highlights: [
+      "AI Platform — AWS Serverless + MCP protocol + Buffer of Thoughts framework; 1,600+ users, 2,000+ Agents, 4,000+ daily calls",
+      "Video Agent System — Cut production from 30 days to 6 hours via Agent pipeline: script generation → asset matching → smart editing → review optimization; causal attribution validated at Nestlé and Feihe",
+      "Team Leadership — Led 10 engineers from traditional dev to full-stack AI engineers; AI-assisted coding (Vibe Coding) boosted efficiency ~50%; pioneered AI MCN model",
+      "Awarded 2024 Group AI Native Individual & Team of the Year",
+      "Clients: CPIC, CATL, Shangri-La, Nestlé, Feihe",
+    ],
+    techStack: [
+      "Multi-Agent",
+      "Buffer of Thoughts",
+      "AWS Serverless",
+      "Causal Strategy",
+      "Agent Orchestration",
+    ],
+  },
+  {
+    period: "2021 — 2022",
+    title: "Causal Inference Researcher",
+    company: "奇绩创坛 Miracle Plus",
+    description:
+      "Applied causal inference to data-driven due diligence for venture capital, providing quantitative decision support to the investment committee.",
+    highlights: [
+      "Founder Profiling Model — Rebuilt evaluation weights via attribution analysis, reducing false-negative screening rate",
+      "Tag Taxonomy Overhaul — NLP-based long-tail tag cleaning and semantic clustering, achieving 95%+ coverage",
+      "Causal Inference for Investment — Mined causal relationships to deliver quantitative decision support for the investment committee",
+    ],
+    techStack: ["Causal Inference", "NLP", "Python"],
+  },
+  {
+    period: "2018 — 2021",
+    title: "NLP Engineer",
+    company: "同花顺 Flush (10jqka)",
+    description:
+      "Built financial knowledge graphs and collaborated with professors at CMU and Edinburgh on causal inference-based quantitative strategies.",
+    highlights: [
+      "Financial Knowledge Graph & Smart Stock Screening — Multi-dimensional graphs (conceptual, causal, event-driven) powering event-driven investment reasoning",
+      "Academic Collaboration — Prof. Jeff Pan at Edinburgh (Knowledge Graphs), Prof. Kun Zhang at CMU (Causal Discovery)",
+      "Causal AI Quant Strategy — Multi-level market timing (macro → sector → stock); backtests and live trading produced significant Alpha",
+      "Causal Analysis Toolkit — Adopted internally, supporting 2 core projects",
+    ],
+    techStack: ["Knowledge Graph", "Causal Inference", "NLP", "Quant Trading"],
+  },
+];
+
 /* ── Page ── */
 
 export default async function ExperiencePage({ params }: PageProps) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
+  const experiences = locale === "en" ? EXPERIENCES_EN : EXPERIENCES_ZH;
 
   return (
     <>
-      <section aria-label="工作经历">
+      <section aria-label={locale === "en" ? "Work Experience" : "工作经历"}>
         <SectionHeading index="02">{dict.experience.heading}</SectionHeading>
         <div className="space-y-6">
-          {EXPERIENCES.map((exp, i) => (
+          {experiences.map((exp, i) => (
             <div
               key={i}
               className="group bg-[#112240]/50 rounded-lg p-6 hover:bg-[#112240] transition-colors duration-200"
