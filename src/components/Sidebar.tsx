@@ -313,16 +313,6 @@ export default function Sidebar() {
 
       {/* Language switcher + Social Links */}
       <div className="ml-1 mt-8">
-        {/* Language switcher */}
-        <div className="mb-4">
-          <button
-            onClick={handleLocaleSwitch}
-            className="rounded-full border border-[#233554] px-3 py-1 text-xs font-mono text-[#8892b0] hover:border-[#4fd1c5] hover:text-[#4fd1c5] transition-colors"
-          >
-            {locale === "zh" ? "EN" : "中"}
-          </button>
-        </div>
-
         {/* Social Links — both personas side by side */}
         <div className="flex items-center gap-6">
           {/* DC socials */}
