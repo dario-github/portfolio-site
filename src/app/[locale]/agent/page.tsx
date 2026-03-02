@@ -98,7 +98,7 @@ export default async function AgentPage({ params }: PageProps) {
                 {skill.name}
               </code>
               <span className="text-xs text-[#8892b0] leading-relaxed">
-                {skill.desc}
+                {locale === "en" ? skill.descEn : skill.desc}
               </span>
             </div>
           ))}

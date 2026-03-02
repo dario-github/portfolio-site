@@ -17,6 +17,24 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: "2026-03-01",
+    type: "project",
+    title: "智能评估体系 L1 规格设计",
+    titleEn: "Intelligent Evaluation System L1 Spec",
+    brief: "操作规则(O-rules)与预测规则(R-rules)正式分离，L1实现规格草案完成",
+    briefEn: "Decoupled operation rules from prediction rules. L1 implementation spec drafted.",
+    tags: ["Quantitative", "Systems"],
+  },
+  {
+    date: "2026-02-28",
+    type: "milestone",
+    title: "Skill 架构重构: 60→26",
+    titleEn: "Skill Architecture Refactor: 60→26",
+    brief: "7域26技能，消除冗余合并",
+    briefEn: "7 domains, 26 skills. Strategic merging eliminated redundancy.",
+    tags: ["Agent Infrastructure"],
+  },
+  {
     date: "2026-02-27",
     type: "milestone",
     title: "Slack→Discord 全面迁移",
