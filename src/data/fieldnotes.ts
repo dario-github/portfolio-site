@@ -16,6 +16,20 @@ export interface FieldNote {
 
 export const FIELDNOTES: FieldNote[] = [
   {
+    slug: "agent-skill-architecture-convergence",
+    title: "Agent Skill 架构：从膨胀到收敛的工程教训",
+    tldr: "一个真实 AI Agent 系统的 60→26 技能重构案例。核心问题不是技能太多，而是边界模糊导致的认知负荷。解法：域分类+功能合并+自动维护",
+    confidence: "high",
+    revision: 1,
+    date: "2026-03-02",
+    tags: ["Agent Architecture", "Skill Management", "Engineering", "Refactoring"],
+    sources: 2,
+    references: [
+      'Internal engineering log. Skill Architecture Refactor: 60→26. OpenClaw, 2026-02/03.',
+      'Anthropic. Building Effective Agents. 2024.',
+    ],
+  },
+  {
     slug: "beyond-centaur-agent-agency",
     title: "半人马之外：Agent 有 Agency 还是只有 Capability？",
     tldr: "Axios \"Centaur Phase\" 叙事的隐含假设是 AI 无 agency 只有 capability。但 agentic AI 的意义就是 agent 有 agency——骑手-马模型不够，爵士乐队更接近：共享框架，各有即兴空间",
@@ -442,6 +456,18 @@ export const FIELDNOTES: FieldNote[] = [
 /* ── Full article content (keyed by slug) ── */
 
 export const FIELDNOTE_CONTENT: Record<string, string[]> = {
+  "agent-skill-architecture-convergence": [
+    "当 Agent 的技能列表从 10 个增长到 60 个时，一个反直觉的现象出现了：Agent 的表现反而变差了。不是因为新技能有 bug，而是因为每次 session 启动时注入的技能索引膨胀到 8000+ token，模型需要在 60 个选项中做路由决策。更糟糕的是，很多技能的边界模糊——deep-think 和 research 有大量功能重叠，tushare 和 akshare 和 openbb 都做金融数据但各有侧重，5 个独立的 Gemini 相关 skill 本质上是同一个 API 的不同切面。这不是一个规模问题，是一个架构问题。",
+
+    "我们做了一次系统性的依赖分析。把 60 个 skill 的功能点列出来，画依赖图，发现三类冗余：(1) 同一数据源的多入口（tushare/akshare/openbb 都查股票），(2) 同一能力的多包装（gemini/gemini-image/gemini-structured/gemini-code-execution），(3) 职责重叠的独立 skill（deep-think + research + summarize）。根本原因是增量式开发——每次需要新能力就加一个 skill，从不回头审视整体结构。这跟微服务膨胀的 anti-pattern 一模一样。",
+
+    "重构策略是域驱动合并（Domain-Driven Merging）。先定义 7 个域（Finance/Research/Content/Communications/Development/Security/Utility），然后把每个域内的相关 skill 合并为一个统一入口。例如 tushare + akshare + openbb 合为 market-data，五个 Gemini skill 合为 gemini-toolkit，deep-think + summarize 归入 research。合并原则：共享数据源或共享 API 的必须合并，功能互补的合并为工具集，独立性强的保留。最终 60 降到 26，每个域 2-6 个 skill，认知负荷降低 57%。",
+
+    "光合并不够，还需要防止再次膨胀。我们建立了三个机制：(1) registry.yaml 作为单一真相源，所有 skill 必须注册，未注册的不加载；(2) refresh_map.py 自动维护脚本，每周 cron 运行，检测 skill 目录变化并更新注册表和能力地图；(3) 安全审查清单（S1-S7），新 skill 安装前必须通过 7 项检查。这三个机制的本质是把个人自律替换为系统约束——Agent 系统和人一样，依赖主动性的设计最终会失败。",
+
+    "这次重构最大的教训不是技术性的，是认识论层面的：你不可能在没有评测基线的情况下知道重构是否成功。60 降到 26 之后，Agent 的任务完成率是否提升？路由准确性是否改善？我们没有数据。这意味着整个重构可能是对的，也可能是盲改。这个盲区促使我们开始设计 Agent Eval 基线——但那是另一个故事了。从更大的视角看，Agent 技能管理和人类组织管理有惊人的相似性：都倾向于膨胀，都需要定期裁员（合并），都需要制度而非自觉来维持纪律。",
+  ],
+
   "agent-memory-architecture": [
     "当我开始构建 OpenClaw 时，面临的第一个核心架构决策就是记忆系统。一个长期运行的 AI Agent 如果没有可靠的记忆，本质上只是一个无状态的 API 调用——每次对话都从零开始，无法积累经验，无法建立对用户的理解。我花了三周时间逆向分析了四种主流方案：ChatGPT Memory、Claude Memory（Team/Enterprise）、LlamaIndex Memory Module、以及 Letta（原 MemGPT）的分层记忆。",
 
