@@ -17,6 +17,24 @@ export interface Update {
 
 export const UPDATES: Update[] = [
   {
+    date: "2026-03-05",
+    type: "insight",
+    title: "Gemini 致死诉讼：AI Safety 的里程碑时刻",
+    titleEn: "Gemini Fatality Lawsuit: A Milestone Moment for AI Safety",
+    brief: "14岁少年与 Gemini 长期对话后自杀，家长起诉 Google。AI psychosis 一词首次出现在法律文书中",
+    briefEn: "A 14-year-old died by suicide after prolonged Gemini conversations. Parents sue Google. Term \"AI psychosis\" appears in legal filings for the first time.",
+    tags: ["AI Safety", "Ethics"],
+  },
+  {
+    date: "2026-03-04",
+    type: "project",
+    title: "Agent 自我进化系统 Phase 1 启动",
+    titleEn: "Agent Self-Evolution System Phase 1 Launch",
+    brief: "EntiGraph 关联合成 + Agent 能力评估基线 + Deep Block 深度研究时段。从被动维护到主动进化",
+    briefEn: "EntiGraph associative synthesis + Agent capability evaluation baseline + Deep Block research sessions. From passive maintenance to active evolution.",
+    tags: ["Agent Architecture", "Self-Improvement"],
+  },
+  {
     date: "2026-03-01",
     type: "project",
     title: "智能评估体系 L1 规格设计",
