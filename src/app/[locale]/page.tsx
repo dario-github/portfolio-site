@@ -211,7 +211,7 @@ export default function Home() {
         </RevealSection>
         <RevealSection delay={0.15}>
           <div className="space-y-0 divide-y divide-[#233554]/30">
-            {UPDATES.map((update) => {
+            {UPDATES.slice(0, 3).map((update) => {
               const cfg = UPDATE_TYPE_CONFIG[update.type];
               const inner = (
                 <>
@@ -242,6 +242,11 @@ export default function Home() {
             })}
           </div>
         </RevealSection>
+        <div className="mt-4 text-center">
+          <Link href={`/${locale}/updates`} className="text-sm text-[#f59e0b] hover:text-[#f59e0b]/80 font-mono transition-colors">
+            {dict.home.viewAllUpdates || `查看全部 ${UPDATES.length} 条动态 →`}
+          </Link>
+        </div>
       </section>
 
       {/* ═══ 东丞区域 — Featured Projects ═══ */}
